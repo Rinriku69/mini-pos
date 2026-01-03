@@ -18,7 +18,7 @@ export class Store implements OnInit {
     });
   }
   ngOnInit(): void {
-
+    this.productService.loadProduct().subscribe();
 
   }
 
