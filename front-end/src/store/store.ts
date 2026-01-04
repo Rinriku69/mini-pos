@@ -2,10 +2,11 @@ import { Component, computed, effect, inject, OnInit, Signal } from '@angular/co
 import { ProductService } from '../services/product-service';
 import { Product } from '../models/product';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { ProductCard } from "../app/product-card/product-card";
 
 @Component({
   selector: 'app-store',
-  imports: [],
+  imports: [ProductCard],
   templateUrl: './store.html',
   styleUrl: './store.scss',
 })
