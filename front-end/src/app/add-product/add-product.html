@@ -21,8 +21,10 @@
     <tr>
       <td><label>Category</label></td>
       <td>
-        <select name="" id="">
-          <option value=""></option>
+        <select>
+          @for (cat of categories(); track cat.id) {
+          <option value="">{{ cat.category_name }}</option>
+          }
         </select>
       </td>
     </tr>
