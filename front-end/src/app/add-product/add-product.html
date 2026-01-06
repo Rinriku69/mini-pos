@@ -5,25 +5,25 @@
         <label>Name</label>
       </td>
       <td>
-        <input type="text" />
+        <input type="text" formControlName="name" />
       </td>
     </tr>
     <tr>
       <td><label>Description</label></td>
       <td>
-        <input type="text" id="description" />
+        <input type="text" id="description" formControlName="description" />
       </td>
     </tr>
     <tr>
       <td><label>Price</label></td>
-      <td><input type="number" /></td>
+      <td><input type="number" formControlName="price" /></td>
     </tr>
     <tr>
       <td><label>Category</label></td>
       <td>
         <select>
           @for (cat of categories(); track cat.id) {
-          <option [value]="">{{ cat.category_name }}</option>
+          <option value="cat.id">{{ cat.category_name }}</option>
           }
         </select>
       </td>
