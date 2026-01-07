@@ -26,6 +26,7 @@ export class AddProduct implements OnInit {
   constructor() {
     effect(() => {
       console.log('Categories changed:', this.categories());
+      console.log('Form changed:', this.productForm);
     });
   }
   ngOnInit(): void {
