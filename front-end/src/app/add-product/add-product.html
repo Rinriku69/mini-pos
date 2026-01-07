@@ -1,4 +1,4 @@
-<form [formGroup]="productForm">
+<form [formGroup]="productForm" (submit)="onSubmit()">
   <table>
     <tr>
       <td>
@@ -29,5 +29,5 @@
       </td>
     </tr>
   </table>
-  <button>Submit</button>
+  <button type="submit">Submit</button>
 </form>
