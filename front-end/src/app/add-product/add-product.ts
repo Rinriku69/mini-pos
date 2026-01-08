@@ -20,14 +20,15 @@ export class AddProduct implements OnInit {
 
   productForm = this.fb.group({
     name: ['', [Validators.required, Validators.minLength(3)]],
-    categoryId: [null, Validators.required],
+    category_id: [null, Validators.required],
     price: [0, [Validators.required, Validators.min(1)]],
     description: ['']
   });
+  formValue = toSignal(this.productForm.valueChanges, { initialValue: this.productForm.value });
   constructor() {
     effect(() => {
       console.log('Categories changed:', this.categories());
-      console.log('Form changed:', this.productForm.value);
+      console.log('Form changed:', this.formValue());
     });
   }
   ngOnInit(): void {
