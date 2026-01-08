@@ -22,13 +22,12 @@ export class AddProduct implements OnInit {
     name: ['', [Validators.required, Validators.minLength(3)]],
     categoryId: [null, Validators.required],
     price: [0, [Validators.required, Validators.min(1)]],
-    stock: [0, [Validators.required, Validators.min(0)]],
     description: ['']
   });
   constructor() {
     effect(() => {
       console.log('Categories changed:', this.categories());
-      console.log('Form changed:', this.productForm.getRawValue());
+      console.log('Form changed:', this.productForm.value);
     });
   }
   ngOnInit(): void {

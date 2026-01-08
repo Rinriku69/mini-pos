@@ -21,7 +21,7 @@
     <tr>
       <td><label>Category</label></td>
       <td>
-        <select>
+        <select formControlName="categoryId">
           @for (cat of categories(); track cat.id) {
           <option value="cat.id">{{ cat.category_name }}</option>
           }
@@ -29,5 +29,5 @@
       </td>
     </tr>
   </table>
-  <button type="submit">Submit</button>
+  <button type="submit" [disabled]="productForm.invalid">Submit</button>
 </form>
