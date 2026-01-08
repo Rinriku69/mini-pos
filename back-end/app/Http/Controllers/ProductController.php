@@ -14,4 +14,23 @@ class ProductController extends Controller
         $products = Product::with('category')->get();
         return ProductResource::collection($products);
     }
+    public function store(Request $request)
+    {
+
+        $validated = $request->validate([
+            'name' => 'required|min:3',
+            'categoryId' => 'required|exists:categories,id',
+            'price' => 'required|numeric|min:1',
+            'description' => 'nullable'
+        ]);
+
+
+        $product = Product::create($validated);
+
+
+        return response()->json([
+            'message' => 'Product created successfully',
+            'data' => $product
+        ], 201);
+    }
 }
