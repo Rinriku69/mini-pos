@@ -1,10 +1,10 @@
 import { Component, effect, inject, OnInit } from '@angular/core';
-import { Category } from '../../models/category';
 import { ProductService } from '../../services/product-service';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { Product } from '../../models/product';
+import { Product } from '../../models/types';
 import { FormControl, FormGroup, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-add-product',
@@ -20,44 +20,26 @@ export class AddProduct implements OnInit {
 
   productForm = this.fb.group({
     name: ['', [Validators.required, Validators.minLength(3)]],
-    category_id: [null, Validators.required],
+    category_id: ["xx", Validators.required],
     price: [0, [Validators.required, Validators.min(1)]],
     description: ['']
   });
   formValue = toSignal(this.productForm.valueChanges, { initialValue: this.productForm.value });
+
   constructor() {
     effect(() => {
       console.log('Categories changed:', this.categories());
       console.log('Form changed:', this.formValue());
     });
   }
+
   ngOnInit(): void {
     this.productService.loadCategory().subscribe();
 
   }
 
   onSubmit() {
+    this.productService.addProduct(this.productForm);
 
-    if (this.productForm.valid) {
-
-      const formData = this.productForm.value;
-      const apiUrl = 'http://localhost:8000/api/products';
-
-
-      this.http.post(apiUrl, formData).subscribe({
-        next: (response) => {
-          console.log('บันทึกสำเร็จ!', response);
-
-        },
-        error: (error) => {
-          console.error('เกิดข้อผิดพลาด:', error);
-
-        }
-      });
-
-    } else {
-      console.log('ฟอร์มไม่ถูกต้อง กรุณาตรวจสอบข้อมูล');
-      this.productForm.markAllAsTouched();
-    }
   }
 }
