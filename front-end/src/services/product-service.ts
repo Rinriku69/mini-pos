@@ -1,13 +1,16 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, shareReplay, tap } from 'rxjs';
-import { Product } from '../models/product';
-import { Category } from '../models/category';
+import { Product, Category } from '../models/types';
+
+import { FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root', //serviceถูกสร้างเมื่อมีinject
 })
 export class ProductService {
+  private router = inject(Router);
   private products = new BehaviorSubject<Product[]>([]);
   productState$ = this.products.asObservable();
 
@@ -28,7 +31,28 @@ export class ProductService {
     )
   }
 
+  addProduct(productForm: FormGroup) {
+    if (productForm.valid) {
 
+      const formData = productForm.value;
+
+
+      this.http.post(this.productApiUrl, formData).subscribe({
+        next: (response) => {
+          console.log('บันทึกสำเร็จ!', response);
+          this.router.navigate(['/store'])
+        },
+        error: (error) => {
+          console.error('เกิดข้อผิดพลาด:', error);
+
+        }
+      });
+
+    } else {
+      console.log('ฟอร์มไม่ถูกต้อง กรุณาตรวจสอบข้อมูล');
+      productForm.markAllAsTouched();
+    }
+  }
 
 
 }
