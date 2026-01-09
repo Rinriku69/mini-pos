@@ -11,7 +11,11 @@
     <tr>
       <td><label>Description</label></td>
       <td>
-        <input type="text" id="description" formControlName="description" />
+        <textarea
+          id="description"
+          formControlName="description"
+          placeholder="Ex. color: blue"
+        ></textarea>
       </td>
     </tr>
     <tr>
@@ -22,6 +26,7 @@
       <td><label>Category</label></td>
       <td>
         <select formControlName="category_id">
+          <option value="xx">--Select Category--</option>
           @for (cat of categories(); track cat.id) {
           <option [value]="cat.id">{{ cat.category_name }}</option>
           }
