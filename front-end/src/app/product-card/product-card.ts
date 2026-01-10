@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, input, Input } from '@angular/core';
 import { Product } from '../../models/types';
 
 @Component({
@@ -8,6 +8,14 @@ import { Product } from '../../models/types';
   styleUrl: './product-card.scss',
 })
 export class ProductCard {
-  @Input() product!: Product;
+  product = input<Product>({
+    id: 0,
+    product_name: '',
+    product_description: '',
+    price: 0,
+    category_name: ''
+  });
+  /* product = input<Product>({} as Product);  for optional*/
+  /*  product = input.required<Product>(); */
 
 }
