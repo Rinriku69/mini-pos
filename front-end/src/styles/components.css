@@ -1,0 +1,11 @@
+.btn-primary {
+  @apply border border-gray-600 rounded-md px-3 py-2;
+}
+
+.app-nav-link {
+  @apply p-3 hover:bg-amber-600 rounded duration-700;
+}
+
+.app-input-field {
+  @apply m-5;
+}

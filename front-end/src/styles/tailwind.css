@@ -1,4 +1,5 @@
 @import 'tailwindcss';
+@import './components.css';
 
 @theme {
   --color-brand-primary: #ff5733;
