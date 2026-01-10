@@ -10,3 +10,15 @@ export interface Category {
     category_name: string;
 }
 
+export interface Order {
+    id: number;
+    order_item: OrderItem[];
+}
+
+export interface OrderItem {
+    id: number;
+    order_id: number;
+    product: Product;
+    qty: number
+}
+
