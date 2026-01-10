@@ -1,0 +1,6 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-brand-primary: #ff5733;
+  --font-display: 'Sarabun', sans-serif;
+}
