@@ -1,9 +1,20 @@
-<div class="mx-6 border p-3 rounded">
-  <div class="card-header">
-    {{ product().product_name }}
+<div class="flex mx-6 border p-3 rounded justify-between">
+  <div>
+    <div class="card-header">
+      {{ product().product_name }}
+    </div>
+    <div class="card-content">Detail : {{ product().product_description }}</div>
+    <div class="card-price">
+      {{ product().price }}
+    </div>
   </div>
-  <div class="card-content">Detail : {{ product().product_description }}</div>
-  <div class="card-price">
-    {{ product().price }}
+  <div class="">
+    <button
+      type="button"
+      class="btn-primary shadow-lg hover:scale-105 hover:bg-green-300 hover:shadow-green-700 transition-shadow duration-200"
+      (click)="addToCart(product(), 1)"
+    >
+      Add
+    </button>
   </div>
 </div>

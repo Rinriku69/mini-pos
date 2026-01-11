@@ -1,5 +1,7 @@
-import { Component, input, Input } from '@angular/core';
+import { Component, effect, inject, input, Input } from '@angular/core';
 import { Product } from '../models/types';
+import { CartService } from '../services/cart-service';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-product-card',
@@ -8,6 +10,7 @@ import { Product } from '../models/types';
   styleUrl: './product-card.scss',
 })
 export class ProductCard {
+  private cartServices = inject(CartService)
   product = input<Product>({
     id: 0,
     product_name: '',
@@ -17,5 +20,14 @@ export class ProductCard {
   });
   /* product = input<Product>({} as Product);  for optional*/
   /*  product = input.required<Product>(); */
+  orderItem = toSignal(this.cartServices.orderItem$, { initialValue: [] })
 
+  constructor() {
+    effect(() => {
+      console.log(this.orderItem())
+    })
+  }
+  addToCart(item: Product, qty: number) {
+    this.cartServices.addOrderItem(item, qty)
+  }
 }
