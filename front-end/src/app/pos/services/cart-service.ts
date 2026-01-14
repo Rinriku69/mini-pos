@@ -1,14 +1,18 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { Cart, OrderItem, Product } from '../models/types';
+import { Cart, Order, OrderItem, Product } from '../models/types';
 import { createCart } from '../helper';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CartService {
+  private http = inject(HttpClient);
   private cart = new BehaviorSubject({ order_item: [] } as Cart)
   cart$ = this.cart.asObservable();
+  private productApiUrl = 'http://127.0.0.1:8000/api/products';
+  private orderApiUrl = 'http://127.0.0.1:8000/api/orders'
 
   addToCart(item: Product, qty: number): void {
     if (this.cart.value.order_item.length == 0) {
@@ -37,5 +41,19 @@ export class CartService {
       }
     }
 
+  }
+
+  createOrder(total: number) {
+    const order: Order = { order_item: { ...this.cart.value.order_item }, total: total }
+    this.http.post(this.orderApiUrl, order).subscribe({
+      next: (response) => {
+        console.log('order created successfully', response);
+
+      },
+      error: (error) => {
+        console.error('An error occured:', error);
+
+      }
+    });
   }
 }
