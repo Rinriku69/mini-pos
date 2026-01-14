@@ -1,1 +1,5 @@
-<p>cart works!</p>
+<div class="flex flex-col gap-3">
+  @for (item of cart()?.order_item; track item) {
+  <app-cart-card [orderItem]="item"></app-cart-card>
+  }
+</div>
