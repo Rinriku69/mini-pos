@@ -13,13 +13,26 @@ import { DecimalPipe } from '@angular/common';
 export class Cart {
   cartService = inject(CartService)
   protected readonly cart = toSignal(this.cartService.cart$);
-  readonly total = computed(() => this.cart()?.order_item.reduce((result, curr) => {
-    return result + (curr.product.price * curr.qty)
-  }, 0))
+  readonly total = computed(() => {
+    const cart = this.cart();
+    if (!cart) return 0;
+    return cart.order_item.reduce((result, curr) => {
+
+      return result + (curr.product.price * curr.qty)
+    }, 0)
+  }
+
+  )
 
   constructor() {
     effect(() => {
       console.log(this.total())
     })
+  }
+
+  cartCheckout(): void {
+
+    this.cartService.createOrder(this.total())
+
   }
 }
