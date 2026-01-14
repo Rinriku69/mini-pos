@@ -1,32 +1,41 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { Order, OrderItem, Product } from '../models/types';
+import { Cart, OrderItem, Product } from '../models/types';
+import { createCart } from '../helper';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CartService {
-  private order = new BehaviorSubject({} as Order)
-  order$ = this.order.asObservable();
-  private orderItem = new BehaviorSubject<OrderItem[]>([]);
-  orderItem$ = this.orderItem.asObservable();
+  private cart = new BehaviorSubject({ order_item: [] } as Cart)
+  cart$ = this.cart.asObservable();
 
-  addOrderItem(item: Product, qty: number) {
-    const newItem: OrderItem = { id: 1, order_id: 1, product: item, qty: qty }
-    const currentOrderItems = this.orderItem.value;
-    const existing = currentOrderItems.find(ot => ot.product.id == item.id);
-    let newOrderItems: OrderItem[]
-    if (existing) {
-      newOrderItems = currentOrderItems.map(ot => {
-        return ot.product.id === item.id ? { ...ot, qty: ot.qty + 1 } : ot
-      })
+  addToCart(item: Product, qty: number): void {
+    if (this.cart.value.order_item.length == 0) {
+      const newOrderItem: OrderItem = { product: item, qty: qty };
+      const currentItems = this.cart.value;
+      const updatedItems: Cart = { ...currentItems, order_item: [...currentItems?.order_item, newOrderItem] }
 
+      this.cart.next(updatedItems);
     } else {
-      newOrderItems = [...currentOrderItems, newItem]
+      const newOrderItem: OrderItem = { product: item, qty: qty };
 
+      if (this.cart.value.order_item.find(v => v.product.id === newOrderItem.product.id)) {
+        const currenctItems = this.cart.value.order_item;
+        const updatedItems: OrderItem[] = currenctItems.map(old => {
+          return old.product.id === newOrderItem.product.id ? { ...old, qty: old.qty + 1 } : old
+        })
+        const currentCart = this.cart.value
+        const updatedCart: Cart = { ...currentCart, order_item: updatedItems }
+
+        this.cart.next(updatedCart)
+      } else {
+        const currentCart = this.cart.value;
+        const updatedCart: Cart = { ...currentCart, order_item: [...currentCart.order_item, newOrderItem] }
+
+        this.cart.next(updatedCart)
+      }
     }
-
-    this.orderItem.next(newOrderItems);
 
   }
 }
