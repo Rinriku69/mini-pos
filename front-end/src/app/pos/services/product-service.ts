@@ -39,20 +39,21 @@ export class ProductService {
 
       this.http.post(this.productApiUrl, formData).subscribe({
         next: (response) => {
-          console.log('บันทึกสำเร็จ!', response);
+          console.log('Successfully stored', response);
           this.router.navigate(['/store'])
         },
         error: (error) => {
-          console.error('เกิดข้อผิดพลาด:', error);
+          console.error('An error occured:', error);
 
         }
       });
 
     } else {
-      console.log('ฟอร์มไม่ถูกต้อง กรุณาตรวจสอบข้อมูล');
+      console.log('Invalid form value');
       productForm.markAllAsTouched();
     }
   }
 
+  
 
 }
