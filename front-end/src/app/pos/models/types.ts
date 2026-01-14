@@ -15,9 +15,12 @@ export interface Cart {
 }
 
 export interface OrderItem {
-    id?: number;
-    order_id?: number;
     product: Product;
     qty: number
+}
+
+export interface Order {
+    order_item: OrderItem[];
+    total: number
 }
 
