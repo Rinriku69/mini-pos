@@ -1,5 +1,5 @@
 export interface Product {
-    id?: number;
+    id: number;
     product_name: string;
     product_description: string;
     price: number;
@@ -10,14 +10,13 @@ export interface Category {
     category_name: string;
 }
 
-export interface Order {
-    id: number;
+export interface Cart {
     order_item: OrderItem[];
 }
 
 export interface OrderItem {
-    id: number;
-    order_id: number;
+    id?: number;
+    order_id?: number;
     product: Product;
     qty: number
 }
