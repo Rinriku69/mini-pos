@@ -4,15 +4,21 @@
   }
 </div>
 
+@if(cart()?.order_item?.length){
 <div class="flex justify-end">
-  <div class="text-3xl mt-5">Total :{{ total() | number }}</div>
+  <div class="text-3xl mt-5 mx-9">Total :{{ total() | number }}</div>
 </div>
 <div class="flex justify-center">
   <button
     type="button"
-    class="btn-primary hover:scale-105 hover:shadow-2xl shadow-gray-800 hover:bg-gray-500 hover:text-amber-100"
+    class="border-3 border-gray-600 rounded-md px-3 py-2 active:scale-95 transition transform duration-150 hover:scale-105 hover:shadow-2xl shadow-gray-800 hover:bg-gray-500 hover:text-amber-100"
     (click)="cartCheckout()"
   >
     Submit Order
   </button>
 </div>
+}@else {
+<div class="flex justify-center mt-30">
+  <b><span class="text-6xl text-gray-800">-- Empty --</span></b>
+</div>
+}
