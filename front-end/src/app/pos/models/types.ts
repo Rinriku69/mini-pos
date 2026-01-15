@@ -20,7 +20,7 @@ export interface OrderItem {
 }
 
 export interface Order {
-    id: number;
+    order_id: number;
     total: number;
     order_items: [
         {
