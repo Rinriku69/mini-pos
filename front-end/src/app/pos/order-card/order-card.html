@@ -1,0 +1,14 @@
+<div class="flex flex-col gap-5 m-8 p-3 rounded-2xl border">
+  <span class="text-lg font-bold"> Order Id : {{ order().order_id }} </span>
+  @for(order_item of order().order_items; track order_item){
+  <div class="flex gap-5">
+    <div>
+      {{ order_item.product_name }}
+    </div>
+    <div class="">
+      {{ order_item.product_price }}
+    </div>
+    <div class="ml-auto">x {{ order_item.qty }}</div>
+  </div>
+  }
+</div>
