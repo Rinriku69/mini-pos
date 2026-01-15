@@ -3,7 +3,7 @@
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
-use App\Models\Order;
+
 use Illuminate\Support\Facades\Route;
 
 Route::get('/products', [ProductController::class, 'index']);
@@ -12,4 +12,4 @@ Route::post('/products', [ProductController::class, 'store']);
 // Route::apiResource('products', ProductController::class);
 Route::get('/categories', [CategoryController::class, 'index']);
 Route::post('/orders', [OrderController::class, 'store']);
-Route::get('/orders', [Order::class, 'index']);
+Route::get('/orders', [OrderController::class, 'index']);
