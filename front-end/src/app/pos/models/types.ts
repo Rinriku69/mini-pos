@@ -20,7 +20,14 @@ export interface OrderItem {
 }
 
 export interface Order {
-    order_item: OrderItem[];
-    total: number
+    id: number;
+    total: number;
+    order_items: [
+        {
+            product_name: string,
+            product_price: number,
+            qty: number
+        }
+    ]
 }
 
