@@ -12,9 +12,10 @@ export class OrderService {
   private orders = new BehaviorSubject([] as Order[]);
   orders$ = this.orders.asObservable();
 
+
   loadOrders() {
-    this.http.get<Order[]>(this.orderApiUrl).pipe(
-      tap(response => this.orders.next(response))
+    return this.http.get<{ data: Order[] }>(this.orderApiUrl).pipe(
+      tap(response => this.orders.next(response['data']))
     )
   }
 
