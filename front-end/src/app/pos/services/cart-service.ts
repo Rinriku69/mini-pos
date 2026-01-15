@@ -47,6 +47,9 @@ export class CartService {
     this.http.post(this.orderApiUrl, order).subscribe({
       next: (response) => {
         console.log('order created successfully', response);
+        alert('Order Created')
+        const newCart: Cart = { order_item: [] }
+        this.cart.next(newCart);
 
       },
       error: (error) => {
