@@ -1,5 +1,5 @@
 import { Component, input } from '@angular/core';
-import { Order } from '../../models/types';
+import { Order } from '../../../models/types';
 
 @Component({
   selector: 'app-order-card',

@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { OrderService } from '../services/order-service';
+import { OrderService } from '../../services/order-service';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { OrderCard } from './order-card/order-card';
 
