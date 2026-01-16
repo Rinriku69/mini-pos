@@ -26,6 +26,10 @@ export class ProductCard {
 
   }
   addToCart(item: Product, qty: number) {
-    this.cartServices.addToCart(item, qty)
+    this.cartServices.addToCart(item, qty);
+    this.cartServices.cartBump();
   }
+
+
+
 }

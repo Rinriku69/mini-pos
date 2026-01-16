@@ -13,6 +13,7 @@ export class App {
   protected readonly title = signal('mini-pos');
   private cartService = inject(CartService)
   cart = toSignal(this.cartService.cart$)
+  cartBumpActive = toSignal(this.cartService.cartBumpActive)
   cartCount = computed(() => {
     const cart = this.cart()
     if (!cart) {
@@ -22,10 +23,13 @@ export class App {
     }
   })
 
+
   constructor() {
     effect(() => {
       console.log('cart change' + this.cart()?.order_item)
     })
   }
+
+
 
 }

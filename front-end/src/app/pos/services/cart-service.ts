@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, timeout } from 'rxjs';
 import { Cart, OrderItem, Product } from '../models/types';
 import { createCart } from '../helper';
 import { HttpClient } from '@angular/common/http';
@@ -11,6 +11,7 @@ export class CartService {
   private http = inject(HttpClient);
   private cart = new BehaviorSubject({ order_item: [] } as Cart)
   cart$ = this.cart.asObservable();
+  cartBumpActive = new BehaviorSubject<boolean>(false);
   private orderApiUrl = 'http://127.0.0.1:8000/api/orders'
 
   addToCart(item: Product, qty: number): void {
@@ -57,5 +58,12 @@ export class CartService {
 
       }
     });
+  }
+
+  cartBump(): void {
+    this.cartBumpActive.next(true);
+    setTimeout(() => {
+      this.cartBumpActive.next(false);
+    }, 150);
   }
 }
