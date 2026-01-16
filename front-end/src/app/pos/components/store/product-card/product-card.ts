@@ -1,6 +1,6 @@
 import { Component, effect, inject, input, Input } from '@angular/core';
-import { Product } from '../models/types';
-import { CartService } from '../services/cart-service';
+import { Product } from '../../models/types';
+import { CartService } from '../../services/cart-service';
 import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
@@ -20,7 +20,7 @@ export class ProductCard {
   });
   /* product = input<Product>({} as Product);  for optional*/
   /*  product = input.required<Product>(); */
-  
+
 
   constructor() {
 
