@@ -1,4 +1,4 @@
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, Signal } from '@angular/core';
 import { BehaviorSubject, Observable, Subject, timeout } from 'rxjs';
 import { Cart, OrderItem, Product } from '../models/types';
 import { createCart } from '../helper';
@@ -12,6 +12,7 @@ export class CartService {
   private cart = new BehaviorSubject({ order_item: [] } as Cart)
   cart$ = this.cart.asObservable();
   cartBumpActive = new BehaviorSubject<boolean>(false);
+  cartIcon = new BehaviorSubject<HTMLElement | null>(null);
   private orderApiUrl = 'http://127.0.0.1:8000/api/orders'
 
   addToCart(item: Product, qty: number): void {
@@ -65,5 +66,9 @@ export class CartService {
     setTimeout(() => {
       this.cartBumpActive.next(false);
     }, 150);
+  }
+
+  getCartIcon(cart: HTMLElement): void {
+    this.cartIcon.next(cart);
   }
 }

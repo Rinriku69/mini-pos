@@ -7,23 +7,25 @@
       <a class="app-nav-link" routerLink="add-product" routerLinkActive="is-active">Add Product</a>
     </li>
     <li class="">
-      <div class="relative">
-        <span>
-          <a class="app-nav-link" routerLink="cart" routerLinkActive="is-active">Cart</a>
-        </span>
-        @if (cartCount()>0) {
-        <span
-          class="absolute top-4.5 left-10 bg-red-600 rounded-full w-6 h-6 flex items-center justify-center text-amber-50 transition transform"
-          [class.scale-125]="cartBumpActive()"
-        >
-          {{ cartCount() }}
-        </span>
-        }
-      </div>
-    </li>
-    <li class="">
       <a class="app-nav-link" routerLink="orders" routerLinkActive="is-active">Order</a>
     </li>
+    <div class="flex justify-end pl-50">
+      <li class="">
+        <div class="relative">
+          <span #cartIcon>
+            <a class="app-nav-link" routerLink="cart" routerLinkActive="is-active">Cart</a>
+          </span>
+          @if (cartCount()>0) {
+          <span
+            class="absolute top-4.5 left-10 bg-red-600 rounded-full w-6 h-6 flex items-center justify-center text-amber-50 transition transform"
+            [class.scale-125]="cartBumpActive()"
+          >
+            {{ cartCount() }}
+          </span>
+          }
+        </div>
+      </li>
+    </div>
   </ul>
 </nav>
 

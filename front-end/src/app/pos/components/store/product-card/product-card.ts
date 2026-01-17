@@ -1,4 +1,4 @@
-import { Component, effect, inject, input, Input } from '@angular/core';
+import { Component, computed, effect, inject, input, Input } from '@angular/core';
 import { Product } from '../../../models/types';
 import { CartService } from '../../../services/cart-service';
 import { toSignal } from '@angular/core/rxjs-interop';
@@ -20,7 +20,8 @@ export class ProductCard {
   });
   /* product = input<Product>({} as Product);  for optional*/
   /*  product = input.required<Product>(); */
-
+  cartIcon = toSignal(this.cartServices.cartIcon, { initialValue: null });
+  cartIconEl = computed(() => this.cartIcon());
 
   constructor() { }
 
@@ -30,24 +31,37 @@ export class ProductCard {
   }
 
   cartAnimate(btn: HTMLElement) {
-    const rect = btn.getBoundingClientRect()
+    const cartEl = this.cartIconEl();
+    if (!cartEl) return;
+    const rectStart = btn.getBoundingClientRect();
+    const rectEnd = cartEl.getBoundingClientRect();
+
+    const startX = rectStart.left + rectStart.width / 2;
+    const endX = rectEnd.left + rectEnd.width / 2;
+    
+    const startY = rectStart.top + rectStart.height / 2;
+    const endY = rectEnd.top + rectEnd.height / 2;
 
     const fly = document.createElement('div');
+    fly.className =
+      'fixed z-50 w-4 h-4 bg-blue-500 rounded-full transition-all duration-500';
 
-    fly.className = 'fixed z-50 w-4 h-4 bg-blue-500 rounded-full transition-all duration-500';
+    fly.style.left = `${startX}px`;
+    fly.style.top = `${startY}px`;
+    fly.style.transform = 'translate(0, 0) scale(1)';
+    fly.style.opacity = '1';
 
-
-    fly.style.top = rect.top + 'px';
     document.body.appendChild(fly);
 
     requestAnimationFrame(() => {
-      fly.style.right = '36%';
-      fly.style.top = '10px';
-      fly.style.transform = 'scale(0.2)';
-      fly.style.opacity = '0.5';
+      fly.style.transform = `
+      translate(${endX - startX}px, ${endY - startY}px)
+      scale(0.5)
+    `;
+      fly.style.opacity = '0.3';
     });
 
-    setTimeout(() => fly.remove(), 3000);
+    setTimeout(() => fly.remove(), 2000);
   }
 
 
