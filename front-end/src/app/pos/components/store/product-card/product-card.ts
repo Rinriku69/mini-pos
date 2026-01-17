@@ -37,10 +37,10 @@ export class ProductCard {
     const rectEnd = cartEl.getBoundingClientRect();
 
     const startX = rectStart.left + rectStart.width / 2;
-    const endX = rectEnd.left + rectEnd.width / 2;
-    
     const startY = rectStart.top + rectStart.height / 2;
-    const endY = rectEnd.top + rectEnd.height / 2;
+
+    const endX = (rectEnd.left + rectEnd.width / 2) + 13;
+    const endY = (rectEnd.top + rectEnd.height / 2) - 13;
 
     const fly = document.createElement('div');
     fly.className =
