@@ -22,6 +22,7 @@ export interface OrderItem {
 export interface Order {
     order_id: number;
     total: number;
+    date: string;
     order_items: [
         {
             product_name: string,
