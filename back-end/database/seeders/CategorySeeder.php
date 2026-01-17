@@ -19,7 +19,12 @@ class CategorySeeder extends Seeder
             'Laptop',
             'Tablet',
             'Smart Watch',
-            'Accessories'
+            'Accessories',
+            'Electronics',
+            'Books',
+            'Clothing',
+            'Home & Kitchen',
+            'Sports',
         ];
 
         foreach ($categories as $cat) {
