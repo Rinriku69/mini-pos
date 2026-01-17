@@ -22,14 +22,33 @@ export class ProductCard {
   /*  product = input.required<Product>(); */
 
 
-  constructor() {
+  constructor() { }
 
-  }
   addToCart(item: Product, qty: number) {
     this.cartServices.addToCart(item, qty);
     this.cartServices.cartBump();
   }
 
+  cartAnimate(btn: HTMLElement) {
+    const rect = btn.getBoundingClientRect()
+
+    const fly = document.createElement('div');
+
+    fly.className = 'fixed z-50 w-4 h-4 bg-blue-500 rounded-full transition-all duration-500';
+
+
+    fly.style.top = rect.top + 'px';
+    document.body.appendChild(fly);
+
+    requestAnimationFrame(() => {
+      fly.style.right = '36%';
+      fly.style.top = '10px';
+      fly.style.transform = 'scale(0.2)';
+      fly.style.opacity = '0.5';
+    });
+
+    setTimeout(() => fly.remove(), 3000);
+  }
 
 
 }

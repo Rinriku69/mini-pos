@@ -13,6 +13,8 @@
       type="button"
       class="btn-primary shadow-lg hover:scale-105 hover:bg-gray-400 hover:shadow-gray-700 transition-shadow duration-200"
       (click)="addToCart(product(), 1)"
+      (click)="cartAnimate(addBtn)"
+      #addBtn
     >
       Add
     </button>
