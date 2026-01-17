@@ -19,7 +19,7 @@ export class Store implements OnInit {
   constructor() {
     effect(() => {
       // console.log('Products changed:', this.products());
-      console.log('Cart changed:', this.cart());
+      // console.log('Cart changed:', this.cart());
     });
   }
   ngOnInit(): void {

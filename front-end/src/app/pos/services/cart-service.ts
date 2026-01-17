@@ -71,4 +71,15 @@ export class CartService {
   getCartIcon(cart: HTMLElement): void {
     this.cartIcon.next(cart);
   }
+
+
+  removeItem(productId: number) {
+    const currentItem = this.cart.value
+    const newItem = currentItem.order_item.filter(
+      (p) => p.product.id !== productId
+    )
+
+    const newCart: Cart = { ...currentItem, order_item: newItem }
+    this.cart.next(newCart)
+  }
 }

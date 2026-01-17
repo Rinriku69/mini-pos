@@ -27,10 +27,10 @@ export class PosNav implements AfterViewInit {
 
 
   constructor() {
-    effect(() => {
-      console.log('cart change' + this.cart()?.order_item)
-      console.log(this.cartIcon())
-    })
+    /*  effect(() => {
+       console.log('cart change' + this.cart()?.order_item)
+       console.log(this.cartIcon())
+     }) */
   }
 
   ngAfterViewInit() {

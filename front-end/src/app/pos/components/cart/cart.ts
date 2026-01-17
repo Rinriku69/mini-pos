@@ -25,9 +25,7 @@ export class Cart {
   )
 
   constructor() {
-    effect(() => {
-      console.log(this.total())
-    })
+
   }
 
   cartCheckout(): void {

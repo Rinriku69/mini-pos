@@ -1,6 +1,7 @@
-import { Component, input } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import { OrderItem } from '../../../models/types';
 import { DecimalPipe } from '@angular/common';
+import { CartService } from '../../../services/cart-service';
 
 @Component({
   selector: 'app-cart-card',
@@ -10,4 +11,9 @@ import { DecimalPipe } from '@angular/common';
 })
 export class CartCard {
   readonly orderItem = input({} as OrderItem);
+  private cartService = inject(CartService)
+
+  removeItem(productId: number) {
+    this.cartService.removeItem(productId);
+  }
 }
