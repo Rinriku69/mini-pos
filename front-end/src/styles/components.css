@@ -13,7 +13,7 @@
 }
 
 .app-nav-link.is-active {
-  @apply bg-white
+  @apply bg-[#C8AAAA]
     text-gray-900
     shadow-sm;
 }
@@ -58,4 +58,8 @@
 
 .card-price {
   @apply mt-2 text-lg font-semibold text-blue-600;
+}
+
+.main-color-text {
+  @apply text-[#574964];
 }
