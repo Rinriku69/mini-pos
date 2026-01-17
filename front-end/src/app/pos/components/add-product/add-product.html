@@ -1,63 +1,49 @@
-<form [formGroup]="productForm" (submit)="onSubmit()">
-  <div class="flex flex-col gap-5 items-center">
-    <div class="border p-20 mt-20 rounded border-b-current bg-fuchsia-100">
-      <thead>
-        <span>Add New Product</span>
-      </thead>
+<form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+  <div class="max-w-xl mx-auto mt-16 px-4">
+    <div class="bg-white border border-gray-200 rounded-2xl shadow-sm p-6">
+      <h2 class="text-2xl font-semibold text-gray-900 mb-6">Add New Product</h2>
 
-      <table class="flex-1">
-        <tr>
-          <td>
-            <label>Name</label>
-          </td>
-          <td>
-            <input
-              class="app-input-field border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-              type="text"
-              formControlName="name"
-            />
-          </td>
-        </tr>
-        <tr>
-          <td><label>Description</label></td>
-          <td>
-            <textarea
-              class="app-input-field border focus:ring-2 focus:ring-blue-400 focus:outline-none"
-              id="description"
-              formControlName="description"
-              placeholder="Ex. color: blue"
-            ></textarea>
-          </td>
-        </tr>
-        <tr>
-          <td><label>Price</label></td>
-          <td>
-            <input
-              class="app-input-field border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-              type="number"
-              formControlName="price"
-            />
-          </td>
-        </tr>
-        <tr>
-          <td><label>Category</label></td>
-          <td>
-            <select formControlName="category_id" class="app-input-field border rounded">
-              <option value="xx">--Select Category--</option>
-              @for (cat of categories(); track cat.id) {
-              <option [value]="cat.id">{{ cat.category_name }}</option>
-              }
-            </select>
-          </td>
-        </tr>
-      </table>
+      <div class="form-group">
+        <label class="form-label">Name</label>
+        <input type="text" formControlName="name" class="app-input-field" />
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Description</label>
+        <textarea
+          formControlName="description"
+          class="app-input-field resize-none"
+          rows="3"
+          placeholder="Ex. color: blue"
+        ></textarea>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Price</label>
+        <input type="number" formControlName="price" class="app-input-field" />
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Category</label>
+        <select formControlName="category_id" class="app-input-field">
+          <option value="">-- Select Category --</option>
+          @for (cat of categories(); track cat.id) {
+            <option [value]="cat.id">
+              {{ cat.category_name }}
+            </option>
+          }
+        </select>
+      </div>
+
+      <div class="flex justify-end mt-8">
+        <button
+          type="submit"
+          class="btn-primary px-6 py-2 font-semibold disabled:text-gray-800 disabled:bg-gray-400 disabled:cursor-not-allowed hover:scale-105 bg-blue-600 transition"
+          [disabled]="productForm.invalid"
+        >
+          Submit
+        </button>
+      </div>
     </div>
-    <button
-      class="btn-primary disabled:bg-gray-400 w-fit  hover:bg-blue-600 hover:scale-105 transition-all duration-500"
-      type="submit"
-      [disabled]="productForm.invalid"
-    >
-      Submit
-    </button>
   </div>
 </form>
