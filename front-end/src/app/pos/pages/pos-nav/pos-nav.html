@@ -1,23 +1,33 @@
-<nav class="sticky top-0 z-50 border-b pb-6 pt-0.5 transition-shadow bg-[#C8AAAA]">
-  <ul class="flex justify-center mt-5 gap-30">
-    <li>
-      <a class="app-nav-link" routerLink="store" routerLinkActive="is-active">Store</a>
-    </li>
-    <li>
-      <a class="app-nav-link" routerLink="add-product" routerLinkActive="is-active">Add Product</a>
-    </li>
-    <li class="">
-      <a class="app-nav-link" routerLink="orders" routerLinkActive="is-active">Order</a>
-    </li>
-    <div class="flex justify-end pl-50">
-      <li class="">
+<nav class="sticky top-0 z-50 bg-[#C8AAAA] border-b border-gray-400 transition-shadow">
+  <div class="max-w-6xl mx-auto px-6">
+    <ul class="flex items-center justify-between h-16">
+      <div class="flex gap-8">
+        <li>
+          <a class="app-nav-link" routerLink="store" routerLinkActive="is-active"> Store </a>
+        </li>
+
+        <li>
+          <a class="app-nav-link" routerLink="add-product" routerLinkActive="is-active">
+            Add Product
+          </a>
+        </li>
+
+        <li>
+          <a class="app-nav-link" routerLink="orders" routerLinkActive="is-active"> Orders </a>
+        </li>
+      </div>
+
+      <li>
         <div class="relative">
           <span #cartIcon>
-            <a class="app-nav-link" routerLink="cart" routerLinkActive="is-active">Cart</a>
+            <a class="app-nav-link font-semibold" routerLink="cart" routerLinkActive="is-active">
+              Cart
+            </a>
           </span>
+
           @if (cartCount() > 0) {
             <span
-              class="absolute top-4.5 left-10 bg-red-600 rounded-full w-6 h-6 flex items-center justify-center text-amber-50 transition transform"
+              class="absolute -top-2 -right-3 w-6 h-6 bg-red-600 text-white text-xs font-semibold rounded-full flex items-center justify-center transition-transform"
               [class.scale-125]="cartBumpActive()"
             >
               {{ cartCount() }}
@@ -25,10 +35,10 @@
           }
         </div>
       </li>
-    </div>
-  </ul>
+    </ul>
+  </div>
 </nav>
 
-<main class="bg-[#FFDAB3]">
+<main class="bg-[#FFDAB3] min-h-screen">
   <router-outlet />
 </main>

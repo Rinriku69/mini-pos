@@ -4,7 +4,18 @@
 }
 
 .app-nav-link {
-  @apply p-3 hover:bg-[#9F8383] rounded duration-700;
+  @apply text-gray-800
+    font-medium
+    px-3 py-2
+    rounded-md
+    transition-colors duration-150
+    hover:bg-white/40;
+}
+
+.app-nav-link.is-active {
+  @apply bg-white
+    text-gray-900
+    shadow-sm;
 }
 
 .app-input-field {
