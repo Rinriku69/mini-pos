@@ -10,25 +10,6 @@ import { toSignal } from '@angular/core/rxjs-interop';
   styleUrl: './app.scss'
 })
 export class App {
-  protected readonly title = signal('mini-pos');
-  private cartService = inject(CartService)
-  cart = toSignal(this.cartService.cart$)
-  cartBumpActive = toSignal(this.cartService.cartBumpActive)
-  cartCount = computed(() => {
-    const cart = this.cart()
-    if (!cart) {
-      return 0
-    } else {
-      return cart.order_item.length
-    }
-  })
-
-
-  constructor() {
-    effect(() => {
-      console.log('cart change' + this.cart()?.order_item)
-    })
-  }
 
 
 
