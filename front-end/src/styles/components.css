@@ -10,3 +10,14 @@
 .app-input-field {
   @apply m-5;
 }
+
+.btn-add {
+  @apply px-4 py-2
+    rounded-lg
+    bg-blue-600 text-white font-medium
+    shadow-md
+    transition-all duration-200
+    hover:bg-blue-700 hover:shadow-lg hover:-translate-y-0.5
+    active:scale-95 active:shadow
+    focus:outline-none focus:ring-2 focus:ring-blue-400;
+}
