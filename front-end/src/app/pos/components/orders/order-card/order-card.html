@@ -1,14 +1,32 @@
-<div class="flex flex-col gap-5 m-8 p-3 rounded-2xl border">
-  <span class="text-lg font-bold"> Order Id : {{ order().order_id }} </span>
-  @for(order_item of order().order_items; track order_item){
-  <div class="flex gap-5">
-    <div>
-      {{ order_item.product_name }}
-    </div>
-    <div class="">
-      {{ order_item.product_price }}
-    </div>
-    <div class="ml-auto">x {{ order_item.qty }}</div>
+<div class="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm">
+  <div class="flex items-center justify-between mb-4">
+    <span class="text-lg font-semibold text-gray-900"> Order #{{ order().order_id }} </span>
+    <span class="text-sm text-gray-500">
+      {{ order().date }}
+    </span>
   </div>
-  }
+
+  <div class="flex flex-col gap-3">
+    @for (order_item of order().order_items; track order_item.product_name) {
+      <div class="flex items-center text-sm">
+        <div class="flex-1 text-gray-800">
+          {{ order_item.product_name }}
+        </div>
+
+        <div class="w-20 text-right text-gray-600">
+          {{ order_item.product_price }}
+        </div>
+
+        <div class="w-12 text-right text-gray-500">× {{ order_item.qty }}</div>
+      </div>
+    }
+  </div>
+
+  <!-- Divider -->
+  <div class="my-4 border-t border-gray-100"></div>
+
+  <div class="flex justify-end text-sm">
+    <span class="text-gray-500 mr-2">Total</span>
+    <span class="font-semibold text-gray-900"> {{ order().total | number }} THB </span>
+  </div>
 </div>
