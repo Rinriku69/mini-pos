@@ -2,10 +2,11 @@ import { Component, computed, effect, inject, input, Input } from '@angular/core
 import { Product } from '../../../models/types';
 import { CartService } from '../../../services/cart-service';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { DecimalPipe } from '@angular/common';
 
 @Component({
   selector: 'app-product-card',
-  imports: [],
+  imports: [DecimalPipe],
   templateUrl: './product-card.html',
   styleUrl: './product-card.scss',
 })

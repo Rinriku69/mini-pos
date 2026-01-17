@@ -1,19 +1,26 @@
-<div class="flex mx-6 border p-3 rounded justify-between">
-  <div>
+<div
+  class="flex items-center justify-between bg-white border border-gray-200 rounded-xl px-5 py-4 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all"
+>
+  <div class="flex flex-col gap-1">
     <div class="card-header">
       {{ product().product_name }}
     </div>
-    <div class="card-content">Detail : {{ product().product_description }}</div>
+
+    <div class="card-content">
+      {{ product().product_description }}
+    </div>
+
     <div class="card-price">
-      {{ product().price }}
+      {{ product().price | number }}
     </div>
   </div>
-  <div class="">
+
+  <div class="ml-4 shrink-0">
     <button
+      #addBtn
       type="button"
       class="btn-add active:rotate-2"
       (click)="addToCart(product(), 1); cartAnimate(addBtn)"
-      #addBtn
     >
       Add
     </button>
