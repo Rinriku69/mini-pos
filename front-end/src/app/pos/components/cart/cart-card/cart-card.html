@@ -1,8 +1,17 @@
-<div class="border flex p-5 mt-10 mx-10 rounded py-10">
-  <div>
-    <span class="text-xl">
+<div
+  class="flex items-center justify-between bg-white border border-gray-200 rounded-xl px-5 py-4 shadow-sm"
+>
+  <div class="flex flex-col">
+    <span class="text-base font-medium text-gray-900">
       {{ orderItem().product.product_name }}
     </span>
+
+    <span class="text-sm text-gray-500"> Price: {{ orderItem().product.price | number }} </span>
   </div>
-  <div class="ml-auto text-lg">X {{ orderItem().qty }}</div>
+
+  <div class="flex items-center gap-4">
+    <span class="text-sm text-gray-500"> Qty </span>
+
+    <span class="text-lg font-semibold text-gray-800"> × {{ orderItem().qty }} </span>
+  </div>
 </div>

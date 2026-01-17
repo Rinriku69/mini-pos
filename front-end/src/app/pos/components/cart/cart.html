@@ -1,24 +1,31 @@
-<div class="flex flex-col gap-3">
-  @for (item of cart()?.order_item; track item) {
-  <app-cart-card [orderItem]="item"></app-cart-card>
+<div class="max-w-4xl mx-auto mt-10 px-4">
+  @if (cart()?.order_item?.length) {
+    <div class="flex flex-col gap-4">
+      @for (item of cart()?.order_item; track item) {
+        <app-cart-card [orderItem]="item"></app-cart-card>
+      }
+    </div>
+
+    <div class="mt-8 flex items-center justify-between">
+      <div class="text-xl font-semibold text-gray-800">Total</div>
+      <div class="text-2xl font-bold text-blue-600">
+        {{ total() | number }}
+      </div>
+    </div>
+
+    <div class="flex justify-end mt-6">
+      <button
+        type="button"
+        class="px-6 py-3 rounded-lg bg-linear-to-r from-blue-600 to-indigo-600 text-white font-semibold shadow-md hover:from-blue-700 hover:to-indigo-700 active:scale-95 transition"
+        (click)="cartCheckout()"
+      >
+        Submit Order
+      </button>
+    </div>
+  } @else {
+    <div class="flex flex-col items-center justify-center mt-32 text-gray-500">
+      <span class="text-5xl font-light">Your cart is empty</span>
+      <span class="mt-2 text-sm">Add some products to get started</span>
+    </div>
   }
 </div>
-
-@if(cart()?.order_item?.length){
-<div class="flex justify-end">
-  <div class="text-3xl mt-5 mx-9">Total :{{ total() | number }}</div>
-</div>
-<div class="flex justify-center">
-  <button
-    type="button"
-    class="mb-6 px-6 py-3 rounded-lg bg-linear-to-r from-blue-600 to-indigo-600 text-white font-semibold shadow-md hover:from-blue-700 hover:to-indigo-700 active:scale-95 transition"
-    (click)="cartCheckout()"
-  >
-    Submit Order
-  </button>
-</div>
-}@else {
-<div class="flex justify-center mt-30">
-  <b><span class="text-6xl text-gray-800">-- Empty --</span></b>
-</div>
-}

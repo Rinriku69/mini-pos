@@ -1,9 +1,10 @@
 import { Component, input } from '@angular/core';
 import { OrderItem } from '../../../models/types';
+import { DecimalPipe } from '@angular/common';
 
 @Component({
   selector: 'app-cart-card',
-  imports: [],
+  imports: [DecimalPipe],
   templateUrl: './cart-card.html',
   styleUrl: './cart-card.scss',
 })
