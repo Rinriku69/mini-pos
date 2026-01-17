@@ -19,7 +19,7 @@ export class AddProduct implements OnInit {
 
   productForm = this.fb.group({
     name: ['', [Validators.required, Validators.minLength(3)]],
-    category_id: ["xx", Validators.required],
+    category_id: ["", Validators.required],
     price: [0, [Validators.required, Validators.min(1)]],
     description: ['']
   });
