@@ -15,6 +15,12 @@
         <li>
           <a class="app-nav-link" routerLink="orders" routerLinkActive="is-active"> Orders </a>
         </li>
+        <input
+          type="text"
+          class="border bg-white ml-auto"
+          (input)="searchKey.set(key.value)"
+          #key
+        />
       </div>
 
       <li>
