@@ -1,8 +1,9 @@
-import { AfterViewInit, Component, computed, effect, ElementRef, HostListener, inject, OnInit, signal, viewChild } from '@angular/core';
+import { AfterViewInit, Component, computed, effect, ElementRef, HostListener, inject, OnInit, Signal, signal, viewChild } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { CartService } from '../../services/cart-service';
-import { tap } from 'rxjs';
+
+import { ProductService } from '../../services/product-service';
 
 @Component({
   selector: 'app-pos-nav',
@@ -13,7 +14,11 @@ import { tap } from 'rxjs';
 export class PosNav implements AfterViewInit {
   protected readonly title = signal('mini-pos');
   private cartService = inject(CartService)
+  private productService = inject(ProductService)
   cart = toSignal(this.cartService.cart$)
+
+  readonly searchKey = signal('');
+
   cartBumpActive = toSignal(this.cartService.cartBumpActive)
   cartCount = computed(() => {
     const cart = this.cart()
@@ -27,10 +32,9 @@ export class PosNav implements AfterViewInit {
 
 
   constructor() {
-    /*  effect(() => {
-       console.log('cart change' + this.cart()?.order_item)
-       console.log(this.cartIcon())
-     }) */
+    effect(() => {
+      this.productService.searchUpdate(this.searchKey())
+    })
   }
 
   ngAfterViewInit() {
