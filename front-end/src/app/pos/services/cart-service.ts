@@ -28,7 +28,7 @@ export class CartService {
       if (this.cart.value.order_item.find(v => v.product.id === newOrderItem.product.id)) {
         const currenctItems = this.cart.value.order_item;
         const updatedItems: OrderItem[] = currenctItems.map(old => {
-          return old.product.id === newOrderItem.product.id ? { ...old, qty: old.qty + 1 } : old
+          return old.product.id === newOrderItem.product.id ? { ...old, qty: old.qty + qty } : old
         })
         const currentCart = this.cart.value
         const updatedCart: Cart = { ...currentCart, order_item: updatedItems }
