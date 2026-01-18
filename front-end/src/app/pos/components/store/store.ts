@@ -14,7 +14,17 @@ import { CartService } from '../../services/cart-service';
 export class Store implements OnInit {
   private productService = inject(ProductService);
   private cartService = inject(CartService)
-  products = toSignal(this.productService.productState$, { initialValue: [] })
+  private products = toSignal(this.productService.productState$, { initialValue: [] })
+  private searchKey = toSignal(this.productService.searchKey$)
+  protected readonly productsDisplay: Signal<Product[]> = computed(() => {
+    const products = this.products()
+    const searchKey = this.searchKey()
+    if (!products || !searchKey) return this.products()
+
+    return products.filter((p) => p.product_name.toLowerCase().includes(searchKey.toLowerCase()) ?
+      p.product_name.toLowerCase().includes(searchKey.toLowerCase()) : p.product_description.toLowerCase().includes(searchKey.toLowerCase())
+    )
+  })
   cart = toSignal(this.cartService.cart$)
   constructor() {
     effect(() => {
