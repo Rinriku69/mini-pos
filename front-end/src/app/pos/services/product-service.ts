@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { BehaviorSubject, shareReplay, tap } from 'rxjs';
+import { BehaviorSubject, filter, shareReplay, tap } from 'rxjs';
 import { Product, Category } from '../models/types';
 
 import { FormGroup } from '@angular/forms';
@@ -14,6 +14,8 @@ export class ProductService {
   private products = new BehaviorSubject<Product[]>([]);
   productState$ = this.products.asObservable();
 
+  private searchKey = new BehaviorSubject('');
+  searchKey$ = this.searchKey.asObservable();
   private categories = new BehaviorSubject<Category[]>([]);
   categories$ = this.categories.asObservable()
   private productApiUrl = 'http://127.0.0.1:8000/api/products';
@@ -54,6 +56,8 @@ export class ProductService {
     }
   }
 
-  
+  searchUpdate(k: string): void {
+    this.searchKey.next(k)
+  }
 
 }
