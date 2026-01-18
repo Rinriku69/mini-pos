@@ -1,10 +1,11 @@
 import { AfterViewInit, Component, computed, effect, ElementRef, HostListener, inject, OnInit, Signal, signal, viewChild } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { NavigationEnd, Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { CartService } from '../../services/cart-service';
 
 
 import { NavService } from '../../services/nav-service';
+import { filter, map } from 'rxjs';
 
 @Component({
   selector: 'app-pos-nav',
@@ -14,9 +15,19 @@ import { NavService } from '../../services/nav-service';
 })
 export class PosNav implements AfterViewInit {
   protected readonly title = signal('mini-pos');
+  private router = inject(Router)
   private cartService = inject(CartService)
   private navService = inject(NavService)
   cart = toSignal(this.cartService.cart$)
+  private route$ = this.router.events.pipe(
+    filter(e => e instanceof NavigationEnd),
+    map(() => this.router.url)
+  );
+  currentUrl = toSignal(this.route$, { initialValue: this.router.url });
+
+  showSearch = computed(() =>
+    this.currentUrl().startsWith('/main/store') || this.currentUrl().startsWith('/main/orders')
+  );
 
   readonly searchKey = signal('');
 
@@ -35,6 +46,7 @@ export class PosNav implements AfterViewInit {
   constructor() {
     effect(() => {
       this.navService.searchUpdate(this.searchKey())
+
     })
   }
 

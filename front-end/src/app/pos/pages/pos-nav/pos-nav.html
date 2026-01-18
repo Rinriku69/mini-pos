@@ -18,13 +18,15 @@
       </div>
 
       <div class="flex-1 flex justify-center">
-        <input
-          type="text"
-          class="w-72 px-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 bg-white"
-          placeholder="Search product..."
-          (input)="searchKey.set(key.value)"
-          #key
-        />
+        @if (showSearch()) {
+          <input
+            type="text"
+            class="w-72 px-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 bg-white"
+            placeholder="Search product..."
+            (input)="searchKey.set(key.value)"
+            #key
+          />
+        }
       </div>
 
       <li>
