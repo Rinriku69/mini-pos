@@ -4,6 +4,7 @@ import { Product } from '../../models/types';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ProductCard } from "./product-card/product-card";
 import { CartService } from '../../services/cart-service';
+import { NavService } from '../../services/nav-service';
 
 @Component({
   selector: 'app-store',
@@ -13,9 +14,10 @@ import { CartService } from '../../services/cart-service';
 })
 export class Store implements OnInit {
   private productService = inject(ProductService);
-  private cartService = inject(CartService)
+  private cartService = inject(CartService);
+  private navService = inject(NavService);
   private products = toSignal(this.productService.productState$, { initialValue: [] })
-  private searchKey = toSignal(this.productService.searchKey$)
+  private searchKey = toSignal(this.navService.searchKey$)
   protected readonly productsDisplay: Signal<Product[]> = computed(() => {
     const products = this.products()
     const searchKey = this.searchKey()

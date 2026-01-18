@@ -3,7 +3,8 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { CartService } from '../../services/cart-service';
 
-import { ProductService } from '../../services/product-service';
+
+import { NavService } from '../../services/nav-service';
 
 @Component({
   selector: 'app-pos-nav',
@@ -14,7 +15,7 @@ import { ProductService } from '../../services/product-service';
 export class PosNav implements AfterViewInit {
   protected readonly title = signal('mini-pos');
   private cartService = inject(CartService)
-  private productService = inject(ProductService)
+  private navService = inject(NavService)
   cart = toSignal(this.cartService.cart$)
 
   readonly searchKey = signal('');
@@ -33,7 +34,7 @@ export class PosNav implements AfterViewInit {
 
   constructor() {
     effect(() => {
-      this.productService.searchUpdate(this.searchKey())
+      this.navService.searchUpdate(this.searchKey())
     })
   }
 

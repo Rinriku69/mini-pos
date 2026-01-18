@@ -14,8 +14,6 @@ export class ProductService {
   private products = new BehaviorSubject<Product[]>([]);
   productState$ = this.products.asObservable();
 
-  private searchKey = new BehaviorSubject('');
-  searchKey$ = this.searchKey.asObservable();
   private categories = new BehaviorSubject<Category[]>([]);
   categories$ = this.categories.asObservable()
   private productApiUrl = 'http://127.0.0.1:8000/api/products';
@@ -56,8 +54,6 @@ export class ProductService {
     }
   }
 
-  searchUpdate(k: string): void {
-    this.searchKey.next(k)
-  }
+
 
 }
