@@ -63,3 +63,7 @@
 .main-color-text {
   @apply text-[#574964];
 }
+
+.is-disabled {
+  @apply text-gray-700 bg-[#cccccc]/60;
+}

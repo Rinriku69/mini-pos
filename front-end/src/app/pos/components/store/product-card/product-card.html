@@ -25,6 +25,7 @@
             ? (productQty.valueAsNumber -= 1)
             : (productQty.valueAsNumber = 1)
         "
+        [class.is-disabled]="productQty.valueAsNumber == 1"
       >
         −
       </button>
