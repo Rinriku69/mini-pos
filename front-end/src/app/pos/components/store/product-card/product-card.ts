@@ -62,7 +62,7 @@ export class ProductCard {
       fly.style.opacity = '0.3';
     });
 
-    setTimeout(() => fly.remove(), 2000);
+    setTimeout(() => fly.remove(), 2200);
   }
 
 
