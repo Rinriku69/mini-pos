@@ -49,7 +49,7 @@ export class ProductCard {
 
     fly.style.left = `${startX}px`;
     fly.style.top = `${startY}px`;
-    fly.style.transform = 'translate(0, 0) scale(1)';
+    fly.style.transform = 'translate(0, 0) scale(2)';
     fly.style.opacity = '1';
 
     document.body.appendChild(fly);

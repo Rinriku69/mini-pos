@@ -21,7 +21,7 @@ export class AddProduct implements OnInit {
     name: ['', [Validators.required, Validators.minLength(3)]],
     category_id: ["", Validators.required],
     price: [0, [Validators.required, Validators.min(1)]],
-    description: ['']
+    description: [''],
   });
   readonly formValue = toSignal(this.productForm.valueChanges, { initialValue: this.productForm.value });
 
