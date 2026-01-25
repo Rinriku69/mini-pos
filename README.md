@@ -6,7 +6,7 @@
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
 
 **Mini POS** is a personal practice project created to study the integration between **Modern Angular** (Frontend) and **Laravel** (Backend). I built this application to apply what I've learned about state management and database operations in a practical scenario.
-![Project Screenshot](public/img/main.png)
+![Project Screenshot](front-end/public/img/main.png)
 
 
 ## 💡 Why I Built This: Self-Learning Journey
@@ -29,7 +29,7 @@ As a self-learner, I wanted to move beyond basic tutorials and static mock data.
 * **🛡️ Secure Transactions:**
     * Laravel Backend uses `DB::transaction` to ensure atomic operations (Order Creation + Stock Deduction).
     * Rollbacks automatically if any part of the process fails.
-    ![Project Screenshot](public/img/order.png)
+    ![Project Screenshot](front-end/public/img/order.png)
 * **📝 Product Management:**
     * Add new products using **Reactive Forms** with comprehensive validation.
 
