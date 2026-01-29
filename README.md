@@ -7,7 +7,7 @@
 ![TailwindCss](https://img.shields.io/badge/Tailwind_CSS-grey?style=for-the-badge&logo=tailwind-css&logoColor=38B2AC)
 
 **Mini POS** is a personal practice project created to study the integration between **Modern Angular** (Frontend) and **Laravel** (Backend). I built this application to apply what I've learned about state management and database operations in a practical scenario.
-![Project Screenshot](front-end/public/img/main.png)
+![Project Screenshot](front-end/public/img/home.png)
 
 
 ## 💡 Why I Built This: Self-Learning Journey
@@ -24,13 +24,14 @@ As a self-learner, I wanted to move beyond basic tutorials and static mock data.
 * **⚡ Reactive Product Filter:**
     * Instantly filter products by **Category** and **Search Keyword** simultaneously.
     * Powered by `RxJS` (combineLatest) and `Signals` for optimal performance.
+      ![Project Screenshot](front-end/public/img/store.png)
 * **🛒 Smart Shopping Cart:**
     * Real-time calculation of Subtotal, Total Items, and Grand Total.
     * Built entirely with **Angular Signals** (`computed`, `update`) for fine-grained reactivity (No `ngOnChanges` needed).
 * **🛡️ Secure Transactions:**
     * Laravel Backend uses `DB::transaction` to ensure atomic operations (Order Creation + Stock Deduction).
     * Rollbacks automatically if any part of the process fails.
-    ![Project Screenshot](front-end/public/img/order.png)
+    ![Project Screenshot](front-end/public/img/orders.png)
 * **📝 Product Management:**
     * Add new products using **Reactive Forms** with comprehensive validation.
 
