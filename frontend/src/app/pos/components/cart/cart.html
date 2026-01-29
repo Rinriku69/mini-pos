@@ -2,7 +2,7 @@
   @if (cart()?.order_item?.length) {
     <div class="flex flex-col gap-4">
       @for (item of cart()?.order_item; track item) {
-        <app-cart-card [orderItem]="item"></app-cart-card>
+        <app-cart-card [orderItem]="item" class="animate-fade-in-up"></app-cart-card>
       }
     </div>
 
