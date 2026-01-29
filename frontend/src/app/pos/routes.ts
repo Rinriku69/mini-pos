@@ -4,19 +4,21 @@ import { Store } from "./components/store/store";
 import { AddProduct } from "./components/add-product/add-product";
 import { Cart } from "./components/cart/cart";
 import { Orders } from "./components/orders/orders";
+import { HomePage } from "./components/home-page/home-page";
 
 export default [
     {
         path: '',
         component: PosNav,
         children: [
-            { path: '', redirectTo: 'store', pathMatch: 'full' },
+            { path: '', redirectTo: 'home', pathMatch: 'full' },
 
             { path: 'store', component: Store },
 
             { path: 'add-product', component: AddProduct },
             { path: 'cart', component: Cart },
             { path: 'orders', component: Orders },
+            { path: 'home', component: HomePage },
         ],
     },
 ] as Routes;
