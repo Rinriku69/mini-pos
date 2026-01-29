@@ -1,5 +1,5 @@
 <div
-  class="flex items-center justify-between bg-white border border-gray-200 rounded-xl px-5 py-4 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all"
+  class="flex items-center justify-between bg-gray-300 border border-gray-200 rounded-xl px-5 py-4 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all"
 >
   <div class="flex flex-col gap-1">
     <div class="card-header">
@@ -19,7 +19,7 @@
     <div class="flex items-center border border-gray-300 rounded-xl overflow-hidden w-fit">
       <button
         type="button"
-        class="px-3 py-2 text-lg font-bold hover:bg-gray-100 active:bg-gray-200 transition"
+        class="px-3 py-2 bg-gray-200 text-lg font-bold hover:bg-gray-100 active:bg-gray-200 transition"
         (click)="
           productQty.valueAsNumber > 1
             ? (productQty.valueAsNumber -= 1)
@@ -32,7 +32,7 @@
 
       <input
         type="number"
-        class="w-14 text-center border-x border-gray-300 focus:outline-none"
+        class="w-14 py-2 text-center bg-amber-50 border-x border-gray-300 focus:outline-none"
         value="1"
         min="1"
         #productQty
@@ -40,7 +40,7 @@
 
       <button
         type="button"
-        class="px-3 py-2 text-lg font-bold hover:bg-gray-100 active:bg-gray-200 transition"
+        class="px-3 py-2 text-lg font-bold bg-gray-200 hover:bg-gray-100 active:bg-gray-200 transition"
         (click)="productQty.valueAsNumber += 1"
       >
         +

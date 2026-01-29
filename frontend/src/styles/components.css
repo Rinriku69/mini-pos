@@ -6,7 +6,7 @@
 }
 
 .app-nav-link {
-  @apply text-slate-600
+  @apply text-white
     font-medium
     px-3 py-2
     rounded-md
@@ -15,8 +15,8 @@
 }
 
 .app-nav-link.is-active {
-  @apply bg-indigo-100
-    text-indigo-700
+  @apply bg-[#6A1E55]
+    text-[#A64D79]
     shadow-sm;
 }
 
@@ -70,5 +70,5 @@
 }
 
 .is-disabled {
-  @apply text-slate-400 bg-slate-100 cursor-not-allowed;
+  @apply text-slate-400 bg-slate-200 cursor-not-allowed;
 }
