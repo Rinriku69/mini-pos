@@ -35,14 +35,18 @@
       <li>
         <div class="relative">
           <span #cartIcon>
-            <a class="app-nav-link font-semibold" routerLink="cart" routerLinkActive="is-active">
-              Cart
+            <a
+              class="font-semibold text-white hover:bg-blue-700 transition"
+              routerLink="cart"
+              routerLinkActive="is-active"
+            >
+              <app-icon name="cart" class="size-6" />
             </a>
           </span>
 
           @if (cartCount() > 0) {
             <span
-              class="absolute -top-2 -right-3 w-6 h-6 bg-red-600 text-white text-xs font-semibold rounded-full flex items-center justify-center transition-transform"
+              class="border-3 border-[#3B1C32] absolute -top-3 -right-3 w-6 h-6 bg-red-600 text-white text-xs font-semibold rounded-full flex items-center justify-center transition-transform"
               [class.scale-125]="cartBumpActive()"
             >
               {{ cartCount() }}

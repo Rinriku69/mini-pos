@@ -6,10 +6,11 @@ import { CartService } from '../../services/cart-service';
 
 import { NavService } from '../../services/nav-service';
 import { filter, map } from 'rxjs';
+import { Icon } from "../icons/icon/icon";
 
 @Component({
   selector: 'app-pos-nav',
-  imports: [RouterOutlet, RouterLink, RouterLinkActive],
+  imports: [RouterOutlet, RouterLink, RouterLinkActive, Icon],
   templateUrl: './pos-nav.html',
   styleUrl: './pos-nav.scss',
 })
