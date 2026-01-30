@@ -31,7 +31,7 @@
           />
         }
       </div>
-      <div class="flex items-baseline flex-1 justify-end">
+      <div class="flex items-baseline flex-1 justify-center">
         <li>
           <div class="relative">
             <span #cartIcon>
@@ -54,10 +54,22 @@
             }
           </div>
         </li>
-        <li class="ml-14">
-          <a class="text-white">
-            <app-icon [name]="'user'" [classAttribute]="'size-8'" />
-          </a>
+        <li class="ml-14" (mouseenter)="showMenu()" (mouseleave)="hideMenu()">
+          <div class="flex flex-col relative items-center">
+            <a class="text-white">
+              <app-icon [name]="'user'" [classAttribute]="'size-8'" />
+            </a>
+            @if (showUser()) {
+              <div
+                class="animate-fade-in shadow-xl border border-gray-100 top-8 items-center absolute bg-white transition w-24 h-auto duration-300 py-1"
+              >
+                <ul class="flex flex-col items-center justify-start gap-3 h-auto">
+                  <li><a class="">Login</a></li>
+                  <li><a>Setting</a></li>
+                </ul>
+              </div>
+            }
+          </div>
         </li>
       </div>
     </ul>

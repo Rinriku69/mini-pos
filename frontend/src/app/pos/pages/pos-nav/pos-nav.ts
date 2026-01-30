@@ -20,6 +20,7 @@ export class PosNav implements AfterViewInit {
   private cartService = inject(CartService)
   private navService = inject(NavService)
   cart = toSignal(this.cartService.cart$)
+  showUser = signal<boolean>(false)
   private route$ = this.router.events.pipe(
     filter(e => e instanceof NavigationEnd),
     map(() => this.router.url)
@@ -55,6 +56,11 @@ export class PosNav implements AfterViewInit {
     this.cartService.getCartIcon(this.cartIcon()!.nativeElement);
   }
 
-
+  showMenu() {
+    this.showUser.set(true)
+  }
+  hideMenu() {
+    this.showUser.set(false)
+  }
 
 }
