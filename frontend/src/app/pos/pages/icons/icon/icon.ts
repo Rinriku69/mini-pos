@@ -8,6 +8,6 @@ import { Component, input } from '@angular/core';
   styleUrl: './icon.scss',
 })
 export class Icon {
- name = input.required<string>()
- class = input<string>('size-6')
+  name = input.required<string>()
+  classAttribute = input<string>('size-6')
 }
