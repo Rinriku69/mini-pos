@@ -12,8 +12,6 @@
 
 ## 💡 Why I Built This: Self-Learning Journey
 
-> *"The best way to learn is to build something real."*
-
 As a self-learner, I wanted to move beyond basic tutorials and static mock data. I created this project to challenge myself with actual business logic and to better understand how a full-stack application works. My main learning goals were:
 1.  **Explore Modern Angular:** To get hands-on experience with the new **Signals API** and **RxJS** and see how they solve state management problems.
 2.  **Practice Backend Logic:** To learn how to safely handle data updates (like stock deduction) using **Database Transactions** in Laravel.
@@ -23,15 +21,15 @@ As a self-learner, I wanted to move beyond basic tutorials and static mock data.
 
 * **⚡ Reactive Product Filter:**
     * Instantly filter products by **Category** and **Search Keyword** simultaneously.
-    * Powered by `RxJS` (combineLatest) and `Signals` for optimal performance.
+    * Powered by `RxJS`  and `Signals` for optimal performance.
       ![Project Screenshot](frontend/public/img/store.png)
 * **🛒 Smart Shopping Cart:**
     * Real-time calculation of Subtotal, Total Items, and Grand Total.
-    * Built entirely with **Angular Signals** (`computed`, `update`) for fine-grained reactivity (No `ngOnChanges` needed).
+    * Built entirely with **Angular Signals** (`computed`, `update`) for fine-grained reactivity.
 * **🛡️ Secure Transactions:**
-    * Laravel Backend uses `DB::transaction` to ensure atomic operations (Order Creation + Stock Deduction).
+    * Laravel Backend uses `DB::transaction` to ensure atomic operations (Order Creation + Stock Deduction[WIP]).
     * Rollbacks automatically if any part of the process fails.
-    ![Project Screenshot](frontend/public/img/orders.png)
+    ![Project Screenshot](frontend/public/img/order.png)
 * **📝 Product Management:**
     * Add new products using **Reactive Forms** with comprehensive validation.
 
