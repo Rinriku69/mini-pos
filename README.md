@@ -31,7 +31,7 @@ As a self-learner, I wanted to move beyond basic tutorials and static mock data.
 * **🛡️ Secure Transactions:**
     * Laravel Backend uses `DB::transaction` to ensure atomic operations (Order Creation + Stock Deduction).
     * Rollbacks automatically if any part of the process fails.
-    ![Project Screenshot](frontend/public/img/orders.png)
+    ![Project Screenshot](frontend/public/img/order.png)
 * **📝 Product Management:**
     * Add new products using **Reactive Forms** with comprehensive validation.
 
