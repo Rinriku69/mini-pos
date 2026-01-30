@@ -1,5 +1,5 @@
 <nav class="sticky top-0 z-50 bg-[#3B1C32]">
-  <div class="max-w-6xl mx-auto px-6">
+  <div class="max-w-full mx-auto px-6">
     <ul class="flex items-center h-16">
       <div class="flex gap-8">
         <li>
@@ -24,36 +24,42 @@
         @if (showSearch()) {
           <input
             type="text"
-            class="w-72 px-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 bg-white"
+            class="w-[70%] px-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 bg-white"
             placeholder="Search product..."
             (input)="searchKey.set(key.value)"
             #key
           />
         }
       </div>
-
-      <li>
-        <div class="relative">
-          <span #cartIcon>
-            <a
-              class="font-semibold text-white hover:bg-blue-700 transition"
-              routerLink="cart"
-              routerLinkActive="is-active"
-            >
-              <app-icon [name]="'cart'" [classAttribute]="'size-7'" />
-            </a>
-          </span>
-
-          @if (cartCount() > 0) {
-            <span
-              class="border-3 border-[#3B1C32] absolute -top-3 -right-3 w-6 h-6 bg-red-600 text-white text-xs font-semibold rounded-full flex items-center justify-center transition-transform"
-              [class.scale-125]="cartBumpActive()"
-            >
-              {{ cartCount() }}
+      <div class="flex items-baseline flex-1 justify-end">
+        <li>
+          <div class="relative">
+            <span #cartIcon>
+              <a
+                class="font-semibold text-white hover:bg-blue-700 transition"
+                routerLink="cart"
+                routerLinkActive="is-active"
+              >
+                <app-icon [name]="'cart'" [classAttribute]="'size-8'" />
+              </a>
             </span>
-          }
-        </div>
-      </li>
+
+            @if (cartCount() > 0) {
+              <span
+                class="border-3 border-[#3B1C32] absolute -top-3 -right-3 w-6 h-6 bg-red-600 text-white text-xs font-semibold rounded-full flex items-center justify-center transition-transform"
+                [class.scale-125]="cartBumpActive()"
+              >
+                {{ cartCount() }}
+              </span>
+            }
+          </div>
+        </li>
+        <li class="ml-14">
+          <a class="text-white">
+            <app-icon [name]="'user'" [classAttribute]="'size-8'" />
+          </a>
+        </li>
+      </div>
     </ul>
   </div>
 </nav>
