@@ -18,7 +18,11 @@
               placeholder="Enter your username"
             />
             @if (registerForm.get('name')?.invalid && registerForm.get('name')?.touched) {
-              <p class="mt-1 text-xs text-red-500">Username is required.</p>
+              @if (registerForm.get('name')?.hasError('minlength')) {
+                <p class="mt-1 text-xs text-red-500">Username must have atleast 5 characters.</p>
+              } @else {
+                <p class="mt-1 text-xs text-red-500">Username is required.</p>
+              }
             }
           </div>
         </div>
@@ -51,7 +55,11 @@
             placeholder="••••••••"
           />
           @if (registerForm.get('password')?.invalid && registerForm.get('password')?.touched) {
-            <p class="mt-1 text-xs text-red-500">Password is required.</p>
+            @if (registerForm.get('password')?.hasError('minlength')) {
+              <p class="mt-1 text-xs text-red-500">Password must have atleast 8 characters.</p>
+            } @else {
+              <p class="mt-1 text-xs text-red-500">Password is required.</p>
+            }
           }
         </div>
       </div>
