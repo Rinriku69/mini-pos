@@ -13,16 +13,10 @@
             <input
               id="name"
               type="text"
+              [formField]="registerForm.name"
               class="appearance-none rounded-lg relative block w-full px-4 py-3 border border-gray-300 placeholder-gray-400 text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#A64D79] focus:border-transparent transition duration-200"
               placeholder="Enter your username"
             />
-            <!-- @if (registerForm.get('name')?.invalid && registerForm.get('name')?.touched) {
-              @if (registerForm.get('name')?.hasError('minlength')) {
-                <p class="mt-1 text-xs text-red-500">Username must have atleast 5 characters.</p>
-              } @else {
-                <p class="mt-1 text-xs text-red-500">Username is required.</p>
-              }
-            } -->
           </div>
         </div>
 
@@ -33,13 +27,10 @@
           <input
             id="email"
             type="email"
-            formControlName="email"
+            [formField]="registerForm.email"
             class="appearance-none rounded-lg relative block w-full px-4 py-3 border border-gray-300 placeholder-gray-400 text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#A64D79] focus:border-transparent transition duration-200"
             placeholder="you@example.com"
           />
-          <!--  @if (registerForm.get('email')?.invalid && registerForm.get('email')?.touched) {
-            <p class="mt-1 text-xs text-red-500">Please enter a valid email.</p>
-          } -->
         </div>
 
         <div>
@@ -49,24 +40,16 @@
           <input
             id="password"
             type="password"
-            formControlName="password"
+            [formField]="registerForm.password"
             class="appearance-none rounded-lg relative block w-full px-4 py-3 border border-gray-300 placeholder-gray-400 text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#A64D79] focus:border-transparent transition duration-200"
             placeholder="••••••••"
           />
-          <!--  @if (registerForm.get('password')?.invalid && registerForm.get('password')?.touched) {
-            @if (registerForm.get('password')?.hasError('minlength')) {
-              <p class="mt-1 text-xs text-red-500">Password must have atleast 8 characters.</p>
-            } @else {
-              <p class="mt-1 text-xs text-red-500">Password is required.</p>
-            }
-          } -->
         </div>
       </div>
 
       <div>
         <button
           type="submit"
-          [disabled]="registerForm.invalid"
           class="group relative w-full flex justify-center py-3 px-4 border border-transparent text-lg font-medium rounded-lg text-white bg-[#3B1C32] hover:bg-[#A64D79] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#A64D79] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed shadow-md hover:shadow-lg transform active:scale-[0.98]"
         >
           Sign Up

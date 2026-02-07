@@ -11,7 +11,7 @@ import { RegisterForm } from '../../models/types';
 })
 export class Register {
 
-  protected registerModel: WritableSignal<RegisterForm> = signal({
+  protected registerModel = signal<RegisterForm>({
     name: '',
     email: '',
     password: ''
@@ -19,11 +19,11 @@ export class Register {
   });
 
   readonly registerForm = form(this.registerModel);
-
+  
 
 
 
   constructor() {
- 
+
   }
 }
