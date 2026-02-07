@@ -2,12 +2,12 @@ import { Component, computed, inject, signal, WritableSignal } from '@angular/co
 import { debounce, email, form, FormField, required } from '@angular/forms/signals';
 import { RegisterForm } from '../../models/types';
 import { LoginService } from '../../services/login-service';
-import { JsonPipe } from '@angular/common';
+
 
 
 @Component({
   selector: 'app-register',
-  imports: [FormField, JsonPipe],
+  imports: [FormField],
   templateUrl: './register.html',
   styleUrl: './register.scss',
 })
