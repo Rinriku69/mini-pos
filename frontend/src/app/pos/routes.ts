@@ -5,6 +5,7 @@ import { AddProduct } from "./components/add-product/add-product";
 import { Cart } from "./components/cart/cart";
 import { Orders } from "./components/orders/orders";
 import { HomePage } from "./components/home-page/home-page";
+import { Register } from "./components/register/register";
 
 export default [
     {
@@ -19,6 +20,7 @@ export default [
             { path: 'cart', component: Cart },
             { path: 'orders', component: Orders },
             { path: 'home', component: HomePage },
+            { path: 'register', component: Register },
         ],
     },
 ] as Routes;
