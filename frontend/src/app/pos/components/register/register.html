@@ -66,7 +66,8 @@
         <button
           type="button"
           (click)="registerSubmit()"
-          class="group relative w-full flex justify-center py-3 px-4 border border-transparent text-lg font-medium rounded-lg text-white bg-[#3B1C32] hover:bg-[#A64D79] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#A64D79] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed shadow-md hover:shadow-lg transform active:scale-[0.98]"
+          [disabled]="formDisabled()"
+          class="group relative w-full flex justify-center py-3 px-4 border border-transparent text-lg font-medium rounded-lg text-white bg-[#3B1C32] hover:bg-[#A64D79] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#A64D79] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed shadow-md hover:shadow-lg transform active:scale-[0.98] cursor-pointer"
         >
           Sign Up
         </button>
@@ -77,7 +78,7 @@
           Already have an account?
           <a
             routerLink="/login"
-            class="font-medium text-[#A64D79] hover:text-[#3B1C32] transition underline decoration-dotted"
+            class="cursor-pointer font-medium text-[#A64D79] hover:text-[#3B1C32] transition underline decoration-dotted"
           >
             Sign in
           </a>
