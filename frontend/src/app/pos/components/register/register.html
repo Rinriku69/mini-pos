@@ -17,6 +17,11 @@
               class="appearance-none rounded-lg relative block w-full px-4 py-3 border border-gray-300 placeholder-gray-400 text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#A64D79] focus:border-transparent transition duration-200"
               placeholder="Enter your username"
             />
+            @if (registerForm.name().invalid() && registerForm.name().touched()) {
+              @for (error of registerForm.name().errors(); track error) {
+                <p class="text-xs text-red-600 mt-1">{{ error.message }}</p>
+              }
+            }
           </div>
         </div>
 
@@ -31,6 +36,11 @@
             class="appearance-none rounded-lg relative block w-full px-4 py-3 border border-gray-300 placeholder-gray-400 text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#A64D79] focus:border-transparent transition duration-200"
             placeholder="you@example.com"
           />
+          @if (registerForm.email().invalid() && registerForm.email().touched()) {
+            @for (error of registerForm.email().errors(); track error) {
+              <p class="text-xs text-red-600 mt-1">{{ error.message }}</p>
+            }
+          }
         </div>
 
         <div>
@@ -44,12 +54,18 @@
             class="appearance-none rounded-lg relative block w-full px-4 py-3 border border-gray-300 placeholder-gray-400 text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#A64D79] focus:border-transparent transition duration-200"
             placeholder="••••••••"
           />
+          @if (registerForm.password().invalid() && registerForm.password().touched()) {
+            @for (error of registerForm.password().errors(); track error) {
+              <p class="text-xs text-red-600 mt-1">{{ error.message }}</p>
+            }
+          }
         </div>
       </div>
 
       <div>
         <button
-          type="submit"
+          type="button"
+          (click)="registerSubmit()"
           class="group relative w-full flex justify-center py-3 px-4 border border-transparent text-lg font-medium rounded-lg text-white bg-[#3B1C32] hover:bg-[#A64D79] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#A64D79] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed shadow-md hover:shadow-lg transform active:scale-[0.98]"
         >
           Sign Up
