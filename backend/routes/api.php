@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\LoginController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 
@@ -14,4 +13,3 @@ Route::post('/products', [ProductController::class, 'store']);
 Route::get('/categories', [CategoryController::class, 'index']);
 Route::post('/orders', [OrderController::class, 'store']);
 Route::get('/orders', [OrderController::class, 'index']);
-Route::post('/register', [LoginController::class, 'register']);

@@ -10,6 +10,8 @@ class CategoryController extends Controller
 {
     function index()
     {
-        return Category::all()->toResourceCollection();
+        $categories = Category::all();
+
+        return CategoryResource::collection($categories);
     }
 }
