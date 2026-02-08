@@ -12,10 +12,8 @@ Route::get('/products', [ProductController::class, 'index']);
 Route::get('/categories', [CategoryController::class, 'index']);
 Route::post('/orders', [OrderController::class, 'store']);
 Route::get('/orders', [OrderController::class, 'index']);
-Route::middleware([
-    'middleware' => 'api',
-    'prefix' => 'auth'
-])
+Route::middleware(['api'])
+    ->prefix('auth')
     ->group(function () {
         Route::post('/register', [AuthController::class, 'register']);
         Route::post('/login', [AuthController::class, 'authenticate']);
