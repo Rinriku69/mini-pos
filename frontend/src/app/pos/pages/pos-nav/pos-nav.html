@@ -26,7 +26,7 @@
             type="text"
             class="w-[70%] px-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 bg-white"
             placeholder="Search product..."
-            (input)="searchKey.set(key.value)"
+            (input)="search(key.value)"
             #key
           />
         }
@@ -64,8 +64,13 @@
                 class="animate-fade-in shadow-xl border border-gray-100 top-8 items-center absolute bg-white transition w-24 h-auto duration-300 py-1"
               >
                 <ul class="flex flex-col items-center justify-start gap-3 h-auto">
-                  <li><a class="font-medium" routerLink="register">Register</a></li>
-                  <li><a class="font-medium">Setting</a></li>
+                  @if (!tokenExist()) {
+                    <li><a class="font-medium" routerLink="login">Sign in</a></li>
+                    <li><a class="font-medium" routerLink="register">Sign up</a></li>
+                  } @else {
+                    <li><a class="font-medium cursor-pointer" (click)="logOut()">Log out</a></li>
+                  }
+                  <li><a class="font-medium cursor-pointer">Setting</a></li>
                 </ul>
               </div>
             }

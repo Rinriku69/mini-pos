@@ -40,7 +40,7 @@ export class ProductService {
       this.http.post(this.productApiUrl, formData).subscribe({
         next: (response) => {
           console.log('Successfully stored', response);
-          this.router.navigate(['/store'])
+          this.router.navigate(['/main/store'])
         },
         error: (error) => {
           console.error('An error occured:', error);
