@@ -22,7 +22,8 @@ export class Register {
   protected registerModel = signal<RegisterForm>({
     name: '',
     email: '',
-    password: ''
+    password: '',
+    password_confirmation: ''
 
   });
 
