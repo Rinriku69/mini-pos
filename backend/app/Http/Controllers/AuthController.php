@@ -42,23 +42,28 @@ class AuthController extends Controller
             'password' => ['required', 'string']
         ]);
 
-        if (! $token = auth()->attempt($credential)) {
+        if (! $token = auth()->attempt($credentail)) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 
         return $this->respondWithToken($token);
     }
 
+
+
+
     public function refresh()
     {
         return $this->respondWithToken(auth()->refresh());
     }
+
     protected function respondWithToken($token)
     {
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL() * 60
+            'expires_in' => auth('api')->factory()->getTTL() * 60,
+            'user' => auth('api')->user()
         ]);
     }
 }
