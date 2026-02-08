@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { RegisterForm } from '../models/types';
 import { FieldTree } from '@angular/forms/signals';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 
@@ -21,8 +21,15 @@ export class LoginService {
         this.router.navigate(['/main/store'])
 
       },
-      error: (error) => {
-        console.error('An error occured:', error);
+      error: (error: HttpErrorResponse) => {
+        if (error.status == 422) {
+          const validationErrors = error.error;
+          alert(validationErrors.message)
+        } else if (error.status == 500) {
+          alert('Server run into a problem please try again later')
+        } else {
+          alert("An error occurred")
+        }
 
       }
     })
