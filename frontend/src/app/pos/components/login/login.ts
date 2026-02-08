@@ -21,6 +21,7 @@ export class Login {
     name: '',
     password: ''
   })
+  errorMessage = computed(() => this.loginService.loginErrorMessage())
 
   loginForm = form(this.loginModel, (path) => {
     required(path.name, { message: 'User name is required' })
