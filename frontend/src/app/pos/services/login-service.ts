@@ -18,6 +18,7 @@ export class LoginService {
   private http = inject(HttpClient);
   private router = inject(Router);
   private tokenStorage = inject(TokenStorage);
+  reactState = signal(localStorage.getItem('ng-token') ? '1' : '')
   registerErrorMessage = signal({
     name: '',
     email: '',
@@ -62,6 +63,7 @@ export class LoginService {
       next: (response) => {
         this.tokenStorage.set(response.access_token)
         this.router.navigate(['/main/store'])
+        this.reactState.set('1')
         console.log(response)
       },
 
@@ -73,10 +75,17 @@ export class LoginService {
   }
 
   logOut() {
-    localStorage.removeItem('ng-token');
-    return this.http.get(this.logOutUrl).pipe(
-      tap(() => window.location.reload())
-    )
+
+    this.http.post<{ message: string }>(this.logOutUrl, {}).subscribe({
+      next: (response) => {
+        localStorage.removeItem('ng-token');
+        this.reactState.set('')
+        alert(response.message)
+      },
+      error: (err) => {
+        console.log('An error occurred')
+      }
+    })
   }
 
 }

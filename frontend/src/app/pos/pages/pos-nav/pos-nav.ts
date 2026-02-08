@@ -21,7 +21,13 @@ export class PosNav implements AfterViewInit {
   private cartService = inject(CartService)
   private navService = inject(NavService)
   private loginService = inject(LoginService)
-  protected tokenExist = localStorage.getItem('ng-token') ?? null
+  protected tokenExist = computed(() => {
+    const react = this.loginService.reactState()
+    if (react) {
+      return true
+    }
+    return false
+  })
   cart = toSignal(this.cartService.cart$)
   showUser = signal<boolean>(false)
   private route$ = this.router.events.pipe(
@@ -34,7 +40,7 @@ export class PosNav implements AfterViewInit {
     this.currentUrl().startsWith('/main/store') || this.currentUrl().startsWith('/main/orders')
   );
 
-  readonly searchKey = signal('');
+
 
   cartBumpActive = toSignal(this.cartService.cartBumpActive)
   cartCount = computed(() => {
@@ -48,17 +54,15 @@ export class PosNav implements AfterViewInit {
   cartIcon = viewChild<ElementRef<HTMLElement>>('cartIcon');
 
 
-  constructor() {
-    effect(() => {
-      this.navService.searchUpdate(this.searchKey())
-
-    })
-  }
+  constructor() { }
 
   ngAfterViewInit() {
     this.cartService.getCartIcon(this.cartIcon()!.nativeElement);
   }
 
+  search(key: string) {
+    this.navService.searchUpdate(key)
+  }
   showMenu() {
     this.showUser.set(true)
   }
