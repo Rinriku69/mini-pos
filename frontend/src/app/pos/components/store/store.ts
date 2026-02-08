@@ -28,12 +28,7 @@ export class Store implements OnInit {
     )
   })
   cart = toSignal(this.cartService.cart$)
-  constructor() {
-    effect(() => {
-      // console.log('Products changed:', this.products());
-      // console.log('Cart changed:', this.cart());
-    });
-  }
+  constructor() { }
   ngOnInit(): void {
     this.productService.loadProduct().subscribe();
 
