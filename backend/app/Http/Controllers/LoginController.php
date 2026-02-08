@@ -12,7 +12,7 @@ class LoginController extends Controller
     function register(Request $request)
     {
         $validated = $request->validate([
-            'name' => ['required' . 'string', 'max:20'],
+            'name' => ['required', 'string', 'max:20'],
             'email' => ['required', 'email', 'unique:users,email'],
             'password' => ['required', 'string', 'confirmed']
         ]);
