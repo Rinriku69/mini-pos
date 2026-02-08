@@ -43,12 +43,18 @@ class AuthController extends Controller
         ]);
 
         if (! $token = auth()->attempt($credentail)) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+            return response()->json(['error' => 'Username or Password is incorrect'], 401);
         }
 
         return $this->respondWithToken($token);
     }
 
+    public function logout()
+    {
+        auth()->logout();
+
+        return response()->json(['message' => 'Successfully logged out']);
+    }
 
 
 

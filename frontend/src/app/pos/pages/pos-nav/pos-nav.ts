@@ -7,6 +7,7 @@ import { CartService } from '../../services/cart-service';
 import { NavService } from '../../services/nav-service';
 import { filter, map } from 'rxjs';
 import { Icon } from "../icons/icon/icon";
+import { LoginService } from '../../services/login-service';
 
 @Component({
   selector: 'app-pos-nav',
@@ -19,6 +20,8 @@ export class PosNav implements AfterViewInit {
   private router = inject(Router)
   private cartService = inject(CartService)
   private navService = inject(NavService)
+  private loginService = inject(LoginService)
+  protected tokenExist = localStorage.getItem('ng-token') ?? null
   cart = toSignal(this.cartService.cart$)
   showUser = signal<boolean>(false)
   private route$ = this.router.events.pipe(
@@ -62,5 +65,7 @@ export class PosNav implements AfterViewInit {
   hideMenu() {
     this.showUser.set(false)
   }
-
+  logOut() {
+    this.loginService.logOut()
+  }
 }

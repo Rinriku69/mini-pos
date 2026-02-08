@@ -4,6 +4,7 @@ import { FieldTree } from '@angular/forms/signals';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { TokenStorage } from './token.storage';
+import { tap } from 'rxjs';
 
 
 
@@ -12,7 +13,8 @@ import { TokenStorage } from './token.storage';
 })
 export class LoginService {
   private registerUrl = 'http://127.0.0.1:8000/api/auth/register'
-  private loginUrl = 'http://127.0.0.1:8000/api/auth/login'
+  private logInUrl = 'http://127.0.0.1:8000/api/auth/login'
+  private logOutUrl = 'http://127.0.0.1:8000/api/auth/logout'
   private http = inject(HttpClient);
   private router = inject(Router);
   private tokenStorage = inject(TokenStorage);
@@ -56,7 +58,7 @@ export class LoginService {
   }
 
   loginAutherize(loginForm: FieldTree<LoginForm>): void {
-    this.http.post<LoginResponse>(this.loginUrl, loginForm().value()).subscribe({
+    this.http.post<LoginResponse>(this.logInUrl, loginForm().value()).subscribe({
       next: (response) => {
         this.tokenStorage.set(response.access_token)
         this.router.navigate(['/main/store'])
@@ -68,6 +70,13 @@ export class LoginService {
         this.loginErrorMessage.set(err.error.error)
       }
     })
+  }
+
+  logOut() {
+    localStorage.removeItem('ng-token');
+    return this.http.get(this.logOutUrl).pipe(
+      tap(() => window.location.reload())
+    )
   }
 
 }
