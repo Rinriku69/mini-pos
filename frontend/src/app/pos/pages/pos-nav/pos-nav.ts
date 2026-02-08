@@ -7,7 +7,6 @@ import { CartService } from '../../services/cart-service';
 import { NavService } from '../../services/nav-service';
 import { filter, map } from 'rxjs';
 import { Icon } from "../icons/icon/icon";
-import { LoginService } from '../../services/login-service';
 
 @Component({
   selector: 'app-pos-nav',
@@ -20,14 +19,6 @@ export class PosNav implements AfterViewInit {
   private router = inject(Router)
   private cartService = inject(CartService)
   private navService = inject(NavService)
-  private loginService = inject(LoginService)
-  protected tokenExist = computed(() => {
-    const react = this.loginService.reactState()
-    if (react) {
-      return true
-    }
-    return false
-  })
   cart = toSignal(this.cartService.cart$)
   showUser = signal<boolean>(false)
   private route$ = this.router.events.pipe(
@@ -40,7 +31,7 @@ export class PosNav implements AfterViewInit {
     this.currentUrl().startsWith('/main/store') || this.currentUrl().startsWith('/main/orders')
   );
 
-
+  readonly searchKey = signal('');
 
   cartBumpActive = toSignal(this.cartService.cartBumpActive)
   cartCount = computed(() => {
@@ -54,22 +45,22 @@ export class PosNav implements AfterViewInit {
   cartIcon = viewChild<ElementRef<HTMLElement>>('cartIcon');
 
 
-  constructor() { }
+  constructor() {
+    effect(() => {
+      this.navService.searchUpdate(this.searchKey())
+
+    })
+  }
 
   ngAfterViewInit() {
     this.cartService.getCartIcon(this.cartIcon()!.nativeElement);
   }
 
-  search(key: string) {
-    this.navService.searchUpdate(key)
-  }
   showMenu() {
     this.showUser.set(true)
   }
   hideMenu() {
     this.showUser.set(false)
   }
-  logOut() {
-    this.loginService.logOut()
-  }
+
 }

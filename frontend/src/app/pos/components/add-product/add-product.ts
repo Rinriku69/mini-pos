@@ -25,7 +25,12 @@ export class AddProduct implements OnInit {
   });
   readonly formValue = toSignal(this.productForm.valueChanges, { initialValue: this.productForm.value });
 
-  constructor() { }
+  constructor() {
+    effect(() => {
+      console.log('Categories changed:', this.categories());
+      console.log('Form changed:', this.formValue());
+    });
+  }
 
   ngOnInit(): void {
     this.productService.loadCategory().subscribe();

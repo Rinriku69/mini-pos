@@ -13,9 +13,6 @@ import { LoginService } from '../../services/login-service';
 })
 export class Register {
   private loginService = inject(LoginService)
-  protected readonly errorMessage = computed(() => 
-    this.loginService.registerErrorMessage()
-    )
   protected readonly formDisabled = computed(() => {
     if (this.registerForm().invalid() || this.registerForm.password_confirmation().invalid()) {
       return true
