@@ -72,10 +72,12 @@
             placeholder="••••••••"
           />
           @if (
-            registerForm.password().value() !== registerForm.password_confirmation().value() &&
+            registerForm.password_confirmation().invalid() &&
             registerForm.password_confirmation().touched()
           ) {
-            <p class="text-xs text-red-600 mt-1">Confirm assword must match the password</p>
+            @for (error of registerForm.password_confirmation().errors(); track error) {
+              <p class="text-xs text-red-600 mt-1">{{ error.message }}</p>
+            }
           }
         </div>
       </div>
