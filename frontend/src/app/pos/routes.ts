@@ -6,6 +6,7 @@ import { Cart } from "./components/cart/cart";
 import { Orders } from "./components/orders/orders";
 import { HomePage } from "./components/home-page/home-page";
 import { Register } from "./components/register/register";
+import { Login } from "./components/login/login";
 
 export default [
     {
@@ -21,6 +22,7 @@ export default [
             { path: 'orders', component: Orders },
             { path: 'home', component: HomePage },
             { path: 'register', component: Register },
+            { path: 'login', component: Login },
         ],
     },
 ] as Routes;

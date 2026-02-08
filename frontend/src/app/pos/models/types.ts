@@ -39,3 +39,8 @@ export interface RegisterForm {
     password_confirmation: string;
 }
 
+export interface LoginForm {
+    name: string;
+    password: string
+}
+
