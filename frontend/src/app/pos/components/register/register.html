@@ -21,6 +21,8 @@
               @for (error of registerForm.name().errors(); track error) {
                 <p class="text-xs text-red-600 mt-1">{{ error.message }}</p>
               }
+            } @else if (errorMessage().name) {
+              <p class="text-xs text-red-600 mt-1">{{ errorMessage().name }}</p>
             }
           </div>
         </div>
@@ -40,6 +42,8 @@
             @for (error of registerForm.email().errors(); track error) {
               <p class="text-xs text-red-600 mt-1">{{ error.message }}</p>
             }
+          } @else if (errorMessage().email) {
+            <p class="text-xs text-red-600 mt-1">{{ errorMessage().email }}</p>
           }
         </div>
 
@@ -58,6 +62,8 @@
             @for (error of registerForm.password().errors(); track error) {
               <p class="text-xs text-red-600 mt-1">{{ error.message }}</p>
             }
+          } @else if (errorMessage().other) {
+            <p class="text-xs text-red-600 mt-1">{{ errorMessage().other }}</p>
           }
         </div>
         <div>
