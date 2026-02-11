@@ -1,4 +1,4 @@
-# Mini POS System 🛒
+# Mini POS System 
 
 ![Angular](https://img.shields.io/badge/Angular-17-DD0031?style=for-the-badge&logo=angular&logoColor=white)
 ![Laravel](https://img.shields.io/badge/Laravel-11-FF2D20?style=for-the-badge&logo=laravel&logoColor=white)
@@ -10,30 +10,30 @@
 ![Project Screenshot](frontend/public/img/home.png)
 
 
-## 💡 Why I Built This: Self-Learning Journey
+##  Why I Built This: Self-Learning Journey
 
 As a self-learner, I wanted to move beyond basic tutorials and static mock data. I created this project to challenge myself with actual business logic and to better understand how a full-stack application works. My main learning goals were:
 1.  **Explore Modern Angular:** To get hands-on experience with the new **Signals API** and **RxJS** and see how they solve state management problems.
 2.  **Practice Backend Logic:** To learn how to safely handle data updates (like stock deduction) using **Database Transactions** in Laravel.
 3.  **Connect the Stack:** To understand the flow of data between a separate Frontend and Backend API.
    
-## 🌟 Key Features
+##  Key Features
 
-* **⚡ Reactive Product Filter:**
+* ** Reactive Product Filter:**
     * Instantly filter products by **Category** and **Search Keyword** simultaneously.
     * Powered by `RxJS`  and `Signals` for optimal performance.
       ![Project Screenshot](frontend/public/img/store.png)
-* **🛒 Smart Shopping Cart:**
+* ** Smart Shopping Cart:**
     * Real-time calculation of Subtotal, Total Items, and Grand Total.
     * Built entirely with **Angular Signals** (`computed`, `update`) for fine-grained reactivity.
-* **🛡️ Secure Transactions:**
+* ** Secure Transactions:**
     * Laravel Backend uses `DB::transaction` to ensure atomic operations (Order Creation + Stock Deduction[WIP]).
     * Rollbacks automatically if any part of the process fails.
     ![Project Screenshot](frontend/public/img/order.png)
-* **📝 Product Management:**
+* ** Product Management:**
     * Add new products using **Reactive Forms** with comprehensive validation.
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 ### Frontend (Angular 17+)
 * **Core:** Standalone Components, Signals, RxJS
@@ -47,7 +47,7 @@ As a self-learner, I wanted to move beyond basic tutorials and static mock data.
 * **Security:** CSRF Protection, Input Validation (`FormRequest`)
 * **Logic:** Eloquent ORM, Database Transactions
 
-## 🚀 Installation & Setup
+##  Installation & Setup
 
 This project consists of two parts: the Laravel Backend and the Angular Frontend.
 
