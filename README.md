@@ -17,9 +17,14 @@ As a self-learner, I wanted to move beyond basic tutorials and static mock data.
 1.  **Explore Modern Angular:** To get hands-on experience with the new **Signals API** and **RxJS** and see how they solve state management problems.
 2.  **Practice Backend Logic:** To learn how to safely handle data updates (like stock deduction) using **Database Transactions** in Laravel.
 3.  **Connect the Stack:** To understand the flow of data between a separate Frontend and Backend API.
+4.  **Master Stateless Security:** To replace traditional server-side sessions with JWT (JSON Web Tokens), learning how to handle authentication in a decoupled, API-driven architecture.
    
 ##  Key Features
 
+* **Secure Authentication & Authorization:**
+   *Implemented Stateless Authentication using JWT (JSON Web Tokens) replacing standard Laravel sessions.
+   *Integrated Angular HttpInterceptor to automatically attach auth tokens to API requests.
+   *Role-Based Access: Secured sensitive routes (like Dashboard/Settings) to authorized users only.
 * **Reactive Product Filter:**
     * Instantly filter products by **Category** and **Search Keyword** simultaneously.
     * Powered by `RxJS`  and `Signals` for optimal performance.
