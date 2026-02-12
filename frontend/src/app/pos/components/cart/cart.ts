@@ -21,12 +21,8 @@ export class Cart {
       return result + (curr.product.price * curr.qty)
     }, 0)
   }
-
   )
-
-  constructor() {
-
-  }
+  constructor() {}
 
   cartCheckout(): void {
 
