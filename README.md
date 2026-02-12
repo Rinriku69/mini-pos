@@ -22,9 +22,9 @@ As a self-learner, I wanted to move beyond basic tutorials and static mock data.
 ##  Key Features
 
 * **Secure Authentication & Authorization:**
-   *Implemented Stateless Authentication using JWT (JSON Web Tokens) replacing standard Laravel sessions.
-   *Integrated Angular HttpInterceptor to automatically attach auth tokens to API requests.
-   *Role-Based Access: Secured sensitive routes (like Dashboard/Settings) to authorized users only.
+   * Implemented Stateless Authentication using JWT (JSON Web Tokens) replacing standard Laravel sessions.
+   * Integrated Angular HttpInterceptor to automatically attach auth tokens to API requests.
+   * Role-Based Access: Secured sensitive routes (like Dashboard/Settings) to authorized users only.
 * **Reactive Product Filter:**
     * Instantly filter products by **Category** and **Search Keyword** simultaneously.
     * Powered by `RxJS`  and `Signals` for optimal performance.
