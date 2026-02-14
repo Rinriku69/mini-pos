@@ -45,7 +45,11 @@ class AuthController extends Controller
         if (! $token = auth()->attempt($credentail)) {
             return response()->json(['error' => 'Username or Password is incorrect'], 401);
         }
-
+        $user = auth()->user();
+        $token = auth()->claims([
+            'role' => $user->role,
+            'name' => $user->name
+        ])->fromUser($user);
         return $this->respondWithToken($token);
     }
 
