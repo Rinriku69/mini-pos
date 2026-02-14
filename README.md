@@ -2,10 +2,10 @@
 
 ![Angular](https://img.shields.io/badge/Angular-17-DD0031?style=for-the-badge&logo=angular&logoColor=white)
 ![Laravel](https://img.shields.io/badge/Laravel-11-FF2D20?style=for-the-badge&logo=laravel&logoColor=white)
-![MySQL](https://img.shields.io/badge/MySQL-00000F?style=for-the-badge&logo=mysql&logoColor=white)
-![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
 ![TailwindCss](https://img.shields.io/badge/Tailwind_CSS-grey?style=for-the-badge&logo=tailwind-css&logoColor=38B2AC)
 ![Docker](https://img.shields.io/badge/docker-257bd6?style=for-the-badge&logo=docker&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-00000F?style=for-the-badge&logo=mysql&logoColor=white)
 
 **Mini POS** is a personal practice project created to study the integration between **Modern Angular** (Frontend) and **Laravel** (Backend). I built this application to apply what I've learned about state management and database operations in a practical scenario.
 ![Project Screenshot](frontend/public/img/home.png)
@@ -24,7 +24,8 @@ As a self-learner, I wanted to move beyond basic tutorials and static mock data.
 * **Secure Authentication & Authorization:**
    * Implemented Stateless Authentication using JWT (JSON Web Tokens) replacing standard Laravel sessions.
    * Integrated Angular HttpInterceptor to automatically attach auth tokens to API requests.
-   * Role-Based Access: Secured sensitive routes (like Dashboard/Settings) to authorized users only.
+   * Role-Based Access: Secured sensitive routes (like Dashboard/Settings) to authorized users only such as Admin, Cashier or User.
+    ![Project Screenshot](frontend/public/img/login.png)
 * **Reactive Product Filter:**
     * Instantly filter products by **Category** and **Search Keyword** simultaneously.
     * Powered by `RxJS`  and `Signals` for optimal performance.
