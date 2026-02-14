@@ -30,7 +30,7 @@ export class AuthService {
   });
   loginErrorMessage = signal('');
   constructor() {
-    this.loadUserFromStorage();
+    this.loadUserFromStorage()
   }
 
   createUser(registerForm: FieldTree<RegisterForm>): void {
@@ -69,9 +69,9 @@ export class AuthService {
     this.http.post<LoginResponse>(this.logInUrl, loginForm().value()).subscribe({
       next: (response) => {
         this.tokenStorage.set(response.access_token)
+        this.loadUserFromStorage();
         this.router.navigate(['/main/store'])
         this.reactState.set('1')
-
       },
 
       error: (err: HttpErrorResponse) => {
@@ -86,7 +86,9 @@ export class AuthService {
     this.http.post<{ message: string }>(this.logOutUrl, {}).subscribe({
       next: (response) => {
         localStorage.removeItem('ng-token');
+        this.userSignal.set(null);
         this.reactState.set('')
+        this.router.navigate(['/main/login'])
         alert(response.message)
       },
       error: (err) => {
@@ -98,15 +100,13 @@ export class AuthService {
   private loadUserFromStorage() {
     const token = localStorage.getItem('ng-token');
     if (token) {
-      const decoded: any = jwtDecode(token);
+      const decoded: User = jwtDecode(token);
       this.userSignal.set({ id: decoded.id, name: decoded.name, email: decoded.email, role: decoded.role });
     }
   }
 
   getRole() {
-
     return this.userSignal()?.role;
-
   }
 
 }
