@@ -1,12 +1,14 @@
 import { Routes } from "@angular/router";
 import { PosNav } from "./pages/pos-nav/pos-nav";
-import { Store } from "./components/store/store";
-import { AddProduct } from "./components/add-product/add-product";
-import { Cart } from "./components/cart/cart";
-import { Orders } from "./components/orders/orders";
-import { HomePage } from "./components/home-page/home-page";
 import { Register } from "./components/register/register";
 import { Login } from "./components/login/login";
+import { StorePage } from "./pages/store-page/store-page";
+import { AddProductPage } from "./pages/add-product-page/add-product-page";
+import { CartPage } from "./pages/cart-page/cart-page";
+import { OrderPage } from "./pages/order-page/order-page";
+import { HomeViewPage } from "./pages/home-view-page/home-view-page";
+import { RegisterPage } from "./pages/auth/register-page/register-page";
+import { LoginPage } from "./pages/auth/login-page/login-page";
 
 export default [
     {
@@ -15,14 +17,14 @@ export default [
         children: [
             { path: '', redirectTo: 'home', pathMatch: 'full' },
 
-            { path: 'store', component: Store },
+            { path: 'store', component: StorePage },
 
-            { path: 'add-product', component: AddProduct },
-            { path: 'cart', component: Cart },
-            { path: 'orders', component: Orders },
-            { path: 'home', component: HomePage },
-            { path: 'register', component: Register },
-            { path: 'login', component: Login },
+            { path: 'add-product', component: AddProductPage },
+            { path: 'cart', component: CartPage },
+            { path: 'orders', component: OrderPage },
+            { path: 'home', component: HomeViewPage },
+            { path: 'register', component: RegisterPage },
+            { path: 'login', component: LoginPage },
         ],
     },
 ] as Routes;

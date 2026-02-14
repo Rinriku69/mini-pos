@@ -28,7 +28,10 @@ export class AddProduct implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.productService.loadCategory().subscribe();
+    if (this.categories().length == 0) {
+
+      this.productService.loadCategory().subscribe();
+    }
 
   }
 

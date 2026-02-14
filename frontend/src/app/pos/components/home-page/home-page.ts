@@ -10,17 +10,18 @@ import { toSignal } from '@angular/core/rxjs-interop';
   templateUrl: './home-page.html',
   styleUrl: './home-page.scss',
 })
-export class HomePage {
+export class HomePage implements OnInit {
   private productService = inject(ProductService)
   private products = toSignal(this.productService.productState$, { initialValue: [] })
   productStock = computed(() => this.products().length)
 
-  constructor() {
-    this.productService.loadProduct().subscribe()
-    effect(() => {
-      console.log(this.products())
-    })
-  }
+  constructor() { }
 
+  ngOnInit(): void {
+    if (this.products().length == 0) {
+      this.productService.loadProduct().subscribe();
+      console.log(this.products())
+    }
+  }
 
 }

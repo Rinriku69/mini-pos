@@ -18,7 +18,8 @@ export class Store implements OnInit {
   private navService = inject(NavService);
   private products = toSignal(this.productService.productState$, { initialValue: [] })
   private searchKey = toSignal(this.navService.searchKey$)
-  protected readonly productsDisplay: Signal<Product[]> = computed(() => {
+  protected readonly productsDisplay: Signal<Product[] | null> = computed(() => {
+
     const products = this.products()
     const searchKey = this.searchKey()
     if (!products || !searchKey) return this.products()
@@ -26,11 +27,15 @@ export class Store implements OnInit {
     return products.filter((p) => p.product_name.toLowerCase().includes(searchKey.toLowerCase()) ?
       p.product_name.toLowerCase().includes(searchKey.toLowerCase()) : p.product_description.toLowerCase().includes(searchKey.toLowerCase())
     )
+
   })
   cart = toSignal(this.cartService.cart$)
   constructor() { }
   ngOnInit(): void {
-    this.productService.loadProduct().subscribe();
+    if (this.products().length == 0) {
+      this.productService.loadProduct().subscribe();
+
+    }
 
   }
 
