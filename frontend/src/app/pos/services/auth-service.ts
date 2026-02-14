@@ -1,5 +1,5 @@
 import { inject, Injectable, signal } from '@angular/core';
-import { LoginForm, LoginResponse, RegisterForm } from '../models/types';
+import { LoginForm, LoginResponse, RegisterForm, User } from '../models/types';
 import { FieldTree } from '@angular/forms/signals';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -12,7 +12,7 @@ import { UserStorage } from './user.storage';
 @Injectable({
   providedIn: 'root',
 })
-export class LoginService {
+export class AuthService {
   private registerUrl = 'http://127.0.0.1:8000/api/auth/register'
   private logInUrl = 'http://127.0.0.1:8000/api/auth/login'
   private logOutUrl = 'http://127.0.0.1:8000/api/auth/logout'
@@ -20,6 +20,7 @@ export class LoginService {
   private router = inject(Router);
   private tokenStorage = inject(TokenStorage);
   private userStorage = inject(UserStorage);
+  private readonly userSignal = signal<User | null>(null);
   reactState = signal(localStorage.getItem('ng-token') ? '1' : '')
   registerErrorMessage = signal({
     name: '',
@@ -89,6 +90,18 @@ export class LoginService {
         console.log('An error occurred')
       }
     })
+  }
+
+  private loadUserFromStorage() {
+    const token = localStorage.getItem('access_token');
+    if (token) {
+      const decoded: any = jwt_dec(token); // ใช้ library 'jwt-decode'
+      this.userSignal.set({ id: decoded.sub, role: decoded.role });
+    }
+  }
+
+  getRole() {
+    return this.userSignal()?.role;
   }
 
 }
