@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { BehaviorSubject, filter, shareReplay, tap } from 'rxjs';
+import { BehaviorSubject, filter, Observable, shareReplay, tap } from 'rxjs';
 import { Product, Category } from '../models/types';
 
 import { FormGroup } from '@angular/forms';
@@ -20,12 +20,12 @@ export class ProductService {
   private categoryApiUrl = 'http://127.0.0.1:8000/api/categories';
   constructor(private http: HttpClient) { }
 
-  loadProduct() {
+  loadProduct(): Observable<{ data: Product[] }> {
     return this.http.get<{ data: Product[] }>(this.productApiUrl).pipe(
       tap(response => this.products.next(response.data))
     )
   }
-  loadCategory() {
+  loadCategory(): Observable<{ data: Category[] }> {
     return this.http.get<{ data: Category[] }>(this.categoryApiUrl).pipe(
       tap(response => this.categories.next(response.data))
     )
@@ -40,6 +40,7 @@ export class ProductService {
       this.http.post(this.productApiUrl, formData).subscribe({
         next: (response) => {
           console.log('Successfully stored', response);
+          this.loadProduct().subscribe()
           this.router.navigate(['/main/store'])
         },
         error: (error) => {

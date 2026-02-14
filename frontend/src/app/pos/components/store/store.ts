@@ -33,10 +33,14 @@ export class Store implements OnInit {
   constructor() { }
   ngOnInit(): void {
     if (this.products().length == 0) {
-      this.productService.loadProduct().subscribe();
+      this.getProduct()
 
     }
 
+  }
+
+  getProduct(): void {
+    this.productService.loadProduct().subscribe();
   }
 
 }
