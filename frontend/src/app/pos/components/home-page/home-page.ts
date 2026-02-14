@@ -20,7 +20,7 @@ export class HomePage implements OnInit {
   ngOnInit(): void {
     if (this.products().length == 0) {
       this.productService.loadProduct().subscribe();
-      console.log(this.products())
+
     }
   }
 

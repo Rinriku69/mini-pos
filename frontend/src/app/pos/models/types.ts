@@ -56,7 +56,7 @@ export interface User {
     "name": string,
     "role": string,
     "email": string,
-    "email_verified_at": string | null,
-    "created_at": string,
-    "updated_at": string
+    "email_verified_at"?: string | null,
+    "created_at"?: string,
+    "updated_at"?: string
 }
