@@ -5,6 +5,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { TokenStorage } from './token.storage';
 import { tap } from 'rxjs';
+import { UserStorage } from './user.storage';
 
 
 
@@ -18,6 +19,7 @@ export class LoginService {
   private http = inject(HttpClient);
   private router = inject(Router);
   private tokenStorage = inject(TokenStorage);
+  private userStorage = inject(UserStorage);
   reactState = signal(localStorage.getItem('ng-token') ? '1' : '')
   registerErrorMessage = signal({
     name: '',
@@ -58,10 +60,11 @@ export class LoginService {
     })
   }
 
-  loginAutherize(loginForm: FieldTree<LoginForm>): void {
+  loginAuthorize(loginForm: FieldTree<LoginForm>): void {
     this.http.post<LoginResponse>(this.logInUrl, loginForm().value()).subscribe({
       next: (response) => {
         this.tokenStorage.set(response.access_token)
+        this.userStorage.set(response.user)
         this.router.navigate(['/main/store'])
         this.reactState.set('1')
         console.log(response)
