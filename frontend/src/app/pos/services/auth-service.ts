@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { TokenStorage } from './token.storage';
 import { tap } from 'rxjs';
 import { UserStorage } from './user.storage';
+import { jwtDecode } from 'jwt-decode';
 
 
 
@@ -28,6 +29,9 @@ export class AuthService {
     other: ''
   });
   loginErrorMessage = signal('');
+  constructor() {
+    this.loadUserFromStorage();
+  }
 
   createUser(registerForm: FieldTree<RegisterForm>): void {
     this.http.post(this.registerUrl, registerForm().value()).subscribe({
@@ -65,10 +69,9 @@ export class AuthService {
     this.http.post<LoginResponse>(this.logInUrl, loginForm().value()).subscribe({
       next: (response) => {
         this.tokenStorage.set(response.access_token)
-        this.userStorage.set(response.user)
         this.router.navigate(['/main/store'])
         this.reactState.set('1')
-        console.log(response)
+
       },
 
       error: (err: HttpErrorResponse) => {
@@ -93,15 +96,17 @@ export class AuthService {
   }
 
   private loadUserFromStorage() {
-    const token = localStorage.getItem('access_token');
+    const token = localStorage.getItem('ng-token');
     if (token) {
-      const decoded: any = jwt_dec(token); // ใช้ library 'jwt-decode'
-      this.userSignal.set({ id: decoded.sub, role: decoded.role });
+      const decoded: any = jwtDecode(token);
+      this.userSignal.set({ id: decoded.id, name: decoded.name, email: decoded.email, role: decoded.role });
     }
   }
 
   getRole() {
+
     return this.userSignal()?.role;
+
   }
 
 }
