@@ -1,13 +1,13 @@
 import { AfterViewInit, Component, computed, effect, ElementRef, HostListener, inject, OnInit, Signal, signal, viewChild } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
-import { CartService } from '../../services/cart-service';
+import { CartService } from '../../services/cart.service';
 
 
-import { NavService } from '../../services/nav-service';
+import { NavService } from '../../services/nav.service';
 import { filter, map } from 'rxjs';
 import { Icon } from "../icons/icon/icon";
-import { AuthService } from '../../services/auth-service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-pos-nav',
@@ -21,13 +21,7 @@ export class PosNav implements AfterViewInit {
   private cartService = inject(CartService);
   private navService = inject(NavService);
   private authService = inject(AuthService);
-  protected tokenExist = computed(() => {
-    const react = this.authService.reactState()
-    if (react) {
-      return true
-    }
-    return false
-  })
+  protected readonly userRole = computed(() => this.authService.getRole() ?? '')
   cart = toSignal(this.cartService.cart$)
   showUser = signal<boolean>(false)
   private route$ = this.router.events.pipe(

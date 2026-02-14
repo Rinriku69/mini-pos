@@ -1,7 +1,7 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { LoginForm } from '../../models/types';
 import { form, FormField, required } from '@angular/forms/signals';
-import { AuthService } from '../../services/auth-service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',

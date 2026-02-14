@@ -22,7 +22,7 @@ export class AuthService {
   private tokenStorage = inject(TokenStorage);
   private userStorage = inject(UserStorage);
   private readonly userSignal = signal<User | null>(null);
-  reactState = signal(localStorage.getItem('ng-token') ? '1' : '')
+
   registerErrorMessage = signal({
     name: '',
     email: '',
@@ -71,7 +71,6 @@ export class AuthService {
         this.tokenStorage.set(response.access_token)
         this.loadUserFromStorage();
         this.router.navigate(['/main/store'])
-        this.reactState.set('1')
       },
 
       error: (err: HttpErrorResponse) => {
@@ -87,9 +86,7 @@ export class AuthService {
       next: (response) => {
         localStorage.removeItem('ng-token');
         this.userSignal.set(null);
-        this.reactState.set('')
         this.router.navigate(['/main/login'])
-        alert(response.message)
       },
       error: (err) => {
         console.log('An error occurred')
@@ -100,13 +97,14 @@ export class AuthService {
   private loadUserFromStorage() {
     const token = localStorage.getItem('ng-token');
     if (token) {
-      const decoded: User = jwtDecode(token);
-      this.userSignal.set({ id: decoded.id, name: decoded.name, email: decoded.email, role: decoded.role });
+      const decoded: { sub: number; name: string; role: string; email: string } = jwtDecode(token);
+      this.userSignal.set({ id: decoded.sub, name: decoded.name, email: decoded.email, role: decoded.role });
+
     }
   }
 
   getRole() {
-    return this.userSignal()?.role;
+    return this.userSignal()?.role ?? '';
   }
 
 }

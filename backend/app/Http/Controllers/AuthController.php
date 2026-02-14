@@ -47,6 +47,7 @@ class AuthController extends Controller
         }
         $user = auth()->user();
         $token = auth()->claims([
+            'email' => $user->email,
             'role' => $user->role,
             'name' => $user->name
         ])->fromUser($user);

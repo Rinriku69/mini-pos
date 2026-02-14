@@ -1,10 +1,10 @@
 import { Component, computed, inject, OnInit, Signal } from '@angular/core';
-import { OrderService } from '../../services/order-service';
+import { OrderService } from '../../services/order.service';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { OrderCard } from './order-card/order-card';
 
 import { Order } from '../../models/types';
-import { NavService } from '../../services/nav-service';
+import { NavService } from '../../services/nav.service';
 
 @Component({
   selector: 'app-orders',

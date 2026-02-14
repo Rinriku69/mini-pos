@@ -1,6 +1,6 @@
 import { Component, computed, effect, inject, OnInit } from '@angular/core';
 import { RouterLink, } from "@angular/router";
-import { ProductService } from '../../services/product-service';
+import { ProductService } from '../../services/product.service';
 import { toSignal } from '@angular/core/rxjs-interop';
 
 
