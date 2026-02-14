@@ -10,6 +10,7 @@ import { HomeViewPage } from "./pages/home-view-page/home-view-page";
 import { RegisterPage } from "./pages/auth/register-page/register-page";
 import { LoginPage } from "./pages/auth/login-page/login-page";
 import { roleGuard } from "./auth.guard";
+import { UnauthorizePage } from "./pages/errors/unauthorize-page/unauthorize-page";
 
 
 export default [
@@ -26,6 +27,7 @@ export default [
             { path: 'home', component: HomeViewPage },
             { path: 'register', component: RegisterPage },
             { path: 'login', component: LoginPage },
+            { path: 'unauthorize', component: UnauthorizePage },
             {
                 path: 'add-product',
                 loadComponent: () => import('./components/add-product/add-product')
