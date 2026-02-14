@@ -1,7 +1,7 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { debounce, email, form, FormField, required, validate } from '@angular/forms/signals';
 import { RegisterForm } from '../../models/types';
-import { AuthService } from '../../services/auth-service';
+import { AuthService } from '../../services/auth.service';
 
 
 

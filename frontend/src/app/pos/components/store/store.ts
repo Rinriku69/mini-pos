@@ -1,10 +1,10 @@
 import { Component, computed, effect, inject, OnInit, Signal } from '@angular/core';
-import { ProductService } from '../../services/product-service';
+import { ProductService } from '../../services/product.service';
 import { Product } from '../../models/types';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ProductCard } from "./product-card/product-card";
-import { CartService } from '../../services/cart-service';
-import { NavService } from '../../services/nav-service';
+import { CartService } from '../../services/cart.service';
+import { NavService } from '../../services/nav.service';
 
 @Component({
   selector: 'app-store',

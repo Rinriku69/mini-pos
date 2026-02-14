@@ -1,13 +1,13 @@
 import { AfterViewInit, Component, computed, effect, ElementRef, HostListener, inject, OnInit, Signal, signal, viewChild } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
-import { CartService } from '../../services/cart-service';
+import { CartService } from '../../services/cart.service';
 
 
-import { NavService } from '../../services/nav-service';
+import { NavService } from '../../services/nav.service';
 import { filter, map } from 'rxjs';
 import { Icon } from "../icons/icon/icon";
-import { AuthService } from '../../services/auth-service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-pos-nav',

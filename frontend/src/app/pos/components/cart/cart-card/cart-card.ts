@@ -1,7 +1,7 @@
 import { Component, inject, input } from '@angular/core';
 import { OrderItem } from '../../../models/types';
 import { DecimalPipe } from '@angular/common';
-import { CartService } from '../../../services/cart-service';
+import { CartService } from '../../../services/cart.service';
 
 @Component({
   selector: 'app-cart-card',
