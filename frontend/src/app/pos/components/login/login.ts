@@ -1,7 +1,7 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { LoginForm } from '../../models/types';
 import { form, FormField, required } from '@angular/forms/signals';
-import { LoginService } from '../../services/login-service';
+import { AuthService } from '../../services/auth-service';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +10,7 @@ import { LoginService } from '../../services/login-service';
   styleUrl: './login.scss',
 })
 export class Login {
-  private readonly loginService = inject(LoginService)
+  private readonly loginService = inject(AuthService)
   protected readonly formDisabled = computed(() => {
     if (this.loginForm().invalid()) {
       return true
@@ -29,6 +29,6 @@ export class Login {
   })
 
   loginSubmit(): void {
-    this.loginService.loginAutherize(this.loginForm);
+    this.loginService.loginAuthorize(this.loginForm);
   }
 }

@@ -7,7 +7,7 @@ import { CartService } from '../../services/cart-service';
 import { NavService } from '../../services/nav-service';
 import { filter, map } from 'rxjs';
 import { Icon } from "../icons/icon/icon";
-import { LoginService } from '../../services/login-service';
+import { AuthService } from '../../services/auth-service';
 
 @Component({
   selector: 'app-pos-nav',
@@ -20,7 +20,7 @@ export class PosNav implements AfterViewInit {
   private router = inject(Router)
   private cartService = inject(CartService)
   private navService = inject(NavService)
-  private loginService = inject(LoginService)
+  private loginService = inject(AuthService)
   protected tokenExist = computed(() => {
     const react = this.loginService.reactState()
     if (react) {

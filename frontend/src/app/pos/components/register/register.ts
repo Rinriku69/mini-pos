@@ -1,7 +1,7 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { debounce, email, form, FormField, required, validate } from '@angular/forms/signals';
 import { RegisterForm } from '../../models/types';
-import { LoginService } from '../../services/login-service';
+import { AuthService } from '../../services/auth-service';
 
 
 
@@ -12,10 +12,10 @@ import { LoginService } from '../../services/login-service';
   styleUrl: './register.scss',
 })
 export class Register {
-  private loginService = inject(LoginService)
-  protected readonly errorMessage = computed(() => 
+  private loginService = inject(AuthService)
+  protected readonly errorMessage = computed(() =>
     this.loginService.registerErrorMessage()
-    )
+  )
   protected readonly formDisabled = computed(() => {
     if (this.registerForm().invalid() || this.registerForm.password_confirmation().invalid()) {
       return true
