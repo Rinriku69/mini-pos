@@ -21,13 +21,7 @@ export class PosNav implements AfterViewInit {
   private cartService = inject(CartService);
   private navService = inject(NavService);
   private authService = inject(AuthService);
-  protected tokenExist = computed(() => {
-    const react = this.authService.reactState()
-    if (react) {
-      return true
-    }
-    return false
-  })
+  protected readonly userRole = computed(() => this.authService.getRole() ?? '')
   cart = toSignal(this.cartService.cart$)
   showUser = signal<boolean>(false)
   private route$ = this.router.events.pipe(
