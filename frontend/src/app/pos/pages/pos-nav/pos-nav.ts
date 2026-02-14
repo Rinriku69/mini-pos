@@ -17,12 +17,12 @@ import { AuthService } from '../../services/auth-service';
 })
 export class PosNav implements AfterViewInit {
   protected readonly title = signal('mini-pos');
-  private router = inject(Router)
-  private cartService = inject(CartService)
-  private navService = inject(NavService)
-  private loginService = inject(AuthService)
+  private router = inject(Router);
+  private cartService = inject(CartService);
+  private navService = inject(NavService);
+  private authService = inject(AuthService);
   protected tokenExist = computed(() => {
-    const react = this.loginService.reactState()
+    const react = this.authService.reactState()
     if (react) {
       return true
     }
@@ -70,6 +70,6 @@ export class PosNav implements AfterViewInit {
     this.showUser.set(false)
   }
   logOut() {
-    this.loginService.logOut()
+    this.authService.logOut()
   }
 }
