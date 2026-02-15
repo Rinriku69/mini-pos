@@ -6,13 +6,13 @@
       >
     </div>
     <div class="flex items-baseline gap-[5%] w-3/7">
-      <span class="text-white">Category </span>
+      <span class="text-white font-bold text-lg">Category </span>
       <select
         class="app-select-field bg-amber-50 text-center"
         #catFilter
         (change)="categorySelect.set(+catFilter.value)"
       >
-        <option [value]="0">--Select Category--</option>
+        <option [value]="0">--All Category--</option>
         @for (category of categories(); track category.id) {
           <option [value]="category.id">{{ category.category_name }}</option>
         }
@@ -20,7 +20,7 @@
     </div>
   </div>
   <div class="flex flex-col gap-y-5 mt-[5%] w-2/4">
-    @for (product of productDisplay(); track product) {
+    @for (product of productDisplay(); track product.id) {
       <div class="w-full">
         <app-product-stock-card [product]="product"></app-product-stock-card>
       </div>
