@@ -3,7 +3,8 @@ export interface Product {
     product_name: string;
     product_description: string;
     price: number;
-    category_name: string
+    category_name: string;
+    category_id?: number;
 }
 export interface Category {
     id: number;
