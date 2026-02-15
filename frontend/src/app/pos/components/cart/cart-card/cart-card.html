@@ -14,7 +14,7 @@
 
     <span class="text-lg font-semibold text-gray-800"> × {{ orderItem().qty }} </span>
     <button
-      class="text-red-500 hover:underline text-sm"
+      class="text-red-500 hover:underline text-sm cursor-pointer"
       (click)="removeItem(orderItem().product.id)"
     >
       Remove

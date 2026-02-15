@@ -25,6 +25,7 @@ export class ProductService {
       tap(response => this.products.next(response.data))
     )
   }
+
   loadCategory(): Observable<{ data: Category[] }> {
     return this.http.get<{ data: Category[] }>(this.categoryApiUrl).pipe(
       tap(response => this.categories.next(response.data))
@@ -41,7 +42,7 @@ export class ProductService {
         next: (response) => {
           console.log('Successfully stored', response);
           this.loadProduct().subscribe()
-          this.router.navigate(['/main/store'])
+          this.router.navigate(['/main/product-stock'])
         },
         error: (error) => {
           console.error('An error occured:', error);
