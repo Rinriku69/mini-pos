@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AddProduct } from "../../components/add-product/add-product";
+import { AddProduct } from '../../../components/stocks/add-product/add-product';
 
 @Component({
   selector: 'app-add-product-page',
