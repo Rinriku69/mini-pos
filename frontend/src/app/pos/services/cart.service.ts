@@ -1,7 +1,7 @@
 import { inject, Injectable, Signal } from '@angular/core';
 import { BehaviorSubject, Observable, Subject, timeout } from 'rxjs';
 import { Cart, OrderItem, Product } from '../models/types';
-import { createCart } from '../helper';
+import { createCart } from '../helpers';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({

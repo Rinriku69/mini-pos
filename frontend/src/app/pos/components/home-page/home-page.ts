@@ -12,16 +12,12 @@ import { toSignal } from '@angular/core/rxjs-interop';
 })
 export class HomePage implements OnInit {
   private productService = inject(ProductService)
-  private products = toSignal(this.productService.productState$, { initialValue: [] })
-  productStock = computed(() => this.products().length)
+
 
   constructor() { }
 
   ngOnInit(): void {
-    if (this.products().length == 0) {
-      this.productService.loadProduct().subscribe();
 
-    }
   }
 
 }

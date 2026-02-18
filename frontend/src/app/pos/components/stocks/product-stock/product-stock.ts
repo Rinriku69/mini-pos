@@ -10,22 +10,18 @@ import { RouterLink } from "@angular/router";
   templateUrl: './product-stock.html',
   styleUrl: './product-stock.scss',
 })
-export class ProductStock implements OnInit {
+export class ProductStock {
   private readonly productService = inject(ProductService);
-  private readonly products = toSignal(this.productService.productState$, { initialValue: [] })
-  protected readonly categories = toSignal(this.productService.categories$, { initialValue: [] })
+  private readonly products = computed(() => this.productService.productState$());
+  protected readonly categories = computed(() => {
+    return this.productService.categories$()
+  })
   protected categorySelect = signal<number>(0);
   protected readonly productDisplay = computed(() => {
     const products = this.products()
     const catId = this.categorySelect()
     return products.filter((v) => catId != 0 ? v.category_id == catId : v)
   })
-  constructor() { }
-  ngOnInit(): void {
-    this.productService.loadProduct().subscribe()
-    if (this.categories().length == 0) {
 
-      this.productService.loadCategory().subscribe();
-    }
-  }
+
 }

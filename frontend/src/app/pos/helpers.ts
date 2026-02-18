@@ -1,6 +1,5 @@
-import { HttpHeaders } from "@angular/common/http";
 import { Cart } from "./models/types";
-import { readonly } from "@angular/forms/signals";
+export * from './helpers/resource'
 
 
 export function createCart(): Cart {
@@ -8,6 +7,5 @@ export function createCart(): Cart {
 
         order_item: [],
     }
-
 }
 

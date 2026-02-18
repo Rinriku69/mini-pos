@@ -28,7 +28,8 @@
           <label class="form-label">Category</label>
           <select formControlName="category_id" class="app-input-field">
             <option value="">-- Select Category --</option>
-            @for (cat of categories(); track cat.id) {
+
+            @for (cat of categories; track cat.id) {
               <option [value]="cat.id">
                 {{ cat.category_name }}
               </option>

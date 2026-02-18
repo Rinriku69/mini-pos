@@ -30,7 +30,7 @@ export class AuthService {
   });
   loginErrorMessage = signal('');
   constructor() {
-    this.loadUserFromStorage()
+    this.loadUserFromToken()
   }
 
   createUser(registerForm: FieldTree<RegisterForm>): void {
@@ -69,7 +69,7 @@ export class AuthService {
     this.http.post<LoginResponse>(this.logInUrl, loginForm().value()).subscribe({
       next: (response) => {
         this.tokenStorage.set(response.access_token)
-        this.loadUserFromStorage();
+        this.loadUserFromToken();
         this.router.navigate(['/main/store'])
       },
 
@@ -94,7 +94,7 @@ export class AuthService {
     })
   }
 
-  private loadUserFromStorage() {
+  private loadUserFromToken() {
     const token = localStorage.getItem('ng-token');
     if (token) {
       const decoded: { sub: number; name: string; role: string; email: string } = jwtDecode(token);
