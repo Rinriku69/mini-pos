@@ -30,15 +30,15 @@ As a self-learner, I wanted to move beyond basic tutorials and static mock data.
     * Instantly filter products by **Category** and **Search Keyword** simultaneously.
     * Powered by `RxJS`  and `Signals` for optimal performance.
       ![Project Screenshot](frontend/public/img/store.png)
-* **Smart Shopping Cart:**
-    * Real-time calculation of Subtotal, Total Items, and Grand Total.
-    * Built entirely with **Angular Signals** (`computed`, `update`) for fine-grained reactivity.
 * **Secure Transactions:**
     * Laravel Backend uses `DB::transaction` to ensure atomic operations (Order Creation + Stock Deduction[WIP]).
     * Rollbacks automatically if any part of the process fails.
     ![Project Screenshot](frontend/public/img/order.png)
-* **Product Management:**
-    * Add new products using **Reactive Forms** with comprehensive validation.
+* **Smart Shopping Cart:**
+    * Real-time calculation of Subtotal, Total Items, and Grand Total.
+    * Built entirely with **Angular Signals** (`computed`, `update`) for fine-grained reactivity.
+* **Stock Management:(WIP)**
+    * Update and Remove products in stock with RESTful APIs with method PATCH/DELETE.
 
 ##  Tech Stack
 
