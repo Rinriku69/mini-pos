@@ -55,6 +55,21 @@ export class ProductService {
     }
   }
 
+  deleteProduct(productId: number) {
+    this.http.delete(`${this.productApiUrl}/${productId}`).subscribe(
+      {
+        next: (res) => {
+          console.log('Successfully delete', res);
+          loadProduct();
+        },
+        error: (err) => {
+          console.error('An error occured:', err.error.message);
+        }
+      }
+    )
+  }
+
+
 
 
 }
