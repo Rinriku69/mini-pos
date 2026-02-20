@@ -39,6 +39,7 @@ As a self-learner, I wanted to move beyond basic tutorials and static mock data.
     * Built entirely with **Angular Signals** (`computed`, `update`) for fine-grained reactivity.
 * **Stock Management:(WIP)**
     * Update and Remove products in stock with RESTful APIs (PATCH/DELETE).
+      ![Project Screenshot](frontend/public/img/stock.png)
 
 ##  Tech Stack
 
