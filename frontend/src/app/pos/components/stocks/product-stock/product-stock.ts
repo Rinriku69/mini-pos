@@ -3,6 +3,7 @@ import { ProductStockCard } from './product-stock-card/product-stock-card';
 import { ProductService } from '../../../services/product.service';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { RouterLink } from "@angular/router";
+import { EditForm } from "../edit-form/edit-form";
 
 @Component({
   selector: 'app-product-stock',
@@ -22,6 +23,5 @@ export class ProductStock {
     const catId = this.categorySelect()
     return products.filter((v) => catId != 0 ? v.category_id == catId : v)
   })
-
 
 }
