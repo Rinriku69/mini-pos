@@ -1,0 +1,58 @@
+<div
+  class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 backdrop-blur-sm transition-opacity"
+>
+  <div
+    class="flex w-full max-w-2xl flex-col overflow-hidden rounded-xl bg-white shadow-2xl relative"
+  >
+    <button
+      class="absolute right-4 size-18 mt-2 text-red-500 flex justify-center items-center"
+      (click)="closeEdit.emit()"
+    >
+      <app-icon [name]="'close'"></app-icon>
+    </button>
+    <div class="border-b border-gray-400 bg-gray-200 px-8 py-6 text-center">
+      <h2 class="text-3xl font-semibold text-slate-700">Edit Form</h2>
+    </div>
+
+    <form class="flex flex-col gap-6 p-8">
+      <div class="flex flex-col gap-5">
+        <div>
+          <label for="product-name" class="mb-1 block text-sm font-medium text-gray-700">
+            Product Name
+          </label>
+          <input
+            id="product-name"
+            type="text"
+            class="input-form"
+            placeholder="Enter product name"
+          />
+        </div>
+
+        <div>
+          <label for="description" class="mb-1 block text-sm font-medium text-gray-700">
+            Description
+          </label>
+          <textarea
+            id="description"
+            class="h-32 w-full resize-y rounded-md border border-gray-300 px-4 py-2 text-gray-900 transition-colors focus:border-[#A64D79] focus:outline-none focus:ring-1 focus:ring-[#A64D79]"
+            placeholder="Enter product description"
+          ></textarea>
+        </div>
+
+        <div>
+          <label for="price" class="mb-1 block text-sm font-medium text-gray-700"> Price </label>
+          <input id="price" type="number" class="input-form" placeholder="0.00" />
+        </div>
+      </div>
+
+      <div class="mt-4 border-t border-gray-100 pt-6">
+        <button
+          type="button"
+          class="group w-full transform rounded-lg bg-[#3B1C32] px-4 py-3 text-lg font-medium text-white shadow-md transition-all duration-300 hover:bg-[#A64D79] hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[#A64D79] focus:ring-offset-2 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
+        >
+          Submit
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
