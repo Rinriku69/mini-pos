@@ -38,7 +38,7 @@ As a self-learner, I wanted to move beyond basic tutorials and static mock data.
     * Real-time calculation of Subtotal, Total Items, and Grand Total.
     * Built entirely with **Angular Signals** (`computed`, `update`) for fine-grained reactivity.
 * **Stock Management:(WIP)**
-    * Update and Remove products in stock with RESTful APIs with method PATCH/DELETE.
+    * Update and Remove products in stock with RESTful APIs (PATCH/DELETE).
 
 ##  Tech Stack
 
