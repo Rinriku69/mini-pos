@@ -2,10 +2,11 @@ import { Component, computed, inject, signal } from '@angular/core';
 import { LoginForm } from '../../models/types';
 import { form, FormField, required } from '@angular/forms/signals';
 import { AuthService } from '../../services/auth.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-login',
-  imports: [FormField],
+  imports: [FormField, RouterLink],
   templateUrl: './login.html',
   styleUrl: './login.scss',
 })
