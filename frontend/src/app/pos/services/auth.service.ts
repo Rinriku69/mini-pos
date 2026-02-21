@@ -4,8 +4,6 @@ import { FieldTree } from '@angular/forms/signals';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { TokenStorage } from './token.storage';
-import { tap } from 'rxjs';
-import { UserStorage } from './user.storage';
 import { jwtDecode } from 'jwt-decode';
 
 
@@ -20,7 +18,6 @@ export class AuthService {
   private http = inject(HttpClient);
   private router = inject(Router);
   private tokenStorage = inject(TokenStorage);
-  private userStorage = inject(UserStorage);
   private readonly userSignal = signal<User | null>(null);
 
   registerErrorMessage = signal({
@@ -84,12 +81,12 @@ export class AuthService {
 
     this.http.post<{ message: string }>(this.logOutUrl, {}).subscribe({
       next: (response) => {
-        localStorage.removeItem('ng-token');
-        this.userSignal.set(null);
-        this.router.navigate(['/main/login'])
+        this.clearLocalSession()
       },
       error: (err) => {
-        console.log('An error occurred')
+        console.log('An error occurred' + err.error.message)
+
+        this.clearLocalSession()
       }
     })
   }
@@ -103,8 +100,14 @@ export class AuthService {
     }
   }
 
-  getRole() {
+  getRole(): string {
     return this.userSignal()?.role ?? '';
+  }
+
+  clearLocalSession(): void {
+    localStorage.removeItem('ng-token');
+    this.userSignal.set(null);
+    this.router.navigate(['/main/login'])
   }
 
 }
