@@ -26,4 +26,5 @@ Route::middleware(['api'])
 Route::middleware(['auth:api'])
     ->group(function () {
         Route::post('/products', [ProductController::class, 'store']);
+        Route::delete('/products/{productId}', [ProductController::class, 'delete']);
     });

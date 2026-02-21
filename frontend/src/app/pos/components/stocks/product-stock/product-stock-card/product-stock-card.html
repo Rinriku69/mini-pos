@@ -1,3 +1,6 @@
+@if (openEdit()) {
+  <app-edit-form (closeEdit)="toggleEdit()"></app-edit-form>
+}
 <div
   class="flex items-center justify-between bg-gray-300 border border-gray-200 rounded-xl px-5 py-4 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all"
 >
@@ -15,11 +18,15 @@
   </div>
 
   <div class="ml-4 shrink-0 flex gap-4">
-    <button #addBtn type="button" class="btn-add active:rotate-2">Add</button>
-    <button #addBtn type="button" class="btn-add active:rotate-2">
+    <button #addBtn type="button" class="btn-add active:rotate-2" (click)="toggleEdit()">
       <app-icon [name]="'edit'"></app-icon>
     </button>
-    <button #addBtn type="button" class="btn-add active:rotate-2 bg-red-600!">
+    <button
+      #addBtn
+      type="button"
+      class="btn-add active:rotate-2 bg-red-600!"
+      (click)="delete(product().id)"
+    >
       <app-icon [name]="'delete'"></app-icon>
     </button>
   </div>
