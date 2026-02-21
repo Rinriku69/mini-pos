@@ -1,6 +1,5 @@
-import { Component, effect, inject, input, output, signal } from '@angular/core';
+import { Component, effect, inject, input, signal } from '@angular/core';
 import { Product } from '../../../../models/types';
-import { DecimalPipe } from '@angular/common';
 import { Icon } from "../../../../pages/icons/icon/icon";
 import { ProductService } from '../../../../services/product.service';
 import { EditForm } from '../../edit-form/edit-form';
