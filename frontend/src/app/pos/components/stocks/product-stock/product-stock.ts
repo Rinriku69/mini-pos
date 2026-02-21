@@ -2,6 +2,7 @@ import { Component, computed, effect, inject, OnInit, signal } from '@angular/co
 import { ProductStockCard } from './product-stock-card/product-stock-card';
 import { ProductService } from '../../../services/product.service';
 import { RouterLink } from "@angular/router";
+import { EditForm } from "../edit-form/edit-form";
 
 
 @Component({

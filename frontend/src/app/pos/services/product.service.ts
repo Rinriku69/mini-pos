@@ -40,7 +40,7 @@ export class ProductService {
       this.http.post(this.productApiUrl, formData).subscribe({
         next: (response) => {
           console.log('Successfully stored', response);
-          // this.loadProduct().subscribe()
+          loadProduct();
           this.router.navigate(['/main/product-stock'])
         },
         error: (error) => {
