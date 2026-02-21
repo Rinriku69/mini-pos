@@ -25,6 +25,7 @@
             type="text"
             class="input-form"
             placeholder="Enter product name"
+            [value]="product().product_name"
           />
         </div>
 
@@ -36,12 +37,29 @@
             id="description"
             class="h-32 w-full resize-y rounded-md border border-gray-300 px-4 py-2 text-gray-900 transition-colors focus:border-[#A64D79] focus:outline-none focus:ring-1 focus:ring-[#A64D79]"
             placeholder="Enter product description"
+            [value]="product().product_description"
           ></textarea>
         </div>
 
         <div>
           <label for="price" class="mb-1 block text-sm font-medium text-gray-700"> Price </label>
-          <input id="price" type="number" class="input-form" placeholder="0.00" />
+          <input
+            id="price"
+            type="number"
+            class="input-form"
+            placeholder="0.00"
+            [value]="product().price"
+          />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Category</label>
+          <select formControlName="category_id" class="app-input-field">
+            @for (cat of categories(); track cat.id) {
+              <option [value]="cat.id" [selected]="cat.id === product().category_id">
+                {{ cat.category_name }}
+              </option>
+            }
+          </select>
         </div>
       </div>
 

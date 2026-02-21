@@ -1,0 +1,105 @@
+[1mdiff --git a/backend/app/Http/Controllers/AuthController.php b/backend/app/Http/Controllers/AuthController.php[m
+[1mindex 972787be..9cb6e33e 100644[m
+[1m--- a/backend/app/Http/Controllers/AuthController.php[m
+[1m+++ b/backend/app/Http/Controllers/AuthController.php[m
+[36m@@ -24,7 +24,7 @@[m [mfunction register(Request $request)[m
+         $user->email = $request['email'];[m
+         $user->name = $request['name'];[m
+         $user->password = $request['password'];[m
+[31m-        $user->role = "USER";[m
+[32m+[m[32m        $user->role = "User";[m
+         $user->save();[m
+ [m
+ [m
+[1mdiff --git a/frontend/src/app/pos/components/login/login.html b/frontend/src/app/pos/components/login/login.html[m
+[1mindex 3ba4ae53..2b5e1248 100644[m
+[1m--- a/frontend/src/app/pos/components/login/login.html[m
+[1m+++ b/frontend/src/app/pos/components/login/login.html[m
+[36m@@ -62,7 +62,7 @@[m
+         <p class="text-sm text-gray-600">[m
+           Don't have an account?[m
+           <a[m
+[31m-            routerLink="/login"[m
+[32m+[m[32m            routerLink="/main/register"[m
+             class="cursor-pointer font-medium text-[#A64D79] hover:text-[#3B1C32] transition underline decoration-dotted"[m
+           >[m
+             Sign up[m
+[1mdiff --git a/frontend/src/app/pos/components/login/login.ts b/frontend/src/app/pos/components/login/login.ts[m
+[1mindex 22fcf737..1c00ff76 100644[m
+[1m--- a/frontend/src/app/pos/components/login/login.ts[m
+[1m+++ b/frontend/src/app/pos/components/login/login.ts[m
+[36m@@ -2,10 +2,11 @@[m [mimport { Component, computed, inject, signal } from '@angular/core';[m
+ import { LoginForm } from '../../models/types';[m
+ import { form, FormField, required } from '@angular/forms/signals';[m
+ import { AuthService } from '../../services/auth.service';[m
+[32m+[m[32mimport { RouterLink } from '@angular/router';[m
+ [m
+ @Component({[m
+   selector: 'app-login',[m
+[31m-  imports: [FormField],[m
+[32m+[m[32m  imports: [FormField, RouterLink],[m
+   templateUrl: './login.html',[m
+   styleUrl: './login.scss',[m
+ })[m
+[1mdiff --git a/frontend/src/app/pos/components/register/register.html b/frontend/src/app/pos/components/register/register.html[m
+[1mindex 2242d2f7..3fcdd4be 100644[m
+[1m--- a/frontend/src/app/pos/components/register/register.html[m
+[1m+++ b/frontend/src/app/pos/components/register/register.html[m
+[36m@@ -103,7 +103,7 @@[m
+         <p class="text-sm text-gray-600">[m
+           Already have an account?[m
+           <a[m
+[31m-            routerLink="/login"[m
+[32m+[m[32m            routerLink="/main/login"[m
+             class="cursor-pointer font-medium text-[#A64D79] hover:text-[#3B1C32] transition underline decoration-dotted"[m
+           >[m
+             Sign in[m
+[1mdiff --git a/frontend/src/app/pos/components/register/register.ts b/frontend/src/app/pos/components/register/register.ts[m
+[1mindex 1b2d4065..b3f16f02 100644[m
+[1m--- a/frontend/src/app/pos/components/register/register.ts[m
+[1m+++ b/frontend/src/app/pos/components/register/register.ts[m
+[36m@@ -2,12 +2,13 @@[m [mimport { Component, computed, inject, signal } from '@angular/core';[m
+ import { debounce, email, form, FormField, required, validate } from '@angular/forms/signals';[m
+ import { RegisterForm } from '../../models/types';[m
+ import { AuthService } from '../../services/auth.service';[m
+[32m+[m[32mimport { RouterLink } from '@angular/router';[m
+ [m
+ [m
+ [m
+ @Component({[m
+   selector: 'app-register',[m
+[31m-  imports: [FormField],[m
+[32m+[m[32m  imports: [FormField, RouterLink],[m
+   templateUrl: './register.html',[m
+   styleUrl: './register.scss',[m
+ })[m
+[1mdiff --git a/frontend/src/app/pos/components/stocks/product-stock/product-stock.ts b/frontend/src/app/pos/components/stocks/product-stock/product-stock.ts[m
+[1mindex 6902b248..89b4e081 100644[m
+[1m--- a/frontend/src/app/pos/components/stocks/product-stock/product-stock.ts[m
+[1m+++ b/frontend/src/app/pos/components/stocks/product-stock/product-stock.ts[m
+[36m@@ -23,5 +23,4 @@[m [mexport class ProductStock {[m
+     const catId = this.categorySelect()[m
+     return products.filter((v) => catId != 0 ? v.category_id == catId : v)[m
+   })[m
+[31m-[m
+ }[m
+[1mdiff --git a/frontend/src/app/pos/routes.ts b/frontend/src/app/pos/routes.ts[m
+[1mindex 806197b6..3cbc4990 100644[m
+[1m--- a/frontend/src/app/pos/routes.ts[m
+[1m+++ b/frontend/src/app/pos/routes.ts[m
+[36m@@ -32,13 +32,13 @@[m [mexport default [[m
+                 path: 'add-product',[m
+                 loadComponent: () => import('./components/stocks/add-product/add-product')[m
+                     .then(m => m.AddProduct),[m
+[31m-                canActivate: [roleGuard(['Admin', 'cashier'])][m
+[32m+[m[32m                canActivate: [roleGuard(['Admin', 'Cashier'])][m
+             },[m
+             {[m
+                 path: 'product-stock',[m
+                 loadComponent: () => import('./components/stocks/product-stock/product-stock')[m
+                     .then(m => m.ProductStock),[m
+[31m-                canActivate: [roleGuard(['Admin', 'cashier'])][m
+[32m+[m[32m                canActivate: [roleGuard(['Admin', 'Cashier'])][m
+             },[m
+         ],[m
+     },[m
