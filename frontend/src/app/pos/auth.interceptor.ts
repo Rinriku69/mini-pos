@@ -10,16 +10,16 @@ import { catchError, throwError } from "rxjs";
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
     const token = localStorage.getItem('ng-token') ?? null
     const authService = inject(AuthService);
-    let setHeder = req;
+    let setHeader = req;
     if (token) {
-        const setHeader = req.clone({
+        setHeader = req.clone({
             setHeaders: {
                 Authorization: `Bearer ${token}`
             }
         })
 
     }
-    return next(setHeder).pipe(
+    return next(setHeader).pipe(
         catchError((err) => {
             if (err.status === 401) {
                 console.warn('Token Expired')

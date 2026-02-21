@@ -40,11 +40,11 @@ export class ProductService {
       this.http.post(this.productApiUrl, formData).subscribe({
         next: (response) => {
           console.log('Successfully stored', response);
-          loadProduct();
+          this.products.reload()
           this.router.navigate(['/main/product-stock'])
         },
         error: (error) => {
-          console.error('An error occured:', error);
+          console.error('An error occured:', error.error.message);
 
         }
       });
@@ -59,8 +59,9 @@ export class ProductService {
     this.http.delete(`${this.productApiUrl}/${productId}`).subscribe(
       {
         next: (res) => {
+          this.products.reload()
           console.log('Successfully delete', res);
-          loadProduct();
+
         },
         error: (err) => {
           console.error('An error occured:', err.error.message);
