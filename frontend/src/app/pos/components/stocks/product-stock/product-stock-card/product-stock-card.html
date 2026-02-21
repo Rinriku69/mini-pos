@@ -1,5 +1,5 @@
 @if (openEdit()) {
-  <app-edit-form (closeEdit)="toggleEdit()"></app-edit-form>
+  <app-edit-form (closeEdit)="toggleEdit()" [product]="product()"></app-edit-form>
 }
 <div
   class="flex items-center justify-between bg-gray-300 border border-gray-200 rounded-xl px-5 py-4 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all"
