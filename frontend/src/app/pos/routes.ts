@@ -32,13 +32,13 @@ export default [
                 path: 'add-product',
                 loadComponent: () => import('./components/stocks/add-product/add-product')
                     .then(m => m.AddProduct),
-                canActivate: [roleGuard(['Admin', 'cashier'])]
+                canActivate: [roleGuard(['Admin', 'Cashier'])]
             },
             {
                 path: 'product-stock',
                 loadComponent: () => import('./components/stocks/product-stock/product-stock')
                     .then(m => m.ProductStock),
-                canActivate: [roleGuard(['Admin', 'cashier'])]
+                canActivate: [roleGuard(['Admin', 'Cashier'])]
             },
         ],
     },

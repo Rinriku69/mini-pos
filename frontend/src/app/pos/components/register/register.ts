@@ -2,12 +2,13 @@ import { Component, computed, inject, signal } from '@angular/core';
 import { debounce, email, form, FormField, required, validate } from '@angular/forms/signals';
 import { RegisterForm } from '../../models/types';
 import { AuthService } from '../../services/auth.service';
+import { RouterLink } from '@angular/router';
 
 
 
 @Component({
   selector: 'app-register',
-  imports: [FormField],
+  imports: [FormField, RouterLink],
   templateUrl: './register.html',
   styleUrl: './register.scss',
 })
