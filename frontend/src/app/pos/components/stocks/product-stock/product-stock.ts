@@ -23,5 +23,4 @@ export class ProductStock {
     const catId = this.categorySelect()
     return products.filter((v) => catId != 0 ? v.category_id == catId : v)
   })
-
 }
