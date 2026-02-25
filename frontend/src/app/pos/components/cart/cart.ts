@@ -16,7 +16,7 @@ export class Cart {
   readonly total = computed(() => {
     const cart = this.cart();
     if (!cart) return 0;
-    return cart.order_item.reduce((result, curr) => {
+    return cart.cart_items.reduce((result, curr) => {
 
       return result + (curr.product.price * curr.qty)
     }, 0)

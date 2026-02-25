@@ -2,9 +2,8 @@ import { Component, computed, inject, OnInit, Signal } from '@angular/core';
 import { OrderService } from '../../services/order.service';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { OrderCard } from './order-card/order-card';
-
-import { OrderCards } from '../../models/types';
 import { NavService } from '../../services/nav.service';
+import { Order } from '../../models/types';
 
 @Component({
   selector: 'app-orders',
@@ -19,7 +18,7 @@ export class Orders implements OnInit {
   private readonly orders = toSignal(this.orderService.orders$, { initialValue: [] });
   private readonly searchKey = toSignal(this.navService.searchKey$, { initialValue: '' })
 
-  readonly orderDiplay: Signal<OrderCards[]> = computed(() => {
+  readonly orderDiplay: Signal<Order[]> = computed(() => {
     const orders = this.orders()
     const searchKey = this.searchKey()
     if (!orders || !searchKey) return this.orders()
