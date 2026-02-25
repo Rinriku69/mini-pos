@@ -42,7 +42,7 @@ export class PosNav implements AfterViewInit {
     if (!cart) {
       return 0
     } else {
-      return cart.order_item.length
+      return cart.cart_items.length
     }
   })
   cartIcon = viewChild<ElementRef<HTMLElement>>('cartIcon');

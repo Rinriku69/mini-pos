@@ -1,6 +1,6 @@
-import { Component, input } from '@angular/core';
-import { OrderCards } from '../../../models/types';
+import { Component, effect, input } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
+import { Order, } from '../../../models/types';
 
 @Component({
   selector: 'app-order-card',
@@ -9,7 +9,12 @@ import { DecimalPipe } from '@angular/common';
   styleUrl: './order-card.scss',
 })
 export class OrderCard {
-  order = input.required<OrderCards>();
+  order = input.required<Order>();
+  constructor() {
+    effect(() => {
 
+      console.log(this.order());
+    })
+  }
 
 }

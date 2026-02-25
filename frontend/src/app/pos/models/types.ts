@@ -10,28 +10,22 @@ export interface Category {
     id: number;
     category_name: string;
 }
-
-export interface Cart {
-    order_item: OrderItem[];
-}
-
-export interface OrderItem {
-    product: Product;
-    qty: number
+export interface OrderResource {
+    data: Order[]
 }
 
 export interface Order {
-    order_items: OrderItem[]
-}
-
-export interface OrderCards extends Order {
     order_id: number;
     total: number;
     date: string;
-
+    order_items: OrderItem[]
 }
 
-
+export interface OrderItem {
+    product_name: string;
+    product_price: number;
+    qty: number
+}
 export interface RegisterForm {
     name: string;
     email: string;
@@ -59,4 +53,13 @@ export interface User {
     "email_verified_at"?: string | null,
     "created_at"?: string,
     "updated_at"?: string
+}
+
+export interface Cart {
+    cart_items: CartItem[];
+}
+
+export interface CartItem {
+    product: Product;
+    qty: number;
 }
