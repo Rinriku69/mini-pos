@@ -42,11 +42,11 @@ class AuthController extends Controller
             'password' => ['required', 'string']
         ]);
 
-        if (! $token = auth()->attempt($credentail)) {
+        if (! $token = Auth::attempt($credentail)) {
             return response()->json(['error' => 'Username or Password is incorrect'], 401);
         }
-        $user = auth()->user();
-        $token = auth()->claims([
+        $user = Auth::user();
+        $token = Auth::claims([
             'email' => $user->email,
             'role' => $user->role,
             'name' => $user->name
@@ -56,7 +56,7 @@ class AuthController extends Controller
 
     public function logout()
     {
-        auth()->logout();
+        Auth::logout();
 
         return response()->json(['message' => 'Successfully logged out']);
     }
@@ -65,7 +65,7 @@ class AuthController extends Controller
 
     public function refresh()
     {
-        return $this->respondWithToken(auth()->refresh());
+        return $this->respondWithToken(Auth::refresh());
     }
 
     protected function respondWithToken($token)
@@ -73,8 +73,8 @@ class AuthController extends Controller
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => auth('api')->factory()->getTTL() * 60,
-            'user' => auth('api')->user()
+            'expires_in' => Auth::factory()->getTTL() * 60,
+            'user' => Auth::user()
         ]);
     }
 }

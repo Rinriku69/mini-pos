@@ -23,4 +23,9 @@ class Product extends Model
     {
         return $this->hasMany(OrderItem::class);
     }
+
+    function productLogs(): HasMany
+    {
+        return $this->hasMany(ProductLog::class);
+    }
 }

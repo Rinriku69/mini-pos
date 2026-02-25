@@ -1,5 +1,5 @@
 import { Component, input } from '@angular/core';
-import { Order } from '../../../models/types';
+import { OrderCards } from '../../../models/types';
 import { DecimalPipe } from '@angular/common';
 
 @Component({
@@ -9,7 +9,7 @@ import { DecimalPipe } from '@angular/common';
   styleUrl: './order-card.scss',
 })
 export class OrderCard {
-  order = input.required<Order>();
+  order = input.required<OrderCards>();
 
 
 }

@@ -21,17 +21,15 @@ export interface OrderItem {
 }
 
 export interface Order {
+    order_items: OrderItem[]
+}
+export interface OrderCards extends Order {
     order_id: number;
     total: number;
     date: string;
-    order_items: [
-        {
-            product_name: string,
-            product_price: number,
-            qty: number
-        }
-    ]
+
 }
+
 
 export interface RegisterForm {
     name: string;
