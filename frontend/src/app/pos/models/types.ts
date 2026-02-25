@@ -23,13 +23,13 @@ export interface OrderItem {
 export interface Order {
     order_items: OrderItem[]
 }
+
 export interface OrderCards extends Order {
     order_id: number;
     total: number;
     date: string;
 
 }
-
 
 export interface RegisterForm {
     name: string;

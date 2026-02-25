@@ -22,7 +22,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
     return next(setHeader).pipe(
         catchError((err) => {
             if (err.status === 401) {
-                console.warn('Token Expired')
+                console.warn('Unauthorize, please login')
 
                 authService.clearLocalSession()
             }
