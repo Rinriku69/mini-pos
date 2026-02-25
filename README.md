@@ -37,10 +37,10 @@ As a self-learner, I wanted to move beyond basic tutorials and static mock data.
 * **Smart Shopping Cart:**
     * Real-time calculation of Subtotal, Total Items, and Grand Total.
     * Built entirely with **Angular Signals** (`computed`, `update`) for fine-grained reactivity.
-* **Stock Management:(WIP)**
+* **Stock Management(WIP):**
     * Update and Remove products in stock with RESTful APIs (PATCH/DELETE).
       ![Project Screenshot](frontend/public/img/stock.png)
-* **POS Terminal(WIP):
+* **POS Terminal(WIP):**
    * Dedicated Single Page Application (SPA) interface designed for rapid checkouts in fast-paced environments like cafes and retail stores.
    * Exclusive access for Cashier and Admin roles, strictly bypassing the standard customer e-commerce flow.
    * Utilizes Angular Signals for instantaneous state management across the order panel, handling item selections, cash inputs, and change calculations without page reloads.
