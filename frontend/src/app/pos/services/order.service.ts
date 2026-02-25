@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, tap } from 'rxjs';
-import { Order } from '../models/types';
+import { OrderCards } from '../models/types';
 
 @Injectable({
   providedIn: 'root',
@@ -9,12 +9,12 @@ import { Order } from '../models/types';
 export class OrderService {
   private http = inject(HttpClient)
   private orderApiUrl = 'http://127.0.0.1:8000/api/orders'
-  private orders = new BehaviorSubject([] as Order[]);
+  private orders = new BehaviorSubject([] as OrderCards[]);
   orders$ = this.orders.asObservable();
 
 
   loadOrders() {
-    return this.http.get<{ data: Order[] }>(this.orderApiUrl).pipe(
+    return this.http.get<{ data: OrderCards[] }>(this.orderApiUrl).pipe(
       tap(response => this.orders.next(response['data']))
     )
   }

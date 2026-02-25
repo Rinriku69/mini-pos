@@ -1,6 +1,6 @@
 import { inject, Injectable, Signal } from '@angular/core';
 import { BehaviorSubject, Observable, Subject, timeout } from 'rxjs';
-import { Cart, OrderItem, Product } from '../models/types';
+import { Cart, Order, OrderItem, Product } from '../models/types';
 import { createCart } from '../helpers';
 import { HttpClient } from '@angular/common/http';
 
@@ -45,7 +45,7 @@ export class CartService {
   }
 
   createOrder(total: number) {
-    const order: { order_item: OrderItem[], total: number } = { order_item: { ...this.cart.value.order_item }, total: total }
+    const order: Order = { order_items: { ...this.cart.value.order_item } }
     this.http.post(this.orderApiUrl, order).subscribe({
       next: (response) => {
         console.log('order created successfully', response);
