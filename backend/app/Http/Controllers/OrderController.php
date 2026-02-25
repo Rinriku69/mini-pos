@@ -24,19 +24,30 @@ class OrderController extends Controller
     {
         DB::transaction(function () use ($request) {
 
-            $productIds = collect($request->order_item)->pluck('product.id')->toArray();
+            $productIds = collect($request->order_items)->pluck('product.id')->toArray();
             $productsFromDb = Product::whereIn('id', $productIds)->get()->keyBy('id');
             $orderItemsData = [];
-            foreach ($request->order_item as $item) {
+            $productLogs = [];
+            $user = Auth::user();
+            foreach ($request->order_items as $item) {
                 $reqProductId = $item['product']['id'];
                 $product = $productsFromDb[$reqProductId];
 
                 $orderItemsData[] = [
-                    'product_id'   => $product->id,
+                    'product_id' => $product->id,
                     'product_name' => $product->name,
-                    'price'     => $product->price,
-                    'qty'          => $item['qty'],
+                    'price' => $product->price,
+                    'qty' => $item['qty'],
                 ];
+
+                $productLogs[] = [
+                    'product_id' => $product->id,
+                    'amount' => -$item['qty'],
+                    'type' => 'sale',
+                    'user_id' => $user->id,
+                ];
+
+                $product->decrement('stock_qty', $item['qty']);
             }
             $total = 0;
 
@@ -49,6 +60,7 @@ class OrderController extends Controller
                 'user_id' => Auth::user()->id
             ]);
             $order->orderItems()->createMany($orderItemsData);
+            $order->productLogs()->createMany($productLogs);
         });
 
         return response()->json(['status' => 'ok']);

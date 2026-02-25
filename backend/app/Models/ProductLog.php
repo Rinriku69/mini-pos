@@ -7,6 +7,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class ProductLog extends Model
 {
+    protected $fillable = [
+        'product_id',
+        'user_id',
+        'type',
+        'amount',
+    ];
     function product(): BelongsTo
     {
         return $this->belongsTo(Product::class);
