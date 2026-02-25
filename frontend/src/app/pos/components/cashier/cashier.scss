@@ -1,0 +1,18 @@
+/* scrollbar-hide utility */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Print receipt styles */
+@media print {
+  body > * {
+    display: none;
+  }
+  .receipt-print {
+    display: block !important;
+  }
+}

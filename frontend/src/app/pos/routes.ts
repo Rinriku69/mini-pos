@@ -29,6 +29,12 @@ export default [
             { path: 'login', component: LoginPage },
             { path: 'unauthorize', component: UnauthorizePage },
             {
+                path: 'cashier',
+                loadComponent: () => import('./components/cashier/cashier')
+                    .then(m => m.Cashier),
+                canActivate: [roleGuard(['Admin', 'Cashier'])]
+            },
+            {
                 path: 'add-product',
                 loadComponent: () => import('./components/stocks/add-product/add-product')
                     .then(m => m.AddProduct),

@@ -20,6 +20,10 @@ export interface OrderItem {
     qty: number
 }
 
+export interface CartItem extends OrderItem {
+
+}
+
 export interface Order {
     order_items: OrderItem[]
 }
