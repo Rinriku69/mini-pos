@@ -7,14 +7,14 @@
   </div>
 
   <div class="flex flex-col gap-3">
-    @for (order_item of order().order_items; track order_item.product_name) {
+    @for (order_item of order().order_items; track order_item.product.id) {
       <div class="flex items-center text-sm">
         <div class="flex-1 text-gray-800">
-          {{ order_item.product_name }}
+          {{ order_item.product.product_name }}
         </div>
 
         <div class="w-20 text-right text-gray-600">
-          {{ order_item.product_price }}
+          {{ order_item.product.price }}
         </div>
 
         <div class="w-12 text-right text-gray-500">× {{ order_item.qty }}</div>
