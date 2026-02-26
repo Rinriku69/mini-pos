@@ -2,17 +2,17 @@
   <div class="max-w-full mx-auto px-6">
     <ul class="flex items-center h-16 gap-[2%]">
       <div class="flex gap-8">
-        <li>
-          <a class="app-nav-link" routerLink="home" routerLinkActive="is-active"> Home </a>
-        </li>
-        <li>
-          <a class="app-nav-link" routerLink="store" routerLinkActive="is-active"> Store </a>
-        </li>
-        @if (userRole() == 'Admin' || userRole() == 'Cashier') {
+        @if (userRole() != 'Cashier') {
           <li>
-            <a class="app-nav-link" routerLink="cashier" routerLinkActive="is-active">
-              Cashier
-            </a>
+            <a class="app-nav-link" routerLink="home" routerLinkActive="is-active"> Home </a>
+          </li>
+          <li>
+            <a class="app-nav-link" routerLink="store" routerLinkActive="is-active"> Store </a>
+          </li>
+        }
+        @if (userRole() == 'Cashier' || userRole() == 'Admin') {
+          <li>
+            <a class="app-nav-link" routerLink="cashier" routerLinkActive="is-active"> Cashier </a>
           </li>
           <li>
             <a class="app-nav-link" routerLink="product-stock" routerLinkActive="is-active">
