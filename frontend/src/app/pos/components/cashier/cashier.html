@@ -4,7 +4,10 @@
     <div class="bg-white shadow-sm px-5 py-3 flex flex-col gap-3 border-b border-slate-200">
       <!-- Search -->
       <div class="relative">
-        <app-icon [name]="'search'"></app-icon>
+        <app-icon
+          [name]="'search'"
+          [classAttribute]="'absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400'"
+        ></app-icon>
         <input
           type="text"
           placeholder="Search products..."
