@@ -1,13 +1,14 @@
-import { Component, computed, signal } from '@angular/core';
+import { Component, computed, effect, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { CartItem, Product } from '../../models/types';
+import { CartItem, Category, Product } from '../../models/types';
 import { Icon } from "../../pages/icons/icon/icon";
+import { ProductService } from '../../services/product.service';
 
 
 
 // Mock product data — replace with global state signal later
-const MOCK_PRODUCTS: Product[] = [
+/* const MOCK_PRODUCTS: Product[] = [
   { id: 1, product_name: 'Americano', product_description: 'Classic black coffee with a bold, rich flavour', price: 65, category_name: 'Beverages', category_id: 1 },
   { id: 2, product_name: 'Cappuccino', product_description: 'Espresso with steamed milk foam and a smooth taste', price: 85, category_name: 'Beverages', category_id: 1 },
   { id: 3, product_name: 'Green Tea Latte', product_description: 'Premium matcha blended with creamy steamed milk', price: 90, category_name: 'Beverages', category_id: 1 },
@@ -20,17 +21,17 @@ const MOCK_PRODUCTS: Product[] = [
   { id: 10, product_name: 'Chocolate Brownie', product_description: 'Fudgy, dense brownie with dark chocolate chips', price: 70, category_name: 'Desserts', category_id: 4 },
   { id: 11, product_name: 'Orange Juice', product_description: 'Freshly squeezed 100% natural orange juice', price: 75, category_name: 'Beverages', category_id: 1 },
   { id: 12, product_name: 'Grilled Panini', product_description: 'Toasted panini with mozzarella, tomato and basil', price: 105, category_name: 'Food', category_id: 3 },
-];
+]; */
 
-const CATEGORIES = ['All', 'Beverages', 'Bakery', 'Food', 'Desserts'];
+/* const CATEGORIES = ['All', 'Beverages', 'Bakery', 'Food', 'Desserts']; */
 
-const CATEGORY_ICONS: Record<string, string> = {
+/* const CATEGORY_ICONS: Record<string, string> = {
   'All': '🛒',
   'Beverages': '☕',
   'Bakery': '🥐',
   'Food': '🥗',
   'Desserts': '🍰',
-};
+}; */
 
 @Component({
   selector: 'app-cashier',
@@ -39,12 +40,19 @@ const CATEGORY_ICONS: Record<string, string> = {
   styleUrl: './cashier.scss',
 })
 export class Cashier {
-  // ── Data ──────────────────────────────────────────────────────────────
-  protected readonly products = signal<Product[]>(MOCK_PRODUCTS); // swap with global state later
-  protected readonly categories = CATEGORIES;
-  protected readonly categoryIcons = CATEGORY_ICONS;
 
-  // ── UI State ──────────────────────────────────────────────────────────
+  // Injection
+  private readonly productService = inject(ProductService);
+
+  // Data   
+  protected readonly products = computed<Product[]>(() => this.productService.productState$());
+  protected readonly categories = computed<string[]>(() => {
+    const cats = this.productService.categories$().map((v) => v.category_name)
+    return ['All', ...cats]
+  });
+  
+
+  //  UI State 
   protected searchKey = signal('');
   protected selectedCategory = signal('All');
   protected cartItems = signal<CartItem[]>([]);
@@ -53,7 +61,9 @@ export class Cashier {
   protected paymentMethod = signal<'cash' | 'card' | 'qr'>('cash');
   protected cashReceived = signal<number | null>(null);
 
-  // ── Derived ────────────────────────────────────────────────────────────
+
+
+  //  Derived 
   protected readonly filteredProducts = computed(() => {
     const key = this.searchKey().toLowerCase();
     const cat = this.selectedCategory();
@@ -87,7 +97,8 @@ export class Cashier {
     return cash - this.total();
   });
 
-  // ── Cart Actions ────────────────────────────────────────────────────────
+
+  //  Cart Actions 
   addToCart(product: Product) {
     this.cartItems.update(items => {
       const existing = items.find(i => i.product.id === product.id);

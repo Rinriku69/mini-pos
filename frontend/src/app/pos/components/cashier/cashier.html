@@ -19,7 +19,7 @@
 
       <!-- Category Pills -->
       <div class="flex gap-2 overflow-x-auto pb-1 scrollbar-hide">
-        @for (cat of categories; track cat) {
+        @for (cat of categories(); track cat) {
           <button
             (click)="setCategory(cat)"
             class="flex items-center gap-1.5 px-4 py-1.5 rounded-full text-sm font-medium whitespace-nowrap transition-all duration-200 border"
@@ -29,7 +29,6 @@
                 : 'bg-white text-slate-600 border-slate-200 hover:border-violet-300 hover:text-violet-600'
             "
           >
-            <span>{{ categoryIcons[cat] }}</span>
             {{ cat }}
           </button>
         }
@@ -64,7 +63,7 @@
             <div
               class="w-full aspect-square rounded-xl bg-linear-to-br from-violet-50 to-indigo-100 flex items-center justify-center text-4xl select-none group-hover:scale-105 transition-transform duration-200"
             >
-              {{ categoryIcons[product.category_name] }}
+              📦
             </div>
 
             <!-- Name -->
@@ -133,7 +132,7 @@
           <div
             class="w-10 h-10 rounded-lg bg-violet-50 flex items-center justify-center text-xl shrink-0"
           >
-            {{ categoryIcons[item.product.category_name] }}
+            📦
           </div>
 
           <!-- Info -->
