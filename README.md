@@ -44,6 +44,7 @@ As a self-learner, I wanted to move beyond basic tutorials and static mock data.
    * Dedicated Single Page Application (SPA) interface designed for rapid checkouts in fast-paced environments like cafes and retail stores.
    * Exclusive access for Cashier and Admin roles, strictly bypassing the standard customer e-commerce flow.
    * Utilizes Angular Signals for instantaneous state management across the order panel, handling item selections, cash inputs, and change calculations without page reloads.
+     ![Project Screenshot](frontend/public/img/terminal.png)
 
 ##  Tech Stack
 
