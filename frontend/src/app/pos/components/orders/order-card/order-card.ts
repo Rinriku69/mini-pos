@@ -10,11 +10,6 @@ import { Order, } from '../../../models/types';
 })
 export class OrderCard {
   order = input.required<Order>();
-  constructor() {
-    effect(() => {
 
-      console.log(this.order());
-    })
-  }
 
 }

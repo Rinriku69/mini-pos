@@ -43,9 +43,10 @@ export class CartService {
 
   }
 
-  createOrder(total: number) {
-    const order: Cart = { cart_items: { ...this.cart.value.cart_items } }
-    this.http.post(this.orderApiUrl, order).subscribe({
+  createOrder(cart?: Cart) {
+    const order: Cart = this.cart.value
+    console.log(cart?.cart_items.length)
+    this.http.post(this.orderApiUrl, cart?.cart_items ? cart : order).subscribe({
       next: (response) => {
         console.log('order created successfully', response);
         alert('Order Created')
