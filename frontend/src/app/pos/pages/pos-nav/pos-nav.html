@@ -2,13 +2,18 @@
   <div class="max-w-full mx-auto px-6">
     <ul class="flex items-center h-16 gap-[2%]">
       <div class="flex gap-8">
-        <li>
-          <a class="app-nav-link" routerLink="home" routerLinkActive="is-active"> Home </a>
-        </li>
-        <li>
-          <a class="app-nav-link" routerLink="store" routerLinkActive="is-active"> Store </a>
-        </li>
-        @if (userRole() == 'Admin' || userRole() == 'Cashier') {
+        @if (userRole() != 'Cashier') {
+          <li>
+            <a class="app-nav-link" routerLink="home" routerLinkActive="is-active"> Home </a>
+          </li>
+          <li>
+            <a class="app-nav-link" routerLink="store" routerLinkActive="is-active"> Store </a>
+          </li>
+        }
+        @if (userRole() == 'Cashier' || userRole() == 'Admin') {
+          <li>
+            <a class="app-nav-link" routerLink="cashier" routerLinkActive="is-active"> Cashier </a>
+          </li>
           <li>
             <a class="app-nav-link" routerLink="cashier" routerLinkActive="is-active">
               Cashier
@@ -26,18 +31,18 @@
         }
       </div>
 
-      <div class="flex-2 flex justify-end">
+      <div class="flex-2 flex justify-center relative">
         @if (showSearch()) {
           <input
             type="text"
-            class="w-[80%] px-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 bg-white"
+            class="px-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 bg-white max-w-200 w-full"
             placeholder="Search product..."
             (input)="search(key.value)"
             #key
           />
         }
       </div>
-      <div class="flex items-baseline flex-1 justify-end">
+      <div class="flex items-baseline justify-end px-5">
         <li>
           <div class="relative">
             <span #cartIcon>

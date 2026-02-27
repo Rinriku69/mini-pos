@@ -67,7 +67,11 @@ export class AuthService {
       next: (response) => {
         this.tokenStorage.set(response.access_token)
         this.loadUserFromToken();
-        this.router.navigate(['/main/store'])
+        if (this.userSignal()?.role == 'Cashier') {
+          this.router.navigate(['/main/cashier'])
+        } else {
+          this.router.navigate(['/main/store'])
+        }
       },
 
       error: (err: HttpErrorResponse) => {
