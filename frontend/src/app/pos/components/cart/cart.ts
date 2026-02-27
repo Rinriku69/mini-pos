@@ -26,7 +26,7 @@ export class Cart {
 
   cartCheckout(): void {
 
-    this.cartService.createOrder(this.total())
+    this.cartService.createOrder()
 
   }
 }
