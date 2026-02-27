@@ -1,9 +1,11 @@
 import { Component, computed, effect, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { CartItem, Category, Product } from '../../models/types';
+import { Cart, CartItem, Category, Product } from '../../models/types';
 import { Icon } from "../../pages/icons/icon/icon";
 import { ProductService } from '../../services/product.service';
+import { CartService } from '../../services/cart.service';
+
 
 @Component({
   selector: 'app-cashier',
@@ -15,6 +17,7 @@ export class Cashier {
 
   // Injection
   private readonly productService = inject(ProductService);
+  private readonly cartService = inject(CartService);
 
   // Data   
   protected readonly products = computed<Product[]>(() => this.productService.productState$());
@@ -22,12 +25,12 @@ export class Cashier {
     const cats = this.productService.categories$().map((v) => v.category_name)
     return ['All', ...cats]
   });
-  
+
 
   //  UI State 
   protected searchKey = signal('');
   protected selectedCategory = signal('All');
-  protected cartItems = signal<CartItem[]>([]);
+  protected cartItems = signal<Cart>({ cart_items: [] });
   protected discount = signal(0);
   protected showReceipt = signal(false);
   protected paymentMethod = signal<'cash' | 'card' | 'qr'>('cash');
@@ -49,7 +52,8 @@ export class Cashier {
   });
 
   protected readonly subtotal = computed(() =>
-    this.cartItems().reduce((sum, item) => sum + item.product.price * item.qty, 0)
+    this.cartItems()?.cart_items.reduce((sum, item) => sum + item.product.price * item.qty, 0) ?? 0
+
   );
 
   protected readonly discountAmount = computed(() =>
@@ -61,7 +65,7 @@ export class Cashier {
   );
 
   protected readonly cartCount = computed(() =>
-    this.cartItems().reduce((sum, item) => sum + item.qty, 0)
+    this.cartItems()?.cart_items.reduce((sum, item) => sum + item.qty, 0)
   );
 
   protected readonly change = computed(() => {
@@ -72,19 +76,21 @@ export class Cashier {
 
   //  Cart Actions 
   addToCart(product: Product) {
-    this.cartItems.update(items => {
-      const existing = items.find(i => i.product.id === product.id);
+    this.cartItems.update((items) => {
+      const existing = items?.cart_items.find(i => i.product.id === product.id);
       if (existing) {
-        return items.map(i =>
+        const newCartItem = items?.cart_items.map(i =>
           i.product.id === product.id ? { ...i, qty: i.qty + 1 } : i
         );
+
+        return { ...items, cart_items: [...newCartItem] }
       }
-      return [...items, { product, qty: 1 }];
+      return { ...items, cart_items: [...items.cart_items, { product, qty: 1 }] };
     });
   }
 
   removeFromCart(productId: number) {
-    this.cartItems.update(items => items.filter(i => i.product.id !== productId));
+    this.cartItems.update(items => ({ ...items, cart_items: items.cart_items.filter(i => i.product.id !== productId) }));
   }
 
   updateQty(productId: number, qty: number) {
@@ -93,29 +99,30 @@ export class Cashier {
       return;
     }
     this.cartItems.update(items =>
-      items.map(i => i.product.id === productId ? { ...i, qty } : i)
+      ({ ...items, cart_items: items.cart_items.map(i => i.product.id === productId ? { ...i, qty } : i) })
     );
   }
 
   clearCart() {
-    this.cartItems.set([]);
+    this.cartItems.set({ cart_items: [] });
     this.discount.set(0);
     this.cashReceived.set(null);
     this.showReceipt.set(false);
   }
 
   confirmOrder() {
-    if (this.cartItems().length === 0) return;
+    if (this.cartItems().cart_items.length === 0) return;
     this.showReceipt.set(true);
   }
 
   printAndClose() {
+    this.cartService.createOrder(this.cartItems())
     window.print();
     this.clearCart();
   }
 
   getItemQty(productId: number): number {
-    return this.cartItems().find(i => i.product.id === productId)?.qty ?? 0;
+    return this.cartItems().cart_items.find(i => i.product.id === productId)?.qty ?? 0;
   }
 
   setCategory(cat: string) {
