@@ -24,12 +24,12 @@ class OrderController extends Controller
     {
         DB::transaction(function () use ($request) {
 
-            $productIds = collect($request->order_items)->pluck('product.id')->toArray();
+            $productIds = collect($request->cart_items)->pluck('product.id')->toArray();
             $productsFromDb = Product::whereIn('id', $productIds)->get()->keyBy('id');
             $orderItemsData = [];
             $productLogs = [];
             $user = Auth::user();
-            foreach ($request->order_items as $item) {
+            foreach ($request->cart_items as $item) {
                 $reqProductId = $item['product']['id'];
                 $product = $productsFromDb[$reqProductId];
 
