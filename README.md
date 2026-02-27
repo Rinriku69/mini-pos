@@ -26,6 +26,11 @@ As a self-learner, I wanted to move beyond basic tutorials and static mock data.
    * Integrated Angular HttpInterceptor to automatically attach auth tokens to API requests.
    * Role-Based Access: Secured sensitive routes (like Dashboard/Settings) to authorized users only such as Admin, Cashier or User.
     ![Project Screenshot](frontend/public/img/login.png)
+* **POS Terminal(WIP):**
+   * Dedicated Single Page Application (SPA) interface designed for rapid checkouts in fast-paced environments like cafes and retail stores.
+   * Exclusive access for Cashier and Admin roles, strictly bypassing the standard customer e-commerce flow.
+   * Utilizes Angular Signals for instantaneous state management across the order panel, handling item selections, cash inputs, and change calculations without page reloads.
+     ![Project Screenshot](frontend/public/img/terminal.png)
 * **Reactive Product Filter:**
     * Instantly filter products by **Category** and **Search Keyword** simultaneously.
     * Powered by `RxJS`  and `Signals` for optimal performance.
@@ -40,10 +45,6 @@ As a self-learner, I wanted to move beyond basic tutorials and static mock data.
 * **Stock Management(WIP):**
     * Update and Remove products in stock with RESTful APIs (PATCH/DELETE).
       ![Project Screenshot](frontend/public/img/stock.png)
-* **POS Terminal(WIP):**
-   * Dedicated Single Page Application (SPA) interface designed for rapid checkouts in fast-paced environments like cafes and retail stores.
-   * Exclusive access for Cashier and Admin roles, strictly bypassing the standard customer e-commerce flow.
-   * Utilizes Angular Signals for instantaneous state management across the order panel, handling item selections, cash inputs, and change calculations without page reloads.
 
 ##  Tech Stack
 
