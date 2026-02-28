@@ -18,6 +18,7 @@ export class EditForm {
     product_name: '',
     product_description: '',
     price: 0,
+    stock_qty: 0,
     category_name: ''
   })
 
