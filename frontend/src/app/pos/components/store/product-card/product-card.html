@@ -26,10 +26,12 @@
   <!-- Controls -->
   <div class="flex items-center gap-2 px-3 pb-3">
     <!-- Qty Stepper -->
-    <div class="flex items-center border border-gray-300 rounded-lg overflow-hidden text-sm flex-1">
+    <div
+      class="flex items-center border-4 border-gray-300 rounded-lg overflow-hidden text-sm ml-auto mr-3"
+    >
       <button
         type="button"
-        class="px-2 py-1 bg-gray-100 font-bold hover:bg-gray-200 active:bg-gray-300 transition"
+        class="px-2 py-1 bg-gray-100 font-bold hover:bg-gray-200 active:bg-gray-300 transition h-10 w-10"
         (click)="
           productQty.valueAsNumber > 1
             ? (productQty.valueAsNumber -= 1)
@@ -50,7 +52,7 @@
 
       <button
         type="button"
-        class="px-2 py-1 bg-gray-100 font-bold hover:bg-gray-200 active:bg-gray-300 transition"
+        class="px-2 py-1 bg-gray-100 font-bold hover:bg-gray-200 active:bg-gray-300 transition h-10 w-10"
         (click)="productQty.valueAsNumber += 1"
       >
         +
@@ -61,7 +63,7 @@
     <button
       #addBtn
       type="button"
-      class="btn-add active:rotate-2 text-sm px-3 py-1 shrink-0"
+      class="btn-add active:rotate-2 text-sm px-3 py-1 shrink-0 h-10 items-center"
       (click)="addToCart(product(), productQty.valueAsNumber); cartAnimate(addBtn)"
     >
       Add
