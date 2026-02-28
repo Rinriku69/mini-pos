@@ -1,30 +1,35 @@
 <div
-  class="flex items-center justify-between bg-gray-300 border border-gray-200 rounded-xl px-5 py-4 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all"
+  class="flex flex-col bg-white border border-gray-200 rounded-2xl shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-200 overflow-hidden"
 >
-  <div class="flex flex-col gap-1">
-    <div class="card-header">
-      <span class="text-[#574964]">{{ product().product_name }}</span>
-    </div>
-
-    <div class="card-content">
-      {{ product().product_description }}
-    </div>
-
-    <div class="card-price">
-      {{ product().price | number }} <span class="text-black text-sm">THB</span>
-    </div>
+  <!-- Emoji / Mockup Photo Banner -->
+  <div
+    class="flex items-center justify-center bg-linear-to-br from-amber-50 to-orange-100 h-28 text-6xl select-none"
+  >
+    {{ product().emoji ?? '🛍️' }}
   </div>
 
-  <div class="ml-4 shrink-0 flex gap-4 items-center">
-    <div>
-      <span class="font-semibold text-sm text-slate-500 mx-1"
-        >Qty Left: {{ product().stock_qty }}</span
-      >
+  <!-- Product Info -->
+  <div class="flex flex-col gap-1 px-3 pt-3 pb-2 flex-1">
+    <span class="font-semibold text-[#574964] text-sm leading-tight truncate">
+      {{ product().product_name }}
+    </span>
+    <span class="text-xs text-gray-500 line-clamp-2 leading-tight">
+      {{ product().product_description }}
+    </span>
+    <div class="mt-1 flex items-baseline gap-1">
+      <span class="font-bold text-base text-gray-800">{{ product().price | number }}</span>
+      <span class="text-xs text-gray-500">THB</span>
     </div>
-    <div class="flex items-center border border-gray-300 rounded-xl overflow-hidden w-fit">
+    <span class="text-xs text-slate-400">Qty Left: {{ product().stock_qty }}</span>
+  </div>
+
+  <!-- Controls -->
+  <div class="flex items-center gap-2 px-3 pb-3">
+    <!-- Qty Stepper -->
+    <div class="flex items-center border border-gray-300 rounded-lg overflow-hidden text-sm flex-1">
       <button
         type="button"
-        class="px-3 py-2 bg-gray-200 text-lg font-bold hover:bg-gray-100 active:bg-gray-200 transition"
+        class="px-2 py-1 bg-gray-100 font-bold hover:bg-gray-200 active:bg-gray-300 transition"
         (click)="
           productQty.valueAsNumber > 1
             ? (productQty.valueAsNumber -= 1)
@@ -37,7 +42,7 @@
 
       <input
         type="number"
-        class="w-14 py-2 text-center bg-amber-50 border-x border-gray-300 focus:outline-none"
+        class="w-8 py-1 text-center bg-amber-50 border-x border-gray-300 focus:outline-none text-sm"
         value="1"
         min="1"
         #productQty
@@ -45,16 +50,18 @@
 
       <button
         type="button"
-        class="px-3 py-2 text-lg font-bold bg-gray-200 hover:bg-gray-100 active:bg-gray-200 transition"
+        class="px-2 py-1 bg-gray-100 font-bold hover:bg-gray-200 active:bg-gray-300 transition"
         (click)="productQty.valueAsNumber += 1"
       >
         +
       </button>
     </div>
+
+    <!-- Add Button -->
     <button
       #addBtn
       type="button"
-      class="btn-add active:rotate-2"
+      class="btn-add active:rotate-2 text-sm px-3 py-1 shrink-0"
       (click)="addToCart(product(), productQty.valueAsNumber); cartAnimate(addBtn)"
     >
       Add

@@ -6,6 +6,7 @@ export interface Product {
     stock_qty: number;
     category_name: string;
     category_id?: number;
+    emoji?: string;
 }
 export interface Category {
     id: number;
