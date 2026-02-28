@@ -12,13 +12,7 @@ import { DecimalPipe } from '@angular/common';
 })
 export class ProductCard {
   private cartServices = inject(CartService)
-  product = input<Product>({
-    id: 0,
-    product_name: '',
-    product_description: '',
-    price: 0,
-    category_name: ''
-  });
+  product = input.required<Product>();
   /* product = input<Product>({} as Product);  for optional*/
   /*  product = input.required<Product>(); */
   cartIcon = toSignal(this.cartServices.cartIcon, { initialValue: null });

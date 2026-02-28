@@ -23,6 +23,7 @@ class ProductController extends Controller
             'name' => 'required|min:3',
             'category_id' => 'required|exists:categories,id',
             'price' => 'required|numeric|min:1',
+            'stock_qty' => 'required|numeric|min:0',
             'description' => 'nullable'
         ]);
 
