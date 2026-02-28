@@ -34,7 +34,7 @@ As a self-learner, I wanted to move beyond basic tutorials and static mock data.
 * **Reactive Product Filter:**
     * Instantly filter products by **Category** and **Search Keyword** simultaneously.
     * Powered by `RxJS`  and `Signals` for optimal performance.
-     ![Project Screenshot](frontend/public/img/store.png)
+     
 * **Secure Transactions:**
     * Laravel Backend uses `DB::transaction` to ensure atomic operations (Order Creation + Stock Deduction[WIP]).
     * Rollbacks automatically if any part of the process fails.
