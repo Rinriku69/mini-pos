@@ -15,7 +15,6 @@ export class EditForm {
   private readonly productService = inject(ProductService);
   categories = this.productService.categories$;
 
-
   product = input.required<Product>();
   editForm = form(linkedSignal(() => {
     const pro = this.product()
