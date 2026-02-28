@@ -4,10 +4,20 @@ export interface Product {
     product_description: string;
     price: number;
     stock_qty: number;
-    category_name: string;
-    category_id?: number;
+    category_name?: string;
+    category_id: number;
     emoji?: string;
 }
+
+export interface ProductRequest {
+    id: number;
+    name: string;
+    description: string;
+    price: number;
+    stock_qty: number;
+    category_id: number;
+}
+
 export interface Category {
     id: number;
     category_name: string;

@@ -1,7 +1,7 @@
 import { HttpClient, HttpResourceRef } from '@angular/common/http';
 import { computed, inject, Injectable } from '@angular/core';
 import { BehaviorSubject, filter, Observable, shareReplay, tap } from 'rxjs';
-import { Product, Category } from '../models/types';
+import { Product, Category, ProductRequest } from '../models/types';
 
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -70,6 +70,29 @@ export class ProductService {
     )
   }
 
+  updateProduct(product: Product) {
+    const { id, product_name, product_description, category_id, stock_qty, price } = product
+    const porductReq: ProductRequest = {
+      id,
+      name: product_name,
+      description: product_description,
+      category_id,
+      price,
+      stock_qty
+    }
+
+    this.http.put(this.productApiUrl, porductReq).subscribe(
+      {
+        next: (res) => {
+          this.products.reload();
+          console.log('Successfully update', res);
+        },
+        error: (err) => {
+          console.error('An error occured:', err.error.message);
+        }
+      }
+    )
+  }
 
 
 

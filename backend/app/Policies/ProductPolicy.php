@@ -19,4 +19,8 @@ class ProductPolicy
     {
         return $user->isAdministrator();
     }
+    function update(User $user, Product $product): bool
+    {
+        return $user->isAdministrator() || $user->isCashier();
+    }
 }

@@ -6,6 +6,7 @@ use App\Http\Resources\ProductResource;
 use App\Models\Product;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
@@ -51,6 +52,28 @@ class ProductController extends Controller
             ], 201);
         } catch (QueryException $excp) {
             return response()->json(['error' => $excp->getMessage()], 401);
+        }
+    }
+
+    function update(Request $request)
+    {
+        $validated = $request->validate([
+            'category_id' => 'required|exists:categories,id',
+            'description' => 'nullable',
+            'id' => 'required',
+            'name' => 'required|min:3',
+            'price' => 'required|numeric|min:1',
+            'stock_qty' => 'required|numeric|min:0',
+        ]);
+
+        try {
+            DB::transaction(function () use ($validated) {
+                $product = Product::findOrFail($validated['id']);
+                $product->update($validated);
+            });
+            return response()->json(["Success fully updated "], 200);
+        } catch (QueryException $excp) {
+            return response()->json(['error' => $excp->getMessage()], 400);
         }
     }
 }
