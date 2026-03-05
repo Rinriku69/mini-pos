@@ -20,7 +20,14 @@ export class Cashier {
   private readonly cartService = inject(CartService);
 
   // Data   
-  protected readonly products = computed<Product[]>(() => this.productService.productState$());
+  protected readonly products = computed<Product[]>(() => {
+    const prodcuts = this.productService.productState$();
+    if (prodcuts.hasValue()) {
+      return prodcuts.value().data
+    } else {
+      return []
+    }
+  });
   protected readonly categories = computed<string[]>(() => {
     const cats = this.productService.categories$().map((v) => v.category_name)
     return ['All', ...cats]

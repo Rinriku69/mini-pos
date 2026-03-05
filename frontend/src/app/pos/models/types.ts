@@ -75,3 +75,11 @@ export interface CartItem {
     product: Product;
     qty: number;
 }
+
+export interface AddProductForm<T> {
+    product_name: string;
+    category_id: T;
+    price: number;
+    stock_qty: number;
+    product_description: string;
+}
