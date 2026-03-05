@@ -1,3 +1,7 @@
+export interface ResourceResponse<T> {
+    data: T[]
+}
+
 export interface Product {
     id: number;
     product_name: string;
@@ -22,12 +26,10 @@ export interface Category {
     id: number;
     category_name: string;
 }
-export interface ResourceResponse<T> {
-    data: T[]
-}
 
 export interface Order {
     order_id: number;
+    user_name: string;
     total: number;
     date: string;
     order_items: OrderItem[]

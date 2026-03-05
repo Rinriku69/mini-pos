@@ -15,7 +15,7 @@ class OrderController extends Controller
 {
     function index()
     {
-        $orders = Order::with('orderItems.product')->get();
+        $orders = Order::with('orderItems.product')->with('user')->get();
 
         return OrderResource::collection($orders);
     }
