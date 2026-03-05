@@ -22,8 +22,8 @@ export interface Category {
     id: number;
     category_name: string;
 }
-export interface OrderResource {
-    data: Order[]
+export interface ResourceResponse<T> {
+    data: T[]
 }
 
 export interface Order {
