@@ -22,6 +22,7 @@ class OrderController extends Controller
 
     function store(Request $request)
     {
+
         DB::transaction(function () use ($request) {
 
             $productIds = collect($request->cart_items)->pluck('product.id')->toArray();
@@ -57,7 +58,7 @@ class OrderController extends Controller
 
             $order = Order::create([
                 'order_total' => $total,
-                'user_id' => Auth::user()->id
+                'user_id' => $user->id
             ]);
             $order->orderItems()->createMany($orderItemsData);
             $order->productLogs()->createMany($productLogs);
