@@ -16,6 +16,7 @@ export class AddProduct {
   submit = output<void>();
 
   onSubmit() {
+
     this.submit.emit()
   }
 

@@ -77,9 +77,9 @@ export interface CartItem {
 }
 
 export interface AddProductForm<T> {
-    product_name: string;
+    name: string;
     category_id: T;
     price: number;
     stock_qty: number;
-    product_description: string;
+    description: string;
 }

@@ -22,8 +22,8 @@ export class ProductService {
     return this.products;
   }
   );
-  private categories = httpResource<{ data: Category[] }>(() => this.categoryApiUrl);
 
+  private categories = httpResource<{ data: Category[] }>(() => this.categoryApiUrl);
   categories$ = computed<Category[]>(() => {
     const categories = this.categories
     if (categories.hasValue()) return categories.value().data;
@@ -31,10 +31,12 @@ export class ProductService {
 
   })
 
+  reloadProduct(): void {
+    this.products.reload()
+  }
+
   addProduct(productForm: AddProductForm<number>) {
-    return this.http.post(this.productApiUrl, productForm).pipe(
-      tap(() => this.products.reload)
-    );
+    return this.http.post(this.productApiUrl, productForm)
   }
 
   deleteProduct(productId: number) {
