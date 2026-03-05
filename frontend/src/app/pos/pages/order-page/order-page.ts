@@ -24,7 +24,8 @@ export class OrderPage {
     if (!orders.hasValue()) return [];
     if (!searchKey) return orders.value().data
 
-    return orders.value().data.filter((v) => v.order_id.toLocaleString() == searchKey)
+    return orders.value().data.filter((v) => v.user_name.toLowerCase().includes(searchKey) || v.order_id.toLocaleString() == searchKey || v.order_items.find(v => v.product_name.toLocaleLowerCase().includes(searchKey)))
+
 
   })
 
