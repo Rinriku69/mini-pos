@@ -34,7 +34,7 @@ export class AuthService {
     this.http.post(this.registerUrl, registerForm().value()).subscribe({
       next: (response) => {
         console.log('Successfully Screated', response);
-        this.router.navigate(['/main/login'])
+        this.router.navigate(['/login'])
 
       },
       error: (error: HttpErrorResponse) => {
@@ -68,9 +68,9 @@ export class AuthService {
         this.tokenStorage.set(response.access_token)
         this.loadUserFromToken();
         if (this.userSignal()?.role == 'Cashier') {
-          this.router.navigate(['/main/cashier'])
+          this.router.navigate(['/cashier'])
         } else {
-          this.router.navigate(['/main/store'])
+          this.router.navigate(['/store'])
         }
       },
 
@@ -111,7 +111,7 @@ export class AuthService {
   clearLocalSession(): void {
     localStorage.removeItem('ng-token');
     this.userSignal.set(null);
-    this.router.navigate(['/main/login'])
+    this.router.navigate(['/login'])
   }
 
 }

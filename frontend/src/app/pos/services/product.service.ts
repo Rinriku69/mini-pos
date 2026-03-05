@@ -41,7 +41,7 @@ export class ProductService {
         next: (response) => {
           console.log('Successfully stored', response);
           this.products.reload()
-          this.router.navigate(['/main/product-stock'])
+          this.router.navigate(['/product-stock'])
         },
         error: (error) => {
           console.error('An error occured:', error.error.message);

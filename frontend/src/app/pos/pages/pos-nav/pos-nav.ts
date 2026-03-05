@@ -31,7 +31,7 @@ export class PosNav implements AfterViewInit {
   currentUrl = toSignal(this.route$, { initialValue: this.router.url });
 
   showSearch = computed(() =>
-    this.currentUrl().startsWith('/main/store') || this.currentUrl().startsWith('/main/orders')
+    this.currentUrl().startsWith('/store') || this.currentUrl().startsWith('/orders')
   );
 
 

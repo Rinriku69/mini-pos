@@ -14,38 +14,31 @@ import { UnauthorizePage } from "./pages/errors/unauthorize-page/unauthorize-pag
 
 
 export default [
+
+    { path: 'store', component: StorePage },
+    { path: 'cart', component: CartPage },
+    { path: 'orders', component: OrderPage },
+
+    { path: 'register', component: RegisterPage },
+    { path: 'login', component: LoginPage },
+    { path: 'unauthorize', component: UnauthorizePage },
     {
-        path: '',
-        component: PosNav,
-        children: [
-            { path: '', redirectTo: 'home', pathMatch: 'full' },
-
-            { path: 'store', component: StorePage },
-
-            { path: 'cart', component: CartPage },
-            { path: 'orders', component: OrderPage },
-            { path: 'home', component: HomeViewPage },
-            { path: 'register', component: RegisterPage },
-            { path: 'login', component: LoginPage },
-            { path: 'unauthorize', component: UnauthorizePage },
-            {
-                path: 'cashier',
-                loadComponent: () => import('./components/cashier/cashier')
-                    .then(m => m.Cashier),
-                canActivate: [roleGuard(['Admin', 'Cashier'])]
-            },
-            {
-                path: 'add-product',
-                loadComponent: () => import('./components/stocks/add-product/add-product')
-                    .then(m => m.AddProduct),
-                canActivate: [roleGuard(['Admin', 'Cashier'])]
-            },
-            {
-                path: 'product-stock',
-                loadComponent: () => import('./components/stocks/product-stock/product-stock')
-                    .then(m => m.ProductStock),
-                canActivate: [roleGuard(['Admin', 'Cashier'])]
-            },
-        ],
+        path: 'cashier',
+        loadComponent: () => import('./components/cashier/cashier')
+            .then(m => m.Cashier),
+        canActivate: [roleGuard(['Admin', 'Cashier'])]
     },
+    {
+        path: 'add-product',
+        loadComponent: () => import('./components/stocks/add-product/add-product')
+            .then(m => m.AddProduct),
+        canActivate: [roleGuard(['Admin', 'Cashier'])]
+    },
+    {
+        path: 'product-stock',
+        loadComponent: () => import('./components/stocks/product-stock/product-stock')
+            .then(m => m.ProductStock),
+        canActivate: [roleGuard(['Admin', 'Cashier'])]
+    },
+
 ] as Routes;
