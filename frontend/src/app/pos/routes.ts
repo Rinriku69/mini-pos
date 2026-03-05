@@ -1,21 +1,21 @@
 import { Routes } from "@angular/router";
 import { StorePage } from "./pages/store-page/store-page";
-import { CartPage } from "./pages/cart-page/cart-page";
 import { OrderPage } from "./pages/order-page/order-page";
-import { RegisterPage } from "./pages/auth/register-page/register-page";
-import { LoginPage } from "./pages/auth/login-page/login-page";
 import { roleGuard } from "./auth.guard";
 import { UnauthorizePage } from "./pages/errors/unauthorize-page/unauthorize-page";
+import { Cart } from "./components/cart/cart";
+import { Register } from "./components/register/register";
+import { Login } from "./components/login/login";
 
 
 export default [
 
     { path: 'store', component: StorePage },
-    { path: 'cart', component: CartPage },
     { path: 'orders', component: OrderPage },
+    { path: 'cart', component: Cart },
 
-    { path: 'register', component: RegisterPage },
-    { path: 'login', component: LoginPage },
+    { path: 'register', component: Register },
+    { path: 'login', component: Login },
     { path: 'unauthorize', component: UnauthorizePage },
     {
         path: 'cashier',
