@@ -1,12 +1,7 @@
 import { Routes } from "@angular/router";
-import { PosNav } from "./pages/pos-nav/pos-nav";
-import { Register } from "./components/register/register";
-import { Login } from "./components/login/login";
 import { StorePage } from "./pages/store-page/store-page";
-
 import { CartPage } from "./pages/cart-page/cart-page";
 import { OrderPage } from "./pages/order-page/order-page";
-import { HomeViewPage } from "./pages/home-view-page/home-view-page";
 import { RegisterPage } from "./pages/auth/register-page/register-page";
 import { LoginPage } from "./pages/auth/login-page/login-page";
 import { roleGuard } from "./auth.guard";
@@ -30,14 +25,14 @@ export default [
     },
     {
         path: 'add-product',
-        loadComponent: () => import('./components/stocks/add-product/add-product')
-            .then(m => m.AddProduct),
+        loadComponent: () => import('./pages/stocks-page/add-product-page/add-product-page')
+            .then(m => m.AddProductPage),
         canActivate: [roleGuard(['Admin', 'Cashier'])]
     },
     {
         path: 'product-stock',
-        loadComponent: () => import('./components/stocks/product-stock/product-stock')
-            .then(m => m.ProductStock),
+        loadComponent: () => import('./pages/stocks-page/product-stock-page/product-stock-page')
+            .then(m => m.ProductStockPage),
         canActivate: [roleGuard(['Admin', 'Cashier'])]
     },
 

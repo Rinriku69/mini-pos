@@ -1,6 +1,6 @@
 <div class="max-w-8xl mx-auto px-4">
   <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-    @for (product of productsDisplay(); track product.product_name) {
+    @for (product of products(); track product.product_name) {
       <app-product-card
         [product]="product"
         class="app-product-card animate-fade-in-up"

@@ -1,11 +1,12 @@
-import { HttpClient, HttpResourceRef } from '@angular/common/http';
+import { HttpClient, httpResource, HttpResourceRef } from '@angular/common/http';
 import { computed, inject, Injectable } from '@angular/core';
 import { BehaviorSubject, filter, Observable, shareReplay, tap } from 'rxjs';
-import { Product, Category, ProductRequest } from '../models/types';
+import { Product, Category, ProductRequest, AddProductForm } from '../models/types';
 
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { loadCategory, loadProduct } from '../helpers';
+import { FieldTree } from '@angular/forms/signals';
+
 
 @Injectable({
   providedIn: 'root', //serviceถูกสร้างเมื่อมีinject
@@ -14,45 +15,26 @@ export class ProductService {
   private router = inject(Router);
   private http = inject(HttpClient);
   private productApiUrl = 'http://127.0.0.1:8000/api/products';
+  private categoryApiUrl = 'http://127.0.0.1:8000/api/categories';
 
-  private products = loadProduct();
-  productState$ = computed<Product[]>(() => {
-    if (!this.products.hasValue()) return [];
-    return this.products.value().data;
+  private products = httpResource<{ data: Product[] }>(() => this.productApiUrl);
+  productState$ = computed(() => {
+    return this.products;
   }
   );
-  private categories = loadCategory();
+  private categories = httpResource<{ data: Category[] }>(() => this.categoryApiUrl);
+
   categories$ = computed<Category[]>(() => {
-    if (!this.categories || !this.categories.hasValue()) return []
-    return this.categories.value().data
+    const categories = this.categories
+    if (categories.hasValue()) return categories.value().data;
+    return []
+
   })
 
-
-
-
-
-  addProduct(productForm: FormGroup) {
-    if (productForm.valid) {
-
-      const formData = productForm.value;
-
-
-      this.http.post(this.productApiUrl, formData).subscribe({
-        next: (response) => {
-          console.log('Successfully stored', response);
-          this.products.reload()
-          this.router.navigate(['/product-stock'])
-        },
-        error: (error) => {
-          console.error('An error occured:', error.error.message);
-
-        }
-      });
-
-    } else {
-      console.log('Invalid form value');
-      productForm.markAllAsTouched();
-    }
+  addProduct(productForm: AddProductForm<number>) {
+    return this.http.post(this.productApiUrl, productForm).pipe(
+      tap(() => this.products.reload)
+    );
   }
 
   deleteProduct(productId: number) {
