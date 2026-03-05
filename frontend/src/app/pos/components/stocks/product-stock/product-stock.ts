@@ -1,8 +1,7 @@
-import { Component, computed, effect, inject, OnInit, signal } from '@angular/core';
+import { Component, computed, effect, inject, input, model, OnInit, output, signal } from '@angular/core';
 import { ProductStockCard } from './product-stock-card/product-stock-card';
-import { ProductService } from '../../../services/product.service';
 import { RouterLink } from "@angular/router";
-import { EditForm } from "../edit-form/edit-form";
+import { Category, Product } from '../../../models/types';
 
 
 @Component({
@@ -12,15 +11,9 @@ import { EditForm } from "../edit-form/edit-form";
   styleUrl: './product-stock.scss',
 })
 export class ProductStock {
-  private readonly productService = inject(ProductService);
-  private readonly products = computed(() => this.productService.productState$());
-  protected readonly categories = computed(() => {
-    return this.productService.categories$()
-  })
-  protected categorySelect = signal<number>(0);
-  protected readonly productDisplay = computed(() => {
-    const products = this.products()
-    const catId = this.categorySelect()
-    return products.filter((v) => catId != 0 ? v.category_id == catId : v)
-  })
+
+  readonly products = input.required<Product[]>();
+  readonly categories = input.required<Category[]>();
+  categorySelect = output<number>();
+
 }

@@ -18,7 +18,7 @@ export class Login {
     }
     return false
   })
-  protected loginModel = signal<LoginForm>({
+  protected readonly loginModel = signal<LoginForm>({
     name: '',
     password: ''
   })

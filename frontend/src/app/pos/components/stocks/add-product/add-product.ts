@@ -1,36 +1,24 @@
-import { Component, effect, inject } from '@angular/core';
-import { ProductService } from '../../../services/product.service';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, computed, effect, inject, input, model, output } from '@angular/core';
+import { AddProductForm, Category } from '../../../models/types';
+import { FieldTree, FormField } from '@angular/forms/signals';
 
 
 
 @Component({
   selector: 'app-add-product',
-  imports: [ReactiveFormsModule],
+  imports: [FormField],
   templateUrl: './add-product.html',
   styleUrl: './add-product.scss',
 })
 export class AddProduct {
-  private productService = inject(ProductService);
-  readonly categories = this.productService.categories$();
-  private fb = inject(FormBuilder);
-
-
-  productForm = this.fb.group({
-    name: ['', [Validators.required, Validators.minLength(3)]],
-    category_id: [0, Validators.required],
-    price: [0, [Validators.required, Validators.min(1)]],
-    stock_qty: [0, [Validators.required, Validators.min(0)]],
-    description: [''],
-  });
-  readonly formValue = toSignal(this.productForm.valueChanges, { initialValue: this.productForm.value });
-
-  constructor() { }
-
+  readonly categories = input.required<Category[]>();
+  addProductForm = model.required<FieldTree<AddProductForm<string>>>();
+  submit = output<void>();
 
   onSubmit() {
-    this.productService.addProduct(this.productForm);
 
+    this.submit.emit()
   }
+
+
 }

@@ -1,3 +1,7 @@
+export interface ResourceResponse<T> {
+    data: T[]
+}
+
 export interface Product {
     id: number;
     product_name: string;
@@ -22,12 +26,10 @@ export interface Category {
     id: number;
     category_name: string;
 }
-export interface OrderResource {
-    data: Order[]
-}
 
 export interface Order {
     order_id: number;
+    user_name: string;
     total: number;
     date: string;
     order_items: OrderItem[]
@@ -74,4 +76,12 @@ export interface Cart {
 export interface CartItem {
     product: Product;
     qty: number;
+}
+
+export interface AddProductForm<T> {
+    name: string;
+    category_id: T;
+    price: number;
+    stock_qty: number;
+    description: string;
 }

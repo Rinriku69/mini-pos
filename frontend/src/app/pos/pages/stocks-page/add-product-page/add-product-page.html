@@ -1,1 +1,6 @@
-<app-add-product></app-add-product>
+<app-add-product
+  [addProductForm]="productForm"
+  [categories]="categories()"
+  (submit)="onSubmit()"
+></app-add-product>
+

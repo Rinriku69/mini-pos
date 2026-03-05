@@ -17,6 +17,7 @@ class ProductController extends Controller
         $products = Product::with('category')->get();
         return ProductResource::collection($products);
     }
+    
     public function store(Request $request)
     {
 

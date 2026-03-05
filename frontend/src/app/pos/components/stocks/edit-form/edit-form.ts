@@ -17,8 +17,8 @@ export class EditForm {
 
   product = input.required<Product>();
   editForm = form(linkedSignal(() => {
-    const pro = this.product()
-    return { ...pro, category_id: pro.category_id.toString() }
+    const product = this.product()
+    return { ...product, category_id: product.category_id.toString() }
   }), (path) => {
     required(path.id, { message: 'Product name is required' })
     required(path.product_name, { message: 'Product name is required' })

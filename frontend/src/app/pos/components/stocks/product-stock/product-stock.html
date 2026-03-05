@@ -10,7 +10,7 @@
       <select
         class="app-select-field bg-amber-50 text-center"
         #catFilter
-        (change)="categorySelect.set(+catFilter.value)"
+        (change)="categorySelect.emit(+catFilter.value)"
       >
         <option [value]="0">--All Category--</option>
         @for (category of categories(); track category.id) {
@@ -20,7 +20,7 @@
     </div>
   </div>
   <div class="flex flex-col gap-y-5 mt-[5%] w-2/4">
-    @for (product of productDisplay(); track product.id) {
+    @for (product of products(); track product.id) {
       <div class="w-full">
         <app-product-stock-card [product]="product"></app-product-stock-card>
       </div>

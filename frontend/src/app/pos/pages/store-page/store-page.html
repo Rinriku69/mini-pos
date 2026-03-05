@@ -1,1 +1,11 @@
-<app-store></app-store>
+@if (products.hasValue()) {
+  <app-store [products]="productsDisplay()"></app-store>
+} @else if (products.isLoading()) {
+  <div class="w-full flex justify-center">
+    <p class="text-5xl text-amber-50">Page is Loading...</p>
+  </div>
+} @else if (products.error()) {
+  <div class="w-full flex justify-center py-8">
+    <p class="text-5xl text-amber-50">Error occurred! Please try again later.</p>
+  </div>
+}

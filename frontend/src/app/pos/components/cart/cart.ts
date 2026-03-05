@@ -22,7 +22,7 @@ export class Cart {
     }, 0)
   }
   )
-  constructor() { }
+
 
   cartCheckout(): void {
 
