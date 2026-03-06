@@ -1,7 +1,7 @@
 import { Component, computed, effect, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Cart, CartItem, Category, Product } from '../../models/types';
+import { ProductCart, CartItem, Category, Product } from '../../models/types';
 import { Icon } from "../../pages/icons/icon/icon";
 import { ProductService } from '../../services/product.service';
 import { CartService } from '../../services/cart.service';
@@ -37,7 +37,7 @@ export class Cashier {
   //  UI State 
   protected searchKey = signal('');
   protected selectedCategory = signal('All');
-  protected cartItems = signal<Cart>({ cart_items: [] });
+  protected cartItems = signal<ProductCart>({ cart_items: [] });
   protected discount = signal(0);
   protected showReceipt = signal(false);
   protected paymentMethod = signal<'cash' | 'card' | 'qr'>('cash');

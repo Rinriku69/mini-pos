@@ -22,7 +22,7 @@ export class PosNav implements AfterViewInit {
   private navService = inject(NavService);
   private authService = inject(AuthService);
   protected readonly userRole = computed(() => this.authService.getRole() ?? '')
-  cart = toSignal(this.cartService.cart$)
+  cart = computed(() => this.cartService.cart$())
   showUser = signal<boolean>(false)
   private route$ = this.router.events.pipe(
     filter(e => e instanceof NavigationEnd),
@@ -36,7 +36,7 @@ export class PosNav implements AfterViewInit {
 
 
 
-  cartBumpActive = toSignal(this.cartService.cartBumpActive)
+  cartBumpActive = computed(() => this.cartService.cartBumpActive())
   cartCount = computed(() => {
     const cart = this.cart()
     if (!cart) {

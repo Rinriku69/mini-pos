@@ -3,16 +3,16 @@ import { StorePage } from "./pages/store-page/store-page";
 import { OrderPage } from "./pages/order-page/order-page";
 import { roleGuard } from "./auth.guard";
 import { UnauthorizePage } from "./pages/errors/unauthorize-page/unauthorize-page";
-import { Cart } from "./components/cart/cart";
 import { Register } from "./components/register/register";
 import { Login } from "./components/login/login";
+import { CartPage } from "./pages/cart-page/cart-page";
 
 
 export default [
 
     { path: 'store', component: StorePage },
     { path: 'orders', component: OrderPage },
-    { path: 'cart', component: Cart },
+    { path: 'cart', component: CartPage },
 
     { path: 'register', component: Register },
     { path: 'login', component: Login },

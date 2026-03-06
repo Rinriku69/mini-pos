@@ -47,7 +47,7 @@ export class Register {
   constructor() { }
 
   registerSubmit(): void {
-    console.log("Submitted")
-    this.loginService.createUser(this.registerForm)
+
+    this.loginService.register(this.registerForm)
   }
 }

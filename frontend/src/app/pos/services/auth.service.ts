@@ -30,10 +30,10 @@ export class AuthService {
     this.loadUserFromToken()
   }
 
-  createUser(registerForm: FieldTree<RegisterForm>): void {
+  register(registerForm: FieldTree<RegisterForm>): void {
     this.http.post(this.registerUrl, registerForm().value()).subscribe({
       next: (response) => {
-        console.log('Successfully Screated', response);
+        console.log('Successfully registered', response);
         this.router.navigate(['/login'])
 
       },

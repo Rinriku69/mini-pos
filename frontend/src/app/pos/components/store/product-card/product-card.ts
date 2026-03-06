@@ -15,7 +15,7 @@ export class ProductCard {
   product = input.required<Product>();
   /* product = input<Product>({} as Product);  for optional*/
   /*  product = input.required<Product>(); */
-  cartIcon = toSignal(this.cartServices.cartIcon, { initialValue: null });
+  cartIcon = computed(() => this.cartServices.cartIcon());
   cartIconEl = computed(() => this.cartIcon());
 
   constructor() { }

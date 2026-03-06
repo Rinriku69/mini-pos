@@ -69,7 +69,7 @@ export interface User {
     "updated_at"?: string
 }
 
-export interface Cart {
+export interface ProductCart {
     cart_items: CartItem[];
 }
 

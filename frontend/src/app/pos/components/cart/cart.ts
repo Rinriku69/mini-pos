@@ -1,6 +1,5 @@
-import { Component, computed, effect, inject } from '@angular/core';
-import { CartService } from '../../services/cart.service';
-import { toSignal } from '@angular/core/rxjs-interop';
+import { Component, computed, effect, inject, input, InputSignal, output } from '@angular/core';
+import { ProductCart } from '../../models/types'
 import { CartCard } from './cart-card/cart-card';
 import { DecimalPipe } from '@angular/common';
 
@@ -11,22 +10,7 @@ import { DecimalPipe } from '@angular/common';
   styleUrl: './cart.scss',
 })
 export class Cart {
-  cartService = inject(CartService)
-  protected readonly cart = toSignal(this.cartService.cart$);
-  readonly total = computed(() => {
-    const cart = this.cart();
-    if (!cart) return 0;
-    return cart.cart_items.reduce((result, curr) => {
-
-      return result + (curr.product.price * curr.qty)
-    }, 0)
-  }
-  )
-
-
-  cartCheckout(): void {
-
-    this.cartService.createOrder()
-
-  }
+  readonly cart: InputSignal<ProductCart> = input<ProductCart>({ cart_items: [] });
+  readonly total = input<number>(0);
+  readonly checkout = output<void>();
 }

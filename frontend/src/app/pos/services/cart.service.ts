@@ -1,6 +1,6 @@
-import { inject, Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { Cart, CartItem, Order, Product } from '../models/types';
+import { computed, inject, Injectable, Signal, signal, WritableSignal } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { ProductCart, CartItem, Order, Product } from '../models/types';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -8,78 +8,65 @@ import { HttpClient } from '@angular/common/http';
 })
 export class CartService {
   private http = inject(HttpClient);
-  private cart = new BehaviorSubject({ cart_items: [] } as Cart)
-  cart$ = this.cart.asObservable();
-  cartBumpActive = new BehaviorSubject<boolean>(false);
-  cartIcon = new BehaviorSubject<HTMLElement | null>(null);
+  private cart: WritableSignal<ProductCart> = signal({ cart_items: [] })
+  cart$ = computed(() => this.cart());
+  cartBumpActive: WritableSignal<boolean> = signal(false);
+  cartIcon: WritableSignal<HTMLElement | null> = signal(null);
   private orderApiUrl = 'http://127.0.0.1:8000/api/orders'
 
   addToCart(item: Product, qty: number): void {
-    if (this.cart.value.cart_items.length == 0) {
+    const currentCart = this.cart();
+    if (currentCart.cart_items.length === 0) {
       const newCartItem: CartItem = { product: item, qty: qty };
-      const currentItems = this.cart.value;
-      const updatedItems: Cart = { ...currentItems, cart_items: [...currentItems?.cart_items, newCartItem] }
+      this.cart.set({ cart_items: [newCartItem] })
+    }
+    else {
+      const newCartItem: CartItem = { product: item, qty: qty };
 
-      this.cart.next(updatedItems);
-    } else {
-      const newOrderItem: CartItem = { product: item, qty: qty };
-
-      if (this.cart.value.cart_items.find(v => v.product.id === newOrderItem.product.id)) {
-        const currenctItems = this.cart.value.cart_items;
-        const updatedItems: CartItem[] = currenctItems.map(old => {
-          return old.product.id === newOrderItem.product.id ? { ...old, qty: old.qty + qty } : old
+      if (currentCart.cart_items.find(v => v.product.id === newCartItem.product.id)) {
+        const currenctCartItems = currentCart.cart_items;
+        const updatedItems: CartItem[] = currenctCartItems.map(old => {
+          return old.product.id === newCartItem.product.id ? { ...old, qty: old.qty + qty } : old
         })
-        const currentCart = this.cart.value
-        const updatedCart: Cart = { ...currentCart, cart_items: updatedItems }
+        this.cart.update(_ => ({ ...currentCart, cart_items: [...updatedItems] }))
 
-        this.cart.next(updatedCart)
       } else {
-        const currentCart = this.cart.value;
-        const updatedCart: Cart = { ...currentCart, cart_items: [...currentCart.cart_items, newOrderItem] }
-
-        this.cart.next(updatedCart)
+        this.cart.update(_ => ({ ...currentCart, cart_items: [...currentCart.cart_items, newCartItem] }))
       }
     }
 
   }
 
-  createOrder(cart?: Cart) {
-    const order: Cart = this.cart.value
-    console.log(cart?.cart_items.length)
-    this.http.post(this.orderApiUrl, cart?.cart_items ? cart : order).subscribe({
-      next: (response) => {
-        console.log('order created successfully', response);
-        alert('Order Created')
-        const newCart: Cart = { cart_items: [] }
-        this.cart.next(newCart);
+  createOrder(cart?: ProductCart): Observable<Order> {
+    const order = this.cart()
+    if (!order && !cart) throw new Error('Cart Empty!');
 
-      },
-      error: (error) => {
-        console.error('An error occured:', error.error.message);
+    return this.http.post<Order>(this.orderApiUrl, cart?.cart_items ? cart : order)
+  }
 
-      }
-    });
+  clearCart(): void {
+    this.cart.set({ cart_items: [] })
   }
 
   cartBump(): void {
-    this.cartBumpActive.next(true);
+    this.cartBumpActive.set(true);
     setTimeout(() => {
-      this.cartBumpActive.next(false);
+      this.cartBumpActive.set(false);
     }, 150);
   }
 
   getCartIcon(cart: HTMLElement): void {
-    this.cartIcon.next(cart);
+    this.cartIcon.set(cart);
   }
 
 
   removeItem(productId: number) {
-    const currentItem = this.cart.value
+    const currentItem = this.cart()
+    if (!currentItem) throw new Error('Cart Empty!');
+
     const newItem = currentItem.cart_items.filter(
       (p) => p.product.id !== productId
     )
-
-    const newCart: Cart = { ...currentItem, cart_items: newItem }
-    this.cart.next(newCart)
+    this.cart.update(v => ({ ...v, cart_items: [...newItem] }))
   }
 }
