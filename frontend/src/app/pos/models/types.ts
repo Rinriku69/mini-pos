@@ -2,6 +2,7 @@ export interface ResourceResponse<T> {
     data: T[]
 }
 
+//---------Products & Category----------
 export interface Product {
     id: number;
     product_name: string;
@@ -27,6 +28,18 @@ export interface Category {
     category_name: string;
 }
 
+export interface ProductCart {
+    cart_items: CartItem[];
+}
+
+export interface AddProductForm<T> {
+    name: string;
+    category_id: T;
+    price: number;
+    stock_qty: number;
+    description: string;
+}
+//----------Order & Cart--------------
 export interface Order {
     order_id: number;
     user_name: string;
@@ -40,6 +53,13 @@ export interface OrderItem {
     product_price: number;
     qty: number
 }
+
+export interface CartItem {
+    product: Product;
+    qty: number;
+}
+
+//----------User & Authorization----------
 export interface RegisterForm {
     name: string;
     email: string;
@@ -69,19 +89,6 @@ export interface User {
     "updated_at"?: string
 }
 
-export interface ProductCart {
-    cart_items: CartItem[];
-}
 
-export interface CartItem {
-    product: Product;
-    qty: number;
-}
 
-export interface AddProductForm<T> {
-    name: string;
-    category_id: T;
-    price: number;
-    stock_qty: number;
-    description: string;
-}
+
