@@ -23,7 +23,7 @@ export class ProductService {
   }
   );
 
-  private categories = httpResource<{ data: Category[] }>(() => this.categoryApiUrl);
+  private categories = httpResource<{ data: Category[] }>(() => ({ url: this.categoryApiUrl, cache: 'force-cache' }));
   categories$ = computed<Category[]>(() => {
     const categories = this.categories
     if (categories.hasValue()) return categories.value().data;
