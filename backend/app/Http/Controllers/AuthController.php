@@ -58,7 +58,7 @@ class AuthController extends Controller
     {
         Auth::logout();
 
-        return response()->json(['message' => 'Successfully logged out']);
+        return response()->json(['message' => 'Successfully logged out'], 200);
     }
 
 
@@ -75,6 +75,6 @@ class AuthController extends Controller
             'token_type' => 'bearer',
             'expires_in' => Auth::factory()->getTTL() * 60,
             'user' => Auth::user()
-        ]);
+        ], 200);
     }
 }
