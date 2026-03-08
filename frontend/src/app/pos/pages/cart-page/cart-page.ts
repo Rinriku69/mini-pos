@@ -28,7 +28,7 @@ export class CartPage {
   cartCheckout(): void {
 
     this.cartService.createOrder().subscribe({
-      next: (response) => {
+      next: (_) => {
         console.log('order created successfully');
         alert('Order Created')
         this.cartService.clearCart()

@@ -1,5 +1,5 @@
 import { Component, inject, input, linkedSignal, output, signal } from '@angular/core';
-import { Product, ProductRequest } from '../../../models/types';
+import { Product } from '../../../models/types';
 import { form, min, required, FormField } from '@angular/forms/signals';
 import { Icon } from '../../../pages/icons/icon/icon';
 import { ProductService } from '../../../services/product.service';

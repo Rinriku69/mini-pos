@@ -3,6 +3,11 @@ export interface ResourceResponse<T> {
 }
 
 //---------Products & Category----------
+export interface ProdcutResponse {
+    message: string;
+    data: ProductResource;
+}
+
 export interface Product {
     id: number;
     product_name: string;
@@ -14,13 +19,15 @@ export interface Product {
     emoji?: string;
 }
 
-export interface ProductRequest {
+export interface ProductResource {
     id: number;
     name: string;
     description: string;
     price: number;
     stock_qty: number;
     category_id: number;
+    created_at?: string;
+    updated_at?: string;
 }
 
 export interface Category {

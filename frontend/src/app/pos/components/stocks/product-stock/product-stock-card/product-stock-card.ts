@@ -21,7 +21,17 @@ export class ProductStockCard {
 
   delete(id: number) {
 
-    this.productService.deleteProduct(id);
+    this.productService.deleteProduct(id).subscribe(
+      {
+        next: (res) => {
+          this.productService.reloadProduct()
+          alert(`${res.data.name} was removed`)
+        },
+        error: (err) => {
+          console.error('An error occured:', err.error.message);
+        }
+      }
+    );
   }
 
 }
