@@ -12,6 +12,7 @@ import { RouterLink } from '@angular/router';
 })
 export class Login {
   private readonly loginService = inject(AuthService)
+  errorMessage = computed(() => this.loginService.loginErrorMessage())
   protected readonly formDisabled = computed(() => {
     if (this.loginForm().invalid()) {
       return true
@@ -22,7 +23,6 @@ export class Login {
     name: '',
     password: ''
   })
-  errorMessage = computed(() => this.loginService.loginErrorMessage())
 
   loginForm = form(this.loginModel, (path) => {
     required(path.name, { message: 'User name is required' })
